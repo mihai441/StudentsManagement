@@ -17,7 +17,9 @@ namespace WebStudentsManagement.Views.Manage
 
         public static string ExternalLogins => "ExternalLogins";
 
-        public static string TwoFactorAuthentication => "TwoFactorAuthentication";
+        public static string Activities => "Activities";
+
+        public static string Activity => "Activity";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
@@ -25,8 +27,10 @@ namespace WebStudentsManagement.Views.Manage
 
         public static string ExternalLoginsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExternalLogins);
 
-        public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
-    
+        public static string ListActivities(ViewContext viewContext) => PageNavClass(viewContext, Activities);
+
+        public static string ListActivity(ViewContext viewContext) => PageNavClass(viewContext, Activity);
+
         public static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActivePage"] as string;
