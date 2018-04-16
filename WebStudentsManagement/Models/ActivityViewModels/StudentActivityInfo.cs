@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace WebStudentsManagement.Models.ManageViewModels
 {
-    public class Activities
+    public class StudentActivityInfo
     {
-        public List<int> IdActivities { get; set; }
+        public int IdActivity { get; set; }
 
-        public List<string> ActivitiesName { get; set; }
+        public List<DateTime> Date { get; set; }
 
-        public List<string> ActivitiesType { get; set; }
+        public List<double> Grade { get; set; }
 
-        public List<string> ActivitiesDescription { get; set; }
+        public List<int> Attendance { get; set; }
 
         public string StatusMessage { get; set; }
     }

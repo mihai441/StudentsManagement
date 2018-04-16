@@ -449,7 +449,7 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var model = new Activity
+            var model = new StudentActivityInfo
             {
             };
 

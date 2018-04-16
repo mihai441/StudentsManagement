@@ -54,7 +54,88 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            return View("Activities");
+            bool admin = false;
+
+            if (!admin)
+            {
+                List<string> activitiesName = new List<string>
+                {
+                    "Activity 1",
+                    "Activity 2",
+                    "Activity 3"
+                };
+
+                List<int> activitiesId = new List<int>
+                {
+                    1,
+                    2,
+                    3
+                };
+
+                List<string> activitiesType = new List<string>
+                {
+                    "C",
+                    "S",
+                    "L"
+                };
+
+                List<string> activityDescription = new List<string>
+                {
+                    "Class 101",
+                    "Class 102",
+                    "Class 103"
+                };
+
+                var model = new Activities
+                {
+                    ActivitiesName = activitiesName,
+                    IdActivities = activitiesId,
+                    ActivitiesType = activitiesType,
+                    ActivitiesDescription = activityDescription
+                };
+
+                return View(model);
+            }
+            else
+            {
+                List<string> activitiesName = new List<string>
+                {
+                    "Activity 4",
+                    "Activity 5",
+                    "Activity 6"
+                };
+
+                List<int> activitiesId = new List<int>
+                {
+                    4,
+                    5,
+                    6
+                };
+
+                List<string> activitiesType = new List<string>
+                {
+                    "S",
+                    "L",
+                    "C"
+                };
+
+                List<string> activityDescription = new List<string>
+                {
+                    "Class 104",
+                    "Class 105",
+                    "Class 106"
+                };
+
+                var model = new Activities
+                {
+                    ActivitiesName = activitiesName,
+                    IdActivities = activitiesId,
+                    ActivitiesType = activitiesType,
+                    ActivitiesDescription = activityDescription
+                };
+
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -70,27 +151,47 @@ namespace WebStudentsManagement.Controllers
              * Dummy data for activity test
              * */
 
-            List<string> activitiesName = new List<string>();
-            activitiesName.Add("Activity 1");
-            activitiesName.Add("Activity 2");
-            activitiesName.Add("Activity 3");
+            List<string> activitiesName = new List<string>
+                {
+                    "Activity 1",
+                    "Activity 2",
+                    "Activity 3"
+                };
 
-            List<int> activitiesId = new List<int>();
-            activitiesId.Add(1);
-            activitiesId.Add(2);
-            activitiesId.Add(3);
+            List<int> activitiesId = new List<int>
+                {
+                    1,
+                    2,
+                    3
+                };
+
+            List<string> activitiesType = new List<string>
+                {
+                    "C",
+                    "S",
+                    "L"
+                };
+
+            List<string> activityDescription = new List<string>
+                {
+                    "Class 101",
+                    "Class 102",
+                    "Class 103"
+                };
 
             var model = new Activities
             {
                 ActivitiesName = activitiesName,
-                IdActivities = activitiesId
+                IdActivities = activitiesId,
+                ActivitiesType = activitiesType,
+                ActivitiesDescription = activityDescription
             };
 
             return View(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Activity(int activityId)
+        public async Task<IActionResult> TeacherActivities()
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -98,11 +199,124 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var model = new Activity
+            /*
+             * Dummy data for activity test
+             * */
+
+            List<string> activitiesName = new List<string>
+                {
+                    "Activity 4",
+                    "Activity 5",
+                    "Activity 6"
+                };
+
+            List<int> activitiesId = new List<int>
+                {
+                    4,
+                    5,
+                    6
+                };
+
+            List<string> activitiesType = new List<string>
+                {
+                    "S",
+                    "L",
+                    "C"
+                };
+
+            List<string> activityDescription = new List<string>
+                {
+                    "Class 104",
+                    "Class 105",
+                    "Class 106"
+                };
+
+            var model = new Activities
             {
+                ActivitiesName = activitiesName,
+                IdActivities = activitiesId,
+                ActivitiesType = activitiesType,
+                ActivitiesDescription = activityDescription
             };
 
             return View(model);
         }
+
+        // GET: Activities/Details/1
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> Details(int? id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            int idActivity = id ?? default(int);
+
+            /*
+             * Check if student exists
+            if (ExistingStudent() == null || ExistingActivity() == null)
+            {
+                return NotFound();
+            }
+            */
+
+            /*
+             * Dummy data for activity test
+             * */
+
+            bool admin = false;
+
+            if (!admin)
+            {
+                List<DateTime> dateTime = new List<DateTime>
+                {
+                    new DateTime(2018, 5, 4),
+                    new DateTime(2018, 5, 5),
+                    new DateTime(2018, 5, 6),
+                    new DateTime(2018, 5, 7)
+                };
+
+                List<double> grade = new List<double>
+                {
+                    9,
+                    8.5,
+                    0,
+                    7.25
+                };
+
+                List<int> attendance = new List<int>
+                {
+                    1,
+                    1,
+                    0,
+                    1
+                };
+
+                var model = new StudentActivityInfo
+                {
+                    IdActivity = idActivity,
+                    Date = dateTime,
+                    Grade = grade,
+                    Attendance = attendance
+                };
+
+                return View(model);
+            }
+            else
+            {
+
+
+                return View();
+            }
+        }
+       
     }
 }

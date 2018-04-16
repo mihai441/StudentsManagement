@@ -17,19 +17,11 @@ namespace WebStudentsManagement.Views.Manage
 
         public static string ExternalLogins => "ExternalLogins";
 
-        public static string Activities => "Activities";
-
-        public static string Activity => "Activity";
-
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 
         public static string ExternalLoginsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExternalLogins);
-
-        public static string ListActivities(ViewContext viewContext) => PageNavClass(viewContext, Activities);
-
-        public static string ListActivity(ViewContext viewContext) => PageNavClass(viewContext, Activity);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {

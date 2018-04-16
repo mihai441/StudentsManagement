@@ -1,0 +1,31 @@
+@model StudentActivityInfo
+@{
+    ViewData["Title"] = "Details";
+}
+<h4>@ViewData["Title"] Activity @Model.IdActivity</h4>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Attendance</th>
+                    <th scope="col">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int iterator = 0; iterator < Model.Date.Count; ++iterator)
+                {
+                    <tr>
+                        <td scope="row">@Model.Date[iterator]</td>
+                        <th scope="row">@Model.Attendance[iterator]</th>
+                        <th scope="row">@Model.Grade[iterator]</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
