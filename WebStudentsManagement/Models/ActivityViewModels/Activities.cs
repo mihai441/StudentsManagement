@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace WebStudentsManagement.Models.ManageViewModels
 {
-    public class TwoFactorAuthenticationViewModel
+    public class Activities
     {
-        public bool HasAuthenticator { get; set; }
+        public List<int> IdActivities { get; set; }
 
-        public int RecoveryCodesLeft { get; set; }
+        public List<string> ActivitiesName { get; set; }
 
-        public bool Is2faEnabled { get; set; }
+        public string StatusMessage { get; set; }
     }
 }

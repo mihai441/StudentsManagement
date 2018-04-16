@@ -1,0 +1,36 @@
+@model Activities
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Student Activities";
+    ViewData.AddActivePage(ActivitiesNavPages.Activities);
+}
+<h4>@ViewData["Title"]</h4>
+<h2>All activities</h2>
+<div>
+    <h4>Manage all your activities</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Activity Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int iterator = 0; iterator < Model.IdActivities.Count; ++iterator)
+                    {
+                        <tr>
+                            <th scope="row">@Model.IdActivities[iterator]</th>
+                            <td><a href="Activity/@Model.IdActivities[iterator]">@Model.ActivitiesName[iterator]</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
