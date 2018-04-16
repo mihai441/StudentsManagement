@@ -1,0 +1,9 @@
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\bin\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.deps.json
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\bin\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\bin\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.csprojResolveAssemblyReference.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.csproj.CoreCompileInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.AssemblyInfoInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.AssemblyInfo.cs
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistence.EF\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.EF.pdb

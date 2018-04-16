@@ -1,0 +1,12 @@
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\bin\Debug\netcoreapp2.0\WebStudentsManagement.deps.json
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\bin\Debug\netcoreapp2.0\WebStudentsManagement.runtimeconfig.json
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\bin\Debug\netcoreapp2.0\WebStudentsManagement.runtimeconfig.dev.json
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\bin\Debug\netcoreapp2.0\WebStudentsManagement.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\bin\Debug\netcoreapp2.0\WebStudentsManagement.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\obj\Debug\netcoreapp2.0\WebStudentsManagement.csprojResolveAssemblyReference.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\obj\Debug\netcoreapp2.0\WebStudentsManagement.csproj.CoreCompileInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\obj\Debug\netcoreapp2.0\WebStudentsManagement.AssemblyInfoInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\obj\Debug\netcoreapp2.0\WebStudentsManagement.AssemblyInfo.cs
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\obj\Debug\netcoreapp2.0\WebStudentsManagement.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\obj\Debug\netcoreapp2.0\WebStudentsManagement.pdb

@@ -1,0 +1,9 @@
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\obj\Debug\netcoreapp2.0\StudentsManagement.Domain.csprojResolveAssemblyReference.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\obj\Debug\netcoreapp2.0\StudentsManagement.Domain.csproj.CoreCompileInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\obj\Debug\netcoreapp2.0\StudentsManagement.Domain.AssemblyInfoInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\obj\Debug\netcoreapp2.0\StudentsManagement.Domain.AssemblyInfo.cs
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\bin\Debug\netcoreapp2.0\StudentsManagement.Domain.deps.json
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\bin\Debug\netcoreapp2.0\StudentsManagement.Domain.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\bin\Debug\netcoreapp2.0\StudentsManagement.Domain.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\obj\Debug\netcoreapp2.0\StudentsManagement.Domain.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Domain\obj\Debug\netcoreapp2.0\StudentsManagement.Domain.pdb

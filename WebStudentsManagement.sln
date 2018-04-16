@@ -3,17 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStudentsManagement", "WebStudentsManagement\WebStudentsManagement.csproj", "{545EB031-5980-4116-8452-09B7F8361A79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStudentsManagement", "WebStudentsManagement\WebStudentsManagement.csproj", "{545EB031-5980-4116-8452-09B7F8361A79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagement.Core", "StudentsManagement.Core\StudentsManagement.Core.csproj", "{A4931A28-99AD-4233-8C0A-43E411CFED83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentsManagement.Core", "StudentsManagement.Core\StudentsManagement.Core.csproj", "{A4931A28-99AD-4233-8C0A-43E411CFED83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagement.Core.Shared", "StudentsManagement.Core.Shared\StudentsManagement.Core.Shared.csproj", "{A259706E-FB76-423A-A9C8-84ED1370A306}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentsManagement.Core.Shared", "StudentsManagement.Core.Shared\StudentsManagement.Core.Shared.csproj", "{A259706E-FB76-423A-A9C8-84ED1370A306}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagement.Persistence", "StudentsManagement.Persistance\StudentsManagement.Persistence.csproj", "{DE8A7D8B-EE3E-4E03-9D37-F326CC80AEB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentsManagement.Persistence", "StudentsManagement.Persistance\StudentsManagement.Persistence.csproj", "{DE8A7D8B-EE3E-4E03-9D37-F326CC80AEB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagement.Persistence.EF", "StudentsManagement.Persistence.EF\StudentsManagement.Persistence.EF.csproj", "{6D636BEE-059A-47E7-AAE9-F5AB7497B10E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentsManagement.Persistence.EF", "StudentsManagement.Persistence.EF\StudentsManagement.Persistence.EF.csproj", "{6D636BEE-059A-47E7-AAE9-F5AB7497B10E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagement.Domain", "StudentsManagement.Domain\StudentsManagement.Domain.csproj", "{8A8E0A57-D1C6-4447-83A3-51979FA78859}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentsManagement.Domain", "StudentsManagement.Domain\StudentsManagement.Domain.csproj", "{8A8E0A57-D1C6-4447-83A3-51979FA78859}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{EE58B42C-E440-4CDF-97B1-12B18A8E6998}"
+	ProjectSection(SolutionItems) = preProject
+		StudentsManagement.Core.Shared\Identity.cs = StudentsManagement.Core.Shared\Identity.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{9FA658C9-F63A-4967-96DA-0BC556AAF6D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{AE946DA2-62B6-409B-A3A9-E76049C861A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{29E71D62-DC24-459C-961E-E1C87DC5D775}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C4E696BC-EE80-415B-B35D-CFFFD5980D36}"
+	ProjectSection(SolutionItems) = preProject
+		WebStudentsManagement\Services\EmailSender.cs = WebStudentsManagement\Services\EmailSender.cs
+		WebStudentsManagement\Services\IEmailSender.cs = WebStudentsManagement\Services\IEmailSender.cs
+		TextFile1.txt = TextFile1.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagement.Authentication", "StudentManagement.Authentication\StudentManagement.Authentication.csproj", "{A32DFF5E-6246-4028-891E-0D3D793AC390}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +65,23 @@ Global
 		{8A8E0A57-D1C6-4447-83A3-51979FA78859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A8E0A57-D1C6-4447-83A3-51979FA78859}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A8E0A57-D1C6-4447-83A3-51979FA78859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A32DFF5E-6246-4028-891E-0D3D793AC390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A32DFF5E-6246-4028-891E-0D3D793AC390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A32DFF5E-6246-4028-891E-0D3D793AC390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A32DFF5E-6246-4028-891E-0D3D793AC390}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{545EB031-5980-4116-8452-09B7F8361A79} = {AE946DA2-62B6-409B-A3A9-E76049C861A1}
+		{A4931A28-99AD-4233-8C0A-43E411CFED83} = {EE58B42C-E440-4CDF-97B1-12B18A8E6998}
+		{A259706E-FB76-423A-A9C8-84ED1370A306} = {EE58B42C-E440-4CDF-97B1-12B18A8E6998}
+		{DE8A7D8B-EE3E-4E03-9D37-F326CC80AEB9} = {9FA658C9-F63A-4967-96DA-0BC556AAF6D9}
+		{6D636BEE-059A-47E7-AAE9-F5AB7497B10E} = {9FA658C9-F63A-4967-96DA-0BC556AAF6D9}
+		{8A8E0A57-D1C6-4447-83A3-51979FA78859} = {29E71D62-DC24-459C-961E-E1C87DC5D775}
+		{C4E696BC-EE80-415B-B35D-CFFFD5980D36} = {29E71D62-DC24-459C-961E-E1C87DC5D775}
+		{A32DFF5E-6246-4028-891E-0D3D793AC390} = {29E71D62-DC24-459C-961E-E1C87DC5D775}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05F0885C-168D-418E-926E-E79A447C3E76}

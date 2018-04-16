@@ -1,0 +1,6 @@
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\StudentManagement.Authentication.deps.json
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\StudentManagement.Authentication.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.csprojResolveAssemblyReference.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.csproj.CoreCompileInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.AssemblyInfoInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.AssemblyInfo.cs

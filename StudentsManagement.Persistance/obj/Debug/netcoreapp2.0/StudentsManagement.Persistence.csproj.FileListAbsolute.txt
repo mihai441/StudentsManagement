@@ -1,0 +1,8 @@
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\bin\Debug\netcoreapp2.0\StudentsManagement.Persistence.deps.json
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\bin\Debug\netcoreapp2.0\StudentsManagement.Persistence.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\bin\Debug\netcoreapp2.0\StudentsManagement.Persistence.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.AssemblyInfoInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.AssemblyInfo.cs
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.pdb

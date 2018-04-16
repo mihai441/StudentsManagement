@@ -1,0 +1,13 @@
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Identity.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\StudentsManagement.Core.Shared.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\StudentsManagement.Domain.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Identity.xml
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.xml
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\obj\Debug\netcoreapp2.0\StudentsManagement.Core.csprojResolveAssemblyReference.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\obj\Debug\netcoreapp2.0\StudentsManagement.Core.csproj.CoreCompileInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\obj\Debug\netcoreapp2.0\StudentsManagement.Core.AssemblyInfoInputs.cache
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\obj\Debug\netcoreapp2.0\StudentsManagement.Core.AssemblyInfo.cs
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Core\bin\Debug\netcoreapp2.0\StudentsManagement.Domain.pdb
