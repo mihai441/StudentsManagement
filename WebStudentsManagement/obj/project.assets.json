@@ -5030,6 +5030,38 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "StudentManagement.Authentication/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.0.2",
+          "StudentsManagement.Core.Shared": "1.0.0",
+          "StudentsManagement.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/StudentManagement.Authentication.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StudentManagement.Authentication.dll": {}
+        }
+      },
+      "StudentsManagement.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.0.2",
+          "Microsoft.Extensions.Logging": "2.0.1",
+          "StudentManagement.Authentication": "1.0.0",
+          "StudentsManagement.Core.Shared": "1.0.0",
+          "StudentsManagement.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/StudentsManagement.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StudentsManagement.Core.dll": {}
+        }
+      },
       "StudentsManagement.Core.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
@@ -13136,6 +13168,16 @@
         "windowsazure.storage.nuspec"
       ]
     },
+    "StudentManagement.Authentication/1.0.0": {
+      "type": "project",
+      "path": "../StudentManagement.Authentication/StudentManagement.Authentication.csproj",
+      "msbuildProject": "../StudentManagement.Authentication/StudentManagement.Authentication.csproj"
+    },
+    "StudentsManagement.Core/1.0.0": {
+      "type": "project",
+      "path": "../StudentsManagement.Core/StudentsManagement.Core.csproj",
+      "msbuildProject": "../StudentsManagement.Core/StudentsManagement.Core.csproj"
+    },
     "StudentsManagement.Core.Shared/1.0.0": {
       "type": "project",
       "path": "../StudentsManagement.Core.Shared/StudentsManagement.Core.Shared.csproj",
@@ -13153,7 +13195,9 @@
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0",
-      "StudentsManagement.Core.Shared >= 1.0.0"
+      "StudentsManagement.Core >= 1.0.0",
+      "StudentsManagement.Core.Shared >= 1.0.0",
+      "StudentsManagement.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -13189,6 +13233,12 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
+            "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core\\StudentsManagement.Core.csproj": {
+              "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core\\StudentsManagement.Core.csproj"
+            },
+            "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj": {
+              "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj"
+            },
             "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj": {
               "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj"
             }

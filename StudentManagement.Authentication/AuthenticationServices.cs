@@ -8,14 +8,14 @@ using StudentsManagement.Core.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using System;
+using System.Security.Claims;
 
 namespace StudentManagement.Authentication
 {
-    class AuthenticationServices : IAuthentication
+    public class AuthenticationServices : IAuthentication
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private ILogger<AuthenticationServices> _logger;
 
         public AuthenticationServices(IPersistence persist, UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
@@ -99,8 +99,97 @@ namespace StudentManagement.Authentication
             return result.Succeeded;
         }
 
+        public async Task<ApplicationUser> Index(ClaimsPrincipal claimsPrincipalUser)
+        {
+            var user = await _userManager.GetUserAsync(claimsPrincipalUser);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(claimsPrincipalUser)}'.");
+            }
+
+            return user;
+        }
+
+        public async Task<bool> ProfileUpdateAsync(ClaimsPrincipal claimsPrincipalUser, string modelEmail, string modelPhoneNumber)
+        {
+            var user = await _userManager.GetUserAsync(claimsPrincipalUser);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(claimsPrincipalUser)}'.");
+            }
+
+            var email = user.Email;
+            if (modelEmail != email)
+            {
+                var setEmailResult = await _userManager.SetEmailAsync(user, modelEmail);
+                if (!setEmailResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                }
+            }
+
+            var phoneNumber = user.PhoneNumber;
+            if (modelPhoneNumber != phoneNumber)
+            {
+                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, modelPhoneNumber);
+                if (!setPhoneResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> CheckPasswordData(ClaimsPrincipal claimsPrincipalUser)
+        {
+            var user = await _userManager.GetUserAsync(claimsPrincipalUser);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(claimsPrincipalUser)}'.");
+            }
+
+            var hasPassword = await _userManager.HasPasswordAsync(user);
+
+            return hasPassword;
+        }
+
+        public async Task<bool> ChangePassword(ClaimsPrincipal claimsPrincipalUser, string oldPassword, string newPassword)
+        {
+            var user = await _userManager.GetUserAsync(claimsPrincipalUser);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(claimsPrincipalUser)}'.");
+            }
+
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            if (!changePasswordResult.Succeeded)
+            {
+                return false;
+            }
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return true;
+        }
+
+        public async Task<bool> SetPasswordAsync(ClaimsPrincipal claimsPrincipalUser, string newPassword)
+        {
+            var user = await _userManager.GetUserAsync(claimsPrincipalUser);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(claimsPrincipalUser)}'.");
+            }
+
+            var addPasswordResult = await _userManager.AddPasswordAsync(user, newPassword);
+            if (!addPasswordResult.Succeeded)
+            {
+                return false;
+            }
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return true;
+        }
 
 
-        
+
     }
 }

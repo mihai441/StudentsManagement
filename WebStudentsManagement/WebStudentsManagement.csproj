@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StudentsManagement.Core.Shared\StudentsManagement.Core.Shared.csproj" />
+    <ProjectReference Include="..\StudentsManagement.Core\StudentsManagement.Core.csproj" />
+    <ProjectReference Include="..\StudentsManagement.Domain\StudentsManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>

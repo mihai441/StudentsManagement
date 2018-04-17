@@ -17,12 +17,22 @@ namespace WebStudentsManagement.Views.Manage
 
         public static string ExternalLogins => "ExternalLogins";
 
+<<<<<<< HEAD
+        public static string TwoFactorAuthentication => "TwoFactorAuthentication";
+
+=======
+>>>>>>> 5a480ab74ba282fb44e86dfe79e20e56d33c913c
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 
         public static string ExternalLoginsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExternalLogins);
 
+<<<<<<< HEAD
+        public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
+    
+=======
+>>>>>>> 5a480ab74ba282fb44e86dfe79e20e56d33c913c
         public static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActivePage"] as string;
