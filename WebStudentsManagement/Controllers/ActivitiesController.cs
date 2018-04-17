@@ -54,9 +54,9 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            bool admin = false;
+            bool student = true;
 
-            if (!admin)
+            if (student)
             {
                 List<string> activitiesName = new List<string>
                 {
@@ -94,7 +94,7 @@ namespace WebStudentsManagement.Controllers
                     ActivitiesDescription = activityDescription
                 };
 
-                return View(model);
+                return View("StudentActivities", model);
             }
             else
             {
@@ -134,112 +134,8 @@ namespace WebStudentsManagement.Controllers
                     ActivitiesDescription = activityDescription
                 };
 
-                return View(model);
+                return View("TeacherActivities", model);
             }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> StudentActivities()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            /*
-             * Dummy data for activity test
-             * */
-
-            List<string> activitiesName = new List<string>
-                {
-                    "Activity 1",
-                    "Activity 2",
-                    "Activity 3"
-                };
-
-            List<int> activitiesId = new List<int>
-                {
-                    1,
-                    2,
-                    3
-                };
-
-            List<string> activitiesType = new List<string>
-                {
-                    "C",
-                    "S",
-                    "L"
-                };
-
-            List<string> activityDescription = new List<string>
-                {
-                    "Class 101",
-                    "Class 102",
-                    "Class 103"
-                };
-
-            var model = new Activities
-            {
-                ActivitiesName = activitiesName,
-                IdActivities = activitiesId,
-                ActivitiesType = activitiesType,
-                ActivitiesDescription = activityDescription
-            };
-
-            return View(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> TeacherActivities()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            /*
-             * Dummy data for activity test
-             * */
-
-            List<string> activitiesName = new List<string>
-                {
-                    "Activity 4",
-                    "Activity 5",
-                    "Activity 6"
-                };
-
-            List<int> activitiesId = new List<int>
-                {
-                    4,
-                    5,
-                    6
-                };
-
-            List<string> activitiesType = new List<string>
-                {
-                    "S",
-                    "L",
-                    "C"
-                };
-
-            List<string> activityDescription = new List<string>
-                {
-                    "Class 104",
-                    "Class 105",
-                    "Class 106"
-                };
-
-            var model = new Activities
-            {
-                ActivitiesName = activitiesName,
-                IdActivities = activitiesId,
-                ActivitiesType = activitiesType,
-                ActivitiesDescription = activityDescription
-            };
-
-            return View(model);
         }
 
         // GET: Activities/Details/1
@@ -272,9 +168,9 @@ namespace WebStudentsManagement.Controllers
              * Dummy data for activity test
              * */
 
-            bool admin = false;
+            bool student = true;
 
-            if (!admin)
+            if (student)
             {
                 List<DateTime> dateTime = new List<DateTime>
                 {
