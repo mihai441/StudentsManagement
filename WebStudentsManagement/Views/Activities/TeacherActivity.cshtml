@@ -19,7 +19,7 @@
                     <tr>
                         <td scope="row">@Model.Id[iterator]</td>
                         <th scope="row">
-                            <a asp-action="Activity" asp-route-id="@Model.Id[iterator]">@Model.Name[iterator]</a>
+                            <a asp-action="Activity/@Model.ActivityId/Student" asp-route-id="@Model.Id[iterator]">@Model.Name[iterator]</a>
                         </th>
                     </tr>
                 }
