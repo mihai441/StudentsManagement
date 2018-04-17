@@ -4,3 +4,12 @@ C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.A
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.csproj.CoreCompileInputs.cache
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.AssemblyInfoInputs.cache
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.AssemblyInfo.cs
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\StudentManagement.Authentication.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\StudentsManagement.Core.Shared.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\StudentsManagement.Domain.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\StudentsManagement.Core.Shared.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\StudentsManagement.Domain.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.dll
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentManagement.Authentication\obj\Debug\netcoreapp2.0\StudentManagement.Authentication.pdb

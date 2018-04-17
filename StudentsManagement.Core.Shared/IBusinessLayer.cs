@@ -7,7 +7,7 @@ namespace StudentsManagement.Core.Shared
     public interface IBusinessLayer : IInitializer
     {
        
-        IInitializer GetStudentOperationService();
+        IStudentServices GetStudentOperationService();
         IAuthentication GetAuthenticationService();
     }
 }

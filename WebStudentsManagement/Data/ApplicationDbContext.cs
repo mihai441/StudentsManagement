@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebStudentsManagement.Models;
+using StudentsManagement.Domain;
 
 namespace WebStudentsManagement.Data
 {

@@ -13,6 +13,7 @@ using WebStudentsManagement.Models;
 using WebStudentsManagement.Services;
 using StudentsManagement.Domain.Services;
 using StudentsManagement.Domain;
+using StudentsManagement.Core.Shared;
 
 namespace WebStudentsManagement
 {
@@ -37,7 +38,8 @@ namespace WebStudentsManagement
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddTransient<IBusinessLayer, BusinessLogic>();
+            
             services.AddMvc();
         }
 

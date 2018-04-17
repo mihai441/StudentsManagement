@@ -6,3 +6,4 @@ C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.AssemblyInfo.cs
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.dll
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\StudentsManagement.Persistance\obj\Debug\netcoreapp2.0\StudentsManagement.Persistence.csprojResolveAssemblyReference.cache
