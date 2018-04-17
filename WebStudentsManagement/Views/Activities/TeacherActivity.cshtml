@@ -1,26 +1,33 @@
 @model AllStudentsOnActivity
 @{
-    ViewData["Title"] = "Activity";
+    ViewData["Title"] = @Model.ActivityName;
 }
-<h3>@ViewData["Title"] @Model.ActivityName</h3>
+<h3>@Model.ActivityName</h3>
 <div class="row">
     <div class="col-md-6">
         <h4>All students at this activity</h4>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Student Id</th>
                     <th scope="col">Student Name</th>
+                    <th scope="col">Student Surname</th>
                 </tr>
             </thead>
             <tbody>
                 @for (int iterator = 0; iterator < Model.Id.Count; ++iterator)
                 {
                     <tr>
-                        <td scope="row">@Model.Id[iterator]</td>
                         <th scope="row">
-                            <a asp-action="Activity/@Model.ActivityId/Student" asp-route-id="@Model.Id[iterator]">@Model.Name[iterator]</a>
+                            @Model.Name[iterator]
                         </th>
+                        <th scope="row">
+                            @Model.Name[iterator]
+                        </th>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="1">Edit</a> |
+                            <a asp-action="Activity/@Model.ActivityId/Student" asp-route-id="@Model.Id[iterator]/Details">Details</a> |
+                            <a asp-action="Delete" asp-route-id="1">Delete</a>
+                        </td>
                     </tr>
                 }
             </tbody>

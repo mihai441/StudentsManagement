@@ -1,8 +1,8 @@
 @model StudentActivityInfo
 @{
-    ViewData["Title"] = "Activity";
+    ViewData["Title"] = @Model.ActivityName;
 }
-<h3>@ViewData["Title"] @Model.IdActivity</h3>
+<h3>@Model.ActivityName</h3>
 <div class="row">
     <div class="col-md-6">
         <table class="table">

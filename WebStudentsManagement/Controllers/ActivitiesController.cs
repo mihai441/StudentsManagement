@@ -138,10 +138,10 @@ namespace WebStudentsManagement.Controllers
             }
         }
 
-        // GET: Activities/Activity/1
+        // GET: Activities/Activity/{activityId}
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> Activity(int? id)
+        [Route("{activityId}")]
+        public async Task<IActionResult> Activity(int? activityId)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -149,12 +149,12 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (id == null)
+            if (activityId == null)
             {
                 return NotFound();
             }
 
-            int idActivity = id ?? default(int);
+            int idActivity = activityId ?? default(int);
 
             /*
              * Check if student exists
@@ -194,9 +194,12 @@ namespace WebStudentsManagement.Controllers
                     1
                 };
 
+                string activityName = "E-learning";
+
                 var model = new StudentActivityInfo
                 {
                     IdActivity = idActivity,
+                    ActivityName = activityName,
                     Date = dateTime,
                     Grade = grade,
                     Attendance = attendance
@@ -226,12 +229,92 @@ namespace WebStudentsManagement.Controllers
                 {
                     Id = studentId,
                     Name = name,
-                    ActivityName = activityName
+                    ActivityName = activityName,
+                    ActivityId = idActivity
                 };
 
                 return View("TeacherActivity", model);
             }
         }
-       
+
+        // GET: Activities/Activity/{activityId}/Student/{studentId}/{method}
+        // method = "add", "details", "edit"
+        [HttpGet]
+        [Route("{activityId}/Student/{studentId}/{method}")]
+        public async Task<IActionResult> Activity(int? activityId, int? studentId, string method)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (activityId == null || studentId == null || method == null)
+            {
+                return NotFound();
+            }
+
+            int idActivity = activityId ?? default(int);
+            int idStudent = studentId ?? default(int);
+
+            /*
+             * Dummy data for activity test
+             * */
+
+            List<DateTime> dateTime = new List<DateTime>
+            {
+                new DateTime(2018, 5, 4),
+                new DateTime(2018, 5, 5),
+                new DateTime(2018, 5, 6),
+                new DateTime(2018, 5, 7)
+            };
+
+            List<double> grade = new List<double>
+            {
+                9,
+                8.5,
+                0,
+                7.25
+            };
+
+            List<int> attendance = new List<int>
+            {
+                1,
+                1,
+                0,
+                1
+            };
+
+            string activityName = "E-learning";
+
+            string studentName = "Mihai";
+
+            var model = new StudentActivityInfo
+            {
+                IdActivity = idActivity,
+                ActivityName = activityName,
+                StudentName = studentName,
+                Date = dateTime,
+                Grade = grade,
+                Attendance = attendance
+            };
+
+            if (method == "Details")
+            {
+                return View("TeacherActivityOfAStudent", model);
+            }
+            else if (method == "Add")
+            {
+                return View("TeacherAddActivityOfAStudent", model);
+            }
+            else if (method == "Edit")
+            {
+                return View("TeacherEditActivityOfAStudent", model);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
