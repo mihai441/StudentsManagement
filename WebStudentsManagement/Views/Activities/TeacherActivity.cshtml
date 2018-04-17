@@ -1,0 +1,32 @@
+@model AllStudentsOnActivity
+@{
+    ViewData["Title"] = "Activity";
+}
+<h3>@ViewData["Title"] @Model.ActivityName</h3>
+<div class="row">
+    <div class="col-md-6">
+        <h4>All students at this activity</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Student Id</th>
+                    <th scope="col">Student Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int iterator = 0; iterator < Model.Id.Count; ++iterator)
+                {
+                    <tr>
+                        <td scope="row">@Model.Id[iterator]</td>
+                        <th scope="row">
+                            <a asp-action="Activity" asp-route-id="@Model.Id[iterator]">@Model.Name[iterator]</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

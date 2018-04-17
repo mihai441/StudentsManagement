@@ -202,13 +202,34 @@ namespace WebStudentsManagement.Controllers
                     Attendance = attendance
                 };
 
-                return View(model);
+                return View("StudentActivity", model);
             }
             else
             {
+                List<int> studentId = new List<int>
+                {
+                    1,
+                    2,
+                    3
+                };
 
+                List<string> name = new List<string>
+                {
+                    "Ionel",
+                    "Georgel",
+                    "Mihai"
+                };
 
-                return View();
+                string activityName = "E-learning";
+
+                var model = new AllStudentsOnActivity
+                {
+                    Id = studentId,
+                    Name = name,
+                    ActivityName = activityName
+                };
+
+                return View("TeacherActivity", model);
             }
         }
        
