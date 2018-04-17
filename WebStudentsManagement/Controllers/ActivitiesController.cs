@@ -26,6 +26,8 @@ namespace WebStudentsManagement.Controllers
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
 
+        private bool student = false;
+
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public ActivitiesController(
@@ -53,8 +55,6 @@ namespace WebStudentsManagement.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
-            bool student = true;
 
             if (student)
             {
@@ -138,10 +138,10 @@ namespace WebStudentsManagement.Controllers
             }
         }
 
-        // GET: Activities/Details/1
+        // GET: Activities/Activity/1
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Activity(int? id)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -167,8 +167,6 @@ namespace WebStudentsManagement.Controllers
             /*
              * Dummy data for activity test
              * */
-
-            bool student = true;
 
             if (student)
             {
