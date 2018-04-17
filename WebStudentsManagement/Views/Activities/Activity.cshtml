@@ -1,9 +1,8 @@
-@model Activity
+@model StudentActivityInfo
 @{
-    ViewData["Title"] = "Activity 1";
-    ViewData.AddActivePage(ManageNavPages.Activity);
+    ViewData["Title"] = "Activity";
 }
-<h4>@ViewData["Title"]</h4>
+<h4>@ViewData["Title"] Activity @Model.IdActivity</h4>
 <div class="row">
     <div class="col-md-6">
         <table class="table">
@@ -15,24 +14,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">27.02.13</th>
-                    <td>1</td>
-                    <td>7</td>
-                </tr>
-                <tr>
-                    <th scope="row">28.02.13</th>
-                    <td>1</td>
-                    <td>6</td>
-                </tr>
-                <tr>
-                    <th scope="row">29.02.13</th>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @for (int iterator = 0; iterator < Model.Date.Count; ++iterator)
+                {
+                    <tr>
+                        <td scope="row">@Model.Date[iterator]</td>
+                        <th scope="row">@Model.Attendance[iterator]</th>
+                        <th scope="row">@Model.Grade[iterator]</th>
+                    </tr>
+                }
             </tbody>
         </table>
-        <h3>Grade : 6.5</h3>
     </div>
 </div>
 @section Scripts {

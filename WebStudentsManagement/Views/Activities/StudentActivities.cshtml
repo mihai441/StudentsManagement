@@ -2,7 +2,6 @@
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Student Activities";
-    ViewData.AddActivePage(ActivitiesNavPages.Activities);
 }
 <h4>@ViewData["Title"]</h4>
 <h2>All activities</h2>
@@ -14,16 +13,20 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Activity Name</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Description</th>
                     </tr>
                 </thead>
                 <tbody>
                     @for (int iterator = 0; iterator < Model.IdActivities.Count; ++iterator)
                     {
                         <tr>
-                            <th scope="row">@Model.IdActivities[iterator]</th>
-                            <td><a href="Activity/@Model.IdActivities[iterator]">@Model.ActivitiesName[iterator]</a></td>
+                            <td scope="row">
+                                <a asp-action="Activity" asp-route-id="@Model.IdActivities[iterator]">@Model.ActivitiesName[iterator]</a>
+                            </td>
+                            <th scope="row">@Model.ActivitiesType[iterator]</th>
+                            <th scope="row">@Model.ActivitiesDescription[iterator]</th>
                         </tr>
                     }
                 </tbody>

@@ -1,0 +1,9 @@
+
+WebStudentsManagement/Controllers/ActivitiesController.cs
+WebStudentsManagement/Controllers/ActivitiesController.cs
+WebStudentsManagement/Models/ActivityViewModels/StudentActivityInfo.cs
+WebStudentsManagement/Controllers/ActivitiesController.cs
+WebStudentsManagement/Models/ActivityViewModels/StudentActivityInfo.cs
+WebStudentsManagement/Views/Activities/Details.cshtml
+*.cshtml
+*.cs
