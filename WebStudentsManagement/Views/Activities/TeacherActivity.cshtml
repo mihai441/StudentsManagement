@@ -25,7 +25,7 @@
                         </th>
                         <td>
                             <a asp-action="Edit" asp-route-id="1">Edit</a> |
-                            <a asp-action="Activity/@Model.ActivityId/Student" asp-route-id="@Model.Id[iterator]/Details">Details</a> |
+                            <a asp-action="Activity" asp-route-activityId="@Model.Id[iterator]" asp-route-studentId="1" asp-route-method="Details">Details</a> |
                             <a asp-action="Delete" asp-route-id="1">Delete</a>
                         </td>
                     </tr>
