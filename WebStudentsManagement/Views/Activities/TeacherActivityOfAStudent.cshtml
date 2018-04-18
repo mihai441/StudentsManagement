@@ -1,0 +1,44 @@
+@model StudentActivityInfo
+@{
+    ViewData["Title"] = @Model.ActivityName + " - " + @Model.StudentName;
+}
+<h3>@Model.ActivityName</h3>
+<h4>Student @Model.StudentName</h4>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Attendance</th>
+                    <th scope="col">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int iterator = 0; iterator < Model.Date.Count; ++iterator)
+                {
+                    <tr>
+                        <td scope="row">@Model.Date[iterator]</td>
+                        @if (Model.Attendance[iterator])
+                        {
+                            <th scope="row">1</th>
+                        }
+                        else
+                        {
+                            <th scope="row">0</th>
+                        }
+                        <th scope="row">@Model.Grade[iterator]</th>
+                        <td><a asp-action="Activity" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId" asp-route-method="Edit">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-action="Activity" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId" asp-route-method="Add">Add new information</a>
+        <hr/>
+        <br />
+        <a asp-action="Activity" asp-route-activityId="@Model.IdActivity" asp-route-returnurl="@ViewData["ReturnUrl"]">Back to student list</a>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
