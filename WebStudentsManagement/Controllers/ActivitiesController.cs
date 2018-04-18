@@ -140,7 +140,7 @@ namespace WebStudentsManagement.Controllers
 
         // GET: Activities/Activity/{activityId}
         [HttpGet]
-        [Route("{activityId}")]
+        [Route("{activityId}", Name = "ActivityDetails")]
         public async Task<IActionResult> Activity(int? activityId)
         {
             var user = await _userManager.GetUserAsync(User);

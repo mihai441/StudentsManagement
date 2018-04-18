@@ -1,14 +1,4 @@
 
 <<<<<<< HEAD
-StudentsManagement.Core.Shared/IRepository.cs
-StudentsManagement.Core.Shared/IRepository.cs
-=======
-WebStudentsManagement/Controllers/ActivitiesController.cs
-WebStudentsManagement/Controllers/ActivitiesController.cs
-WebStudentsManagement/Models/ActivityViewModels/StudentActivityInfo.cs
-WebStudentsManagement/Controllers/ActivitiesController.cs
-WebStudentsManagement/Models/ActivityViewModels/StudentActivityInfo.cs
-WebStudentsManagement/Views/Activities/Details.cshtml
-*.cshtml
-*.cs
+
 >>>>>>> b66705c6eb8aa97999d2e75ca89b35db41b1baed
