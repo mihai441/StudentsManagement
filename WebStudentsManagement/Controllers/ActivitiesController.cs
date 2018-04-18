@@ -79,7 +79,7 @@ namespace WebStudentsManagement.Controllers
                     "L"
                 };
 
-                List<string> activityDescription = new List<string>
+                List<string> activitiesDescription = new List<string>
                 {
                     "Class 101",
                     "Class 102",
@@ -91,7 +91,7 @@ namespace WebStudentsManagement.Controllers
                     ActivitiesName = activitiesName,
                     IdActivities = activitiesId,
                     ActivitiesType = activitiesType,
-                    ActivitiesDescription = activityDescription
+                    ActivitiesDescription = activitiesDescription
                 };
 
                 return View("StudentActivities", model);
@@ -119,7 +119,7 @@ namespace WebStudentsManagement.Controllers
                     "C"
                 };
 
-                List<string> activityDescription = new List<string>
+                List<string> activitiesDescription = new List<string>
                 {
                     "Class 104",
                     "Class 105",
@@ -131,7 +131,7 @@ namespace WebStudentsManagement.Controllers
                     ActivitiesName = activitiesName,
                     IdActivities = activitiesId,
                     ActivitiesType = activitiesType,
-                    ActivitiesDescription = activityDescription
+                    ActivitiesDescription = activitiesDescription
                 };
 
                 return View("TeacherActivities", model);
@@ -158,7 +158,7 @@ namespace WebStudentsManagement.Controllers
 
             /*
              * Check if student exists
-            if (ExistingStudent() == null || ExistingActivity() == null)
+            if (ExistingActivity(idActivity) == null)
             {
                 return NotFound();
             }
@@ -186,12 +186,12 @@ namespace WebStudentsManagement.Controllers
                     7.25
                 };
 
-                List<int> attendance = new List<int>
+                List<bool> attendance = new List<bool>
                 {
-                    1,
-                    1,
-                    0,
-                    1
+                    true,
+                    true,
+                    false,
+                    true
                 };
 
                 string activityName = "E-learning";
@@ -277,12 +277,12 @@ namespace WebStudentsManagement.Controllers
                 7.25
             };
 
-            List<int> attendance = new List<int>
+            List<bool> attendance = new List<bool>
             {
-                1,
-                1,
-                0,
-                1
+                true,
+                true,
+                false,
+                true
             };
 
             string activityName = "E-learning";
@@ -294,6 +294,7 @@ namespace WebStudentsManagement.Controllers
                 IdActivity = idActivity,
                 ActivityName = activityName,
                 StudentName = studentName,
+                StudentId = idStudent,
                 Date = dateTime,
                 Grade = grade,
                 Attendance = attendance

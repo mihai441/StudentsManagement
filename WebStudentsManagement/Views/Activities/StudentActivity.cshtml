@@ -18,11 +18,19 @@
                 {
                     <tr>
                         <td scope="row">@Model.Date[iterator]</td>
-                        <th scope="row">@Model.Attendance[iterator]</th>
+                        @if (Model.Attendance[iterator])
+                        {
+                            <th scope="row">1</th>
+                        }
+                        else
+                        {
+                            <th scope="row">0</th>
+                        }
                         <th scope="row">@Model.Grade[iterator]</th>
                     </tr>
                 }
             </tbody>
+            <
         </table>
     </div>
 </div>
