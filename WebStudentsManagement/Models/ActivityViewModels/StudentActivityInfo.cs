@@ -10,6 +10,10 @@ namespace WebStudentsManagement.Models.ManageViewModels
     {
         public int IdActivity { get; set; }
 
+        public string ActivityName { get; set; }
+
+        public string StudentName { get; set; }
+
         public List<DateTime> Date { get; set; }
 
         public List<double> Grade { get; set; }
