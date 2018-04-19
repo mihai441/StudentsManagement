@@ -237,11 +237,10 @@ namespace WebStudentsManagement.Controllers
             }
         }
 
-        // GET: Activities/Activity/{activityId}/Student/{studentId}/{method}
-        // method = "add", "details", "edit"
+        // GET: Activities/TeacherActivityDetails/{activityId}/Student/{studentId}
         [HttpGet]
-        [Route("{activityId}/Student/{studentId}/{method}")]
-        public async Task<IActionResult> Activity(int? activityId, int? studentId, string method)
+        [Route("{activityId}/Student/{studentId}")]
+        public async Task<IActionResult> TeacherActivityDetails(int? activityId, int? studentId)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -249,7 +248,7 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (activityId == null || studentId == null || method == null)
+            if (activityId == null || studentId == null)
             {
                 return NotFound();
             }
@@ -300,22 +299,75 @@ namespace WebStudentsManagement.Controllers
                 Attendance = attendance
             };
 
-            if (method == "Details")
+            return View(model);
+            //}
+            //else if (method == "Add")
+            //{
+            //    return View("TeacherAddActivityOfAStudent", model);
+            //}
+            //else if (method == "Edit")
+            //{
+            //    return View("TeacherEditActivityOfAStudent", model);
+            //}
+            //else
+            //{
+            //    return NotFound();
+            //}
+        }
+
+        // GET: Activities/TeacherActivityAdd/{activityId}/Student/{studentId}
+        [HttpGet]
+        [Route("{activityId}/Student/{studentId}")]
+        public async Task<IActionResult> TeacherActivityAdd(int? activityId, int? studentId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
             {
-                return View("TeacherActivityOfAStudent", model);
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            else if (method == "Add")
-            {
-                return View("TeacherAddActivityOfAStudent", model);
-            }
-            else if (method == "Edit")
-            {
-                return View("TeacherEditActivityOfAStudent", model);
-            }
-            else
+
+            if (activityId == null || studentId == null)
             {
                 return NotFound();
             }
+
+            int idActivity = activityId ?? default(int);
+            int idStudent = studentId ?? default(int);
+
+            /*
+             * Dummy data for activity test
+             * */
+
+            string studentName = "Mihai";
+
+            string activityName = "E-learning";
+
+            var model = new SingleStudentActivityInfo
+            {
+                IdActivity = idActivity,
+                ActivityName = activityName,
+                StudentName = studentName,
+                StudentId = idStudent
+            };
+
+            return View(model);
+        }
+
+        // POST: Activities/TeacherActivityAdd
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TeacherActivityAdd([Bind("IdActivity,StudentId,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                // AICI TREBUIE MODIFICAT
+                //_context.Add(studentInfo);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(TeacherActivityDetails(studentInfo.IdActivity, studentInfo.StudentId));
+                // AICI TREBUIE MODIFICAT - CATA
+                return RedirectToAction(nameof(Index));
+            }
+            return View("Index");
         }
     }
 }

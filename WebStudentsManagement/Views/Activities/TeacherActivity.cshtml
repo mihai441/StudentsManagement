@@ -24,8 +24,8 @@
                             @Model.Name[iterator]
                         </th>
                         <td>
-                            <a asp-action="Activity" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@Model.Id[iterator]" asp-route-method="Add">Add</a> |
-                            <a asp-action="Activity" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@Model.Id[iterator]" asp-route-method="Details">Details</a>
+                            <a asp-action="TeacherActivityAdd" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@Model.Id[iterator]">Add</a> |
+                            <a asp-action="TeacherActivityDetails" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@Model.Id[iterator]">Details</a>
                         </td>
                     </tr>
                 }
