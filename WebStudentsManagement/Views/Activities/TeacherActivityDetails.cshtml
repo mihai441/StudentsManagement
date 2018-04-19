@@ -28,7 +28,7 @@
                             <th scope="row">0</th>
                         }
                         <th scope="row">@Model.Grade[iterator]</th>
-                        <td><a asp-action="Activity" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId" asp-route-method="Edit">Edit</a></td>
+                        <td><a asp-action="TeacherActivityEdit" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId" asp-route-id="@Model.Id[iterator]">Edit</a></td>
                     </tr>
                 }
             </tbody>

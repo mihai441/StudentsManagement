@@ -260,6 +260,14 @@ namespace WebStudentsManagement.Controllers
              * Dummy data for activity test
              * */
 
+            List<int> id = new List<int>
+            {
+                5,
+                6,
+                7,
+                8
+            };
+
             List<DateTime> dateTime = new List<DateTime>
             {
                 new DateTime(2018, 5, 4),
@@ -290,6 +298,7 @@ namespace WebStudentsManagement.Controllers
 
             var model = new StudentActivityInfo
             {
+                Id = id,
                 IdActivity = idActivity,
                 ActivityName = activityName,
                 StudentName = studentName,
@@ -300,19 +309,6 @@ namespace WebStudentsManagement.Controllers
             };
 
             return View(model);
-            //}
-            //else if (method == "Add")
-            //{
-            //    return View("TeacherAddActivityOfAStudent", model);
-            //}
-            //else if (method == "Edit")
-            //{
-            //    return View("TeacherEditActivityOfAStudent", model);
-            //}
-            //else
-            //{
-            //    return NotFound();
-            //}
         }
 
         // GET: Activities/TeacherActivityAdd/{activityId}/Student/{studentId}
@@ -368,6 +364,55 @@ namespace WebStudentsManagement.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View("Index");
+        }
+
+        // GET: Activities/TeacherActivityEdit/{activityId}/Student/{studentId}/Id/{Id}
+        [HttpGet]
+        [Route("{activityId}/Student/{studentId}/Id/{Id}")]
+        public async Task<IActionResult> TeacherActivityEdit(int? activityId, int? studentId, int? id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (activityId == null || studentId == null || id == null)
+            {
+                return NotFound();
+            }
+
+            int idActivity = activityId ?? default(int);
+            int idStudent = studentId ?? default(int);
+            int idFinal = id ?? default(int);
+
+            /*
+             * Dummy data for activity test
+             * */
+
+            double grade = 7.25;
+
+            bool attendance = true;
+
+            DateTime dateTime = new DateTime(2018, 5, 4);
+
+            string activityName = "E-learning";
+
+            string studentName = "Mihai";
+
+            var model = new SingleStudentActivityInfo
+            {
+                Id = idFinal,
+                IdActivity = idActivity,
+                ActivityName = activityName,
+                StudentName = studentName,
+                StudentId = idStudent,
+                Date = dateTime,
+                Grade = grade,
+                Attendance = attendance
+            };
+
+            return View(model);
         }
     }
 }

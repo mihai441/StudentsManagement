@@ -8,6 +8,8 @@ namespace WebStudentsManagement.Models.ManageViewModels
 {
     public class StudentActivityInfo
     {
+        public List<int> Id { get; set; }
+
         public int IdActivity { get; set; }
 
         public string ActivityName { get; set; }
