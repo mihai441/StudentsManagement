@@ -6,8 +6,9 @@
 <h4>Activity @Model.ActivityName</h4>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="TeacherActivityAdd">
+        <form asp-action="TeacherActivityEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" value="@Model.Id" class="form-control" />
             <input type="hidden" asp-for="IdActivity" value="@Model.IdActivity" class="form-control" />
             <input type="hidden" asp-for="ActivityName" value="@Model.ActivityName" class="form-control" />
             <input type="hidden" asp-for="StudentId" value="@Model.StudentId" class="form-control" />
@@ -34,7 +35,7 @@
     </div>
 </div>
 <div>
-    <a asp-route="ActivityDetails" asp-route-activityId="@Model.IdActivity">Back to student list</a>
+    <a asp-route="TeacherActivityDetails" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId">Back to student activity list - still not working</a>
 </div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

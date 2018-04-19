@@ -140,7 +140,7 @@ namespace WebStudentsManagement.Controllers
 
         // GET: Activities/Activity/{activityId}
         [HttpGet]
-        [Route("{activityId}", Name = "ActivityDetails")]
+        [Route("{activityId}")]
         public async Task<IActionResult> Activity(int? activityId)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -352,7 +352,7 @@ namespace WebStudentsManagement.Controllers
         // POST: Activities/TeacherActivityAdd
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> TeacherActivityAdd([Bind("IdActivity,StudentId,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
+        public async Task<IActionResult> TeacherActivityAdd([Bind("Id,IdActivity,ActivityName,StudentId,StudentName,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
         {
             if (ModelState.IsValid)
             {
@@ -413,6 +413,42 @@ namespace WebStudentsManagement.Controllers
             };
 
             return View(model);
+        }
+
+        // POST: Activities/TeacherActivityEdit
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TeacherActivityEdit([Bind("Id,IdActivity,ActivityName,StudentId,StudentName,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
+        {
+            if (studentInfo.Id != 0)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //_context.Update(student);
+                    //await _context.SaveChangesAsync();
+
+                }
+                catch (Exception)
+                {
+                    //if (!IdExists(student.Id))
+                    //{
+                    //    return NotFound();
+                    //}
+                    //else
+                    //{
+                    //    throw;
+                    //}
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View("Index");
         }
     }
 }
