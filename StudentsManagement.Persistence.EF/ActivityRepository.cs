@@ -16,8 +16,6 @@ namespace StudentsManagement.Persistence.EF
             return StudentsManagementDbContext.Activities.ToList();
                 
         }
-        
-
 
         public Activity GetActivity(int id)
         {
@@ -33,13 +31,13 @@ namespace StudentsManagement.Persistence.EF
                                         .FirstOrDefault();
         }
 
-        public int GetProfessor(int id)
+        public int GetProfessorId(int id)
         {
             return StudentsManagementDbContext.Activities
                             .Where(b => b.Id == id)
                             .Select(i => i.TeacherId)
                             .FirstOrDefault();
-}
+        }
 
         public StudentsManagementDbContext StudentsManagementDbContext
         {
