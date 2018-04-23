@@ -35,7 +35,7 @@
     </div>
 </div>
 <div>
-    <a asp-route="TeacherActivityDetails" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId">Back to student activity list - still not working</a>
+    <a asp-route="StudentInfo" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId">Back to student activity list</a>
 </div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

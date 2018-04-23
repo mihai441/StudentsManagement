@@ -14,9 +14,17 @@
             <input type="hidden" asp-for="StudentId" value="@Model.StudentId" class="form-control" />
             <input type="hidden" asp-for="StudentName" value="@Model.StudentName" class="form-control" />
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker();
+                    });
+                    </script>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Grade" class="control-label"></label>
@@ -35,7 +43,7 @@
     </div>
 </div>
 <div>
-    <a asp-route="ActivityDetails" asp-route-activityId="@Model.IdActivity">Back to student list</a>
+    <a asp-route="StudentInfo" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId">Back to student list</a>
 </div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

@@ -140,7 +140,7 @@ namespace WebStudentsManagement.Controllers
 
         // GET: Activities/Activity/{activityId}
         [HttpGet]
-        [Route("{activityId}")]
+        [Route("{activityId}", Name = "ActivityIndex")]
         public async Task<IActionResult> Activity(int? activityId)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -239,7 +239,7 @@ namespace WebStudentsManagement.Controllers
 
         // GET: Activities/TeacherActivityDetails/{activityId}/Student/{studentId}
         [HttpGet]
-        [Route("{activityId}/Student/{studentId}")]
+        [Route("{activityId}/Student/{studentId}", Name="StudentInfo")]
         public async Task<IActionResult> TeacherActivityDetails(int? activityId, int? studentId)
         {
             var user = await _userManager.GetUserAsync(User);
