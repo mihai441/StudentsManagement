@@ -7,29 +7,29 @@ using System.Text;
 
 namespace StudentsManagement.Persistence.EF
 {
-    class StudentRepository : Repository<Student>, IStudentsRepository
+    class StudentsRepository : Repository<Student>, IStudentsRepository
     {
-        public StudentRepository(DbContext context) : base(context)
+        public StudentsRepository(DbContext context) : base(context)
         {
         }
 
         public Student GetStudent(int id)
         {
-            return StudentDbContext.Students
+            return StudentsManagementDbContext.Students
                 .Where(s => s.Id == id)
                 .SingleOrDefault();
         }
 
         public IEnumerable<Student> GetStudents()
         {
-            return StudentDbContext.Students.ToList();
+            return StudentsManagementDbContext.Students.ToList();
         }
 
-        public UsersDbContext StudentDbContext
+        public StudentsManagementDbContext StudentsManagementDbContext
         {
             get
             {
-                return Context as UsersDbContext;
+                return Context as StudentsManagementDbContext;
             }
         }
     }

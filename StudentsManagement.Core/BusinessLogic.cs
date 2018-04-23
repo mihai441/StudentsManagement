@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using StudentsManagement.Domain;
 using StudentManagement.Authentication;
+using StudentsManagement.Persistence;
 
 namespace StudentsManagement.Core.Shared
 {
@@ -15,10 +16,10 @@ namespace StudentsManagement.Core.Shared
         private IStudentServices studentServices;
 
         public BusinessLogic(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, IPersistenceContext persistenceContext)
         {            
-            studentServices = new StudentServices();
-            auth = new AuthenticationServices(userManager, signInManager);
+            studentServices = new StudentServices(persistenceContext);
+            auth = new AuthenticationServices(studentServices, userManager, signInManager);
             initList = new List<IInitializer> { auth, studentServices };
 
 

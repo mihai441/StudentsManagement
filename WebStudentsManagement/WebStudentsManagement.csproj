@@ -22,6 +22,8 @@
     <ProjectReference Include="..\StudentsManagement.Core.Shared\StudentsManagement.Core.Shared.csproj" />
     <ProjectReference Include="..\StudentsManagement.Core\StudentsManagement.Core.csproj" />
     <ProjectReference Include="..\StudentsManagement.Domain\StudentsManagement.Domain.csproj" />
+    <ProjectReference Include="..\StudentsManagement.Persistance\StudentsManagement.Persistence.csproj" />
+    <ProjectReference Include="..\StudentsManagement.Persistence.EF\StudentsManagement.Persistence.EF.csproj" />
   </ItemGroup>
 
 </Project>

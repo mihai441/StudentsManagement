@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StudentsManagement.Persistence
 {
-    public interface ITeacherRepository : IRepository<Teacher>
+    public interface ITeachersRepository : IRepository<Teacher>
     {
         IEnumerable<Teacher> Teachers();
         Teacher GetTeacher(int id);

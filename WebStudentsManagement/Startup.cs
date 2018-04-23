@@ -14,6 +14,8 @@ using WebStudentsManagement.Services;
 using StudentsManagement.Domain.Services;
 using StudentsManagement.Domain;
 using StudentsManagement.Core.Shared;
+using StudentsManagement.Persistence;
+using StudentsManagement.Persistence.EF;
 
 namespace WebStudentsManagement
 {
@@ -29,16 +31,17 @@ namespace WebStudentsManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<StudentsManagementDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<StudentsManagementDbContext>()
                 .AddDefaultTokenProviders();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IBusinessLayer, BusinessLogic>();
+            services.AddTransient<IPersistenceContext, PersistenceContext>();
             
             services.AddMvc();
         }

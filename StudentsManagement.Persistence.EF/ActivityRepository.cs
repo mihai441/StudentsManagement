@@ -1,5 +1,4 @@
 ﻿using StudentsManagement.Domain;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,13 +7,13 @@ namespace StudentsManagement.Persistence.EF
     class ActivityRepository : Repository<Activity>, IActivityRepository
     {
 
-        public ActivityRepository(DetailsDbContext context) : base(context)
+        public ActivityRepository(StudentsManagementDbContext context) : base(context)
         {
         }
 
         public IEnumerable<Activity> GetActivities()
         {
-            return ActivityDbContext.Activities.ToList();
+            return StudentsManagementDbContext.Activities.ToList();
                 
         }
         
@@ -22,12 +21,13 @@ namespace StudentsManagement.Persistence.EF
 
         public Activity GetActivity(int id)
         {
-            return ActivityDbContext.Activities.Find(id);
+            return StudentsManagementDbContext.Activities.Find(id);
         }
 
         public IEnumerable<Student> GetStudents(int id)
         {
-            return ActivityDbContext.Activities
+            
+            return StudentsManagementDbContext.Activities
                                         .Where(b => b.Id == id)
                                         .Select(i => i.Students)
                                         .FirstOrDefault();
@@ -35,17 +35,17 @@ namespace StudentsManagement.Persistence.EF
 
         public int GetProfessor(int id)
         {
-            return ActivityDbContext.Activities
+            return StudentsManagementDbContext.Activities
                             .Where(b => b.Id == id)
                             .Select(i => i.TeacherId)
                             .FirstOrDefault();
 }
 
-        public DetailsDbContext ActivityDbContext
+        public StudentsManagementDbContext StudentsManagementDbContext
         {
             get
             {
-                return Context as DetailsDbContext;
+                return Context as StudentsManagementDbContext;
             }
         }
     }

@@ -1,20 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using StudentsManagement.Core.Shared;
-using System;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using StudentsManagement.Domain;
-using System.Security.Claims;
-using System.Threading.Tasks;
+using StudentsManagement.Persistence;
 
 namespace StudentsManagement.Core
 {
     class StudentServices : IStudentServices
     {
+        IPersistenceContext _persistenceContext;
 
-        public StudentServices()
+        public StudentServices(IPersistenceContext persistenceContext)
         {
-
+            _persistenceContext = persistenceContext
         }
 
         public void Configure(IApplicationBuilder builder)

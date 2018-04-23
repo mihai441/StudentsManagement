@@ -14,11 +14,12 @@ namespace StudentManagement.Authentication
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IStudentServices _studentServices;
 
-        public AuthenticationServices(UserManager<ApplicationUser> userManager,
+        public AuthenticationServices(IStudentServices studentServices, UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
-
+            _studentServices=studentServices;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -197,9 +198,7 @@ namespace StudentManagement.Authentication
             {
                 throw new ApplicationException($"Unable to load user with ID ");
             }
-            ////IF user is teacher
-            //return true;
-            //IF user is student
+           
             return false;
         }
 

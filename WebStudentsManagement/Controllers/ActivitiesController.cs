@@ -53,10 +53,10 @@ namespace WebStudentsManagement.Controllers
             var result = await _auth.IsUserValid(User);
             if (!result)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                throw new ApplicationException($"Unable to load user");
             }
 
-            if (_auth.IsTeacher(!User))
+            if (_auth.IsTeacher(User))
             {
                 List<string> activitiesName = new List<string>
                 {
@@ -352,7 +352,7 @@ namespace WebStudentsManagement.Controllers
         // POST: Activities/TeacherActivityAdd
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> TeacherActivityAdd([Bind("IdActivity,StudentId,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
+        public IActionResult TeacherActivityAdd([Bind("IdActivity,StudentId,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
         {
             if (ModelState.IsValid)
             {

@@ -18,3 +18,4 @@ C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManageme
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\bin\Debug\netcoreapp2.0\StudentsManagement.Core.pdb
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\bin\Debug\netcoreapp2.0\StudentManagement.Authentication.pdb
 C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\bin\Debug\netcoreapp2.0\StudentsManagement.Domain.pdb
+C:\Users\alexandru.frunza\source\repos\WebStudentsManagement\WebStudentsManagement\obj\Debug\netcoreapp2.0\WebStudentsManagement.csproj.CopyComplete

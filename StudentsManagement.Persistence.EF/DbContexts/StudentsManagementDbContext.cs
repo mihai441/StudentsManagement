@@ -1,15 +1,11 @@
-﻿using JetBrains.Annotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using StudentsManagement.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StudentsManagement.Persistence.EF
 {
-    class UsersDbContext : DbContext
+    public class StudentsManagementDbContext : DbContext
     {
-        public UsersDbContext(DbContextOptions<UsersDbContext> options) 
+        public StudentsManagementDbContext(DbContextOptions<StudentsManagementDbContext> options) 
             : base(options)
         {
         }
@@ -24,6 +20,8 @@ namespace StudentsManagement.Persistence.EF
 
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
-    
+        public virtual DbSet<Activity> Activities { get; set; }
+        public virtual DbSet<StudentActivityDetails> StudentActivityDetails { get; set; }
+
     }
 }
