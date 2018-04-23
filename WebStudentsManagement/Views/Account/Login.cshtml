@@ -2,13 +2,12 @@
 @using System.Linq
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
+@using StudentsManagement.Domain
 @model LoginViewModel
 @inject SignInManager<ApplicationUser> SignInManager
-
 @{
     ViewData["Title"] = "Log in";
 }
-
 <div class="row">
     <div class="col-md-4">
         <h2>@ViewData["Title"]</h2>
@@ -69,7 +68,6 @@
         }
     }
 </div>
-
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

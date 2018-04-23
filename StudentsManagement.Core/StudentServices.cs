@@ -11,7 +11,7 @@ namespace StudentsManagement.Core
 
         public StudentServices(IPersistenceContext persistenceContext)
         {
-            _persistenceContext = persistenceContext
+            _persistenceContext = persistenceContext;
         }
 
         public void Configure(IApplicationBuilder builder)
