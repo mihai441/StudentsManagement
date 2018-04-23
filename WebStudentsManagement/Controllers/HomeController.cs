@@ -6,22 +6,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStudentsManagement.Models;
 using Microsoft.AspNetCore.Identity;
+using StudentsManagement.Domain;
+using StudentsManagement.Core.Shared;
 
 namespace WebStudentsManagement.Controllers
 {
     public class HomeController : Controller
     {
-        SignInManager<ApplicationUser> signInManager;
+        IBusinessLayer _businessLogic;
+        IAuthentication _auth;
         public HomeController(
-            SignInManager<ApplicationUser> signInManager)
+            IBusinessLayer businessLayer)
         {
-            this.signInManager = signInManager;
+            _businessLogic = businessLayer;
+            _auth = _businessLogic.GetAuthenticationService();
         }
 
         public IActionResult Index()
         {
             IActionResult retView = null;
-            if (signInManager.IsSignedIn(User))
+            if (_auth.IsUserSignedIn(User))
             {
                 retView = View("Home");
             }
@@ -34,7 +38,7 @@ namespace WebStudentsManagement.Controllers
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

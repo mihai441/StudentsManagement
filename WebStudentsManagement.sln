@@ -16,9 +16,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentsManagement.Domain", "StudentsManagement.Domain\StudentsManagement.Domain.csproj", "{8A8E0A57-D1C6-4447-83A3-51979FA78859}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{EE58B42C-E440-4CDF-97B1-12B18A8E6998}"
-	ProjectSection(SolutionItems) = preProject
-		StudentsManagement.Core.Shared\Identity.cs = StudentsManagement.Core.Shared\Identity.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{9FA658C9-F63A-4967-96DA-0BC556AAF6D9}"
 EndProject

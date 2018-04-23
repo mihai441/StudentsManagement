@@ -11,14 +11,17 @@ namespace StudentsManagement.Core.Shared
         Task<bool> LogoutProcess();
         Task<bool> LoginProcess(string email, string password, bool remember);
         Task<bool> RegisterProcess(string email, string password);
-        Task<bool> ExternalLoginCallBackAsync();
-        Task<bool> ExternalLogicConfirmationAsync(string email);
+        Task<bool> ExternalLoginCallBack();
+        Task<bool> ExternalLogicConfirmation(string email);
         AuthenticationProperties ExternalLogin(string provider, string redirectUrl);
         Task<ApplicationUser> Index(ClaimsPrincipal user);
-        Task<bool> ProfileUpdateAsync(ClaimsPrincipal claimsPrincipalUser, string modelEmail, string modelPhoneNumber);
+        Task<bool> ProfileUpdate(ClaimsPrincipal claimsPrincipalUser, string modelEmail, string modelPhoneNumber);
         Task<bool> CheckPasswordData(ClaimsPrincipal claimsPrincipalUser);
         Task<bool> ChangePassword(ClaimsPrincipal claimsPrincipalUser, string oldPassword, string newPassword);
-        Task<bool> SetPasswordAsync(ClaimsPrincipal claimsPrincipalUser, string newPassword);
+        Task<bool> SetPassword(ClaimsPrincipal claimsPrincipalUser, string newPassword);
+        bool IsTeacher(ClaimsPrincipal User);
+        Task<bool> IsUserValid(ClaimsPrincipal User);
+        bool IsUserSignedIn(ClaimsPrincipal User);
 
     }
 }

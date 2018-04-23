@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using StudentsManagement.Domain;
 using StudentsManagement.Core.Shared;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using System;
 using System.Security.Claims;
@@ -17,7 +15,7 @@ namespace StudentManagement.Authentication
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AuthenticationServices(IPersistence persist, UserManager<ApplicationUser> userManager,
+        public AuthenticationServices(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
 
@@ -30,7 +28,7 @@ namespace StudentManagement.Authentication
             throw new System.NotImplementedException();
         }
 
-        public async Task<bool> ExternalLogicConfirmationAsync(string email)
+        public async Task<bool> ExternalLogicConfirmation(string email)
         {
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
@@ -58,7 +56,7 @@ namespace StudentManagement.Authentication
             return properties;
         }
 
-        public async Task<bool> ExternalLoginCallBackAsync()
+        public async Task<bool> ExternalLoginCallBack()
         {
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
@@ -96,6 +94,9 @@ namespace StudentManagement.Authentication
             var user = new ApplicationUser { UserName = email, Email = email };
             var result = await _userManager.CreateAsync(user, password);
 
+            if(result.Succeeded)
+                await _signInManager.SignInAsync(user, isPersistent: false);
+
             return result.Succeeded;
         }
 
@@ -110,7 +111,7 @@ namespace StudentManagement.Authentication
             return user;
         }
 
-        public async Task<bool> ProfileUpdateAsync(ClaimsPrincipal claimsPrincipalUser, string modelEmail, string modelPhoneNumber)
+        public async Task<bool> ProfileUpdate(ClaimsPrincipal claimsPrincipalUser, string modelEmail, string modelPhoneNumber)
         {
             var user = await _userManager.GetUserAsync(claimsPrincipalUser);
             if (user == null)
@@ -171,7 +172,7 @@ namespace StudentManagement.Authentication
             return true;
         }
 
-        public async Task<bool> SetPasswordAsync(ClaimsPrincipal claimsPrincipalUser, string newPassword)
+        public async Task<bool> SetPassword(ClaimsPrincipal claimsPrincipalUser, string newPassword)
         {
             var user = await _userManager.GetUserAsync(claimsPrincipalUser);
             if (user == null)
@@ -189,7 +190,33 @@ namespace StudentManagement.Authentication
             return true;
         }
 
+        public bool IsTeacher(ClaimsPrincipal User)
+        {
+            var user =  _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID ");
+            }
+            ////IF user is teacher
+            //return true;
+            //IF user is student
+            return false;
+        }
 
+        public async Task<bool> IsUserValid(ClaimsPrincipal User)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return false;
+            else
+                return true;
+            
+        }
 
+        public bool IsUserSignedIn(ClaimsPrincipal User)
+        {
+            var result = _signInManager.IsSignedIn(User);
+            return result;
+        }
     }
 }

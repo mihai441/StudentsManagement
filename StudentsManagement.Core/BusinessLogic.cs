@@ -13,13 +13,12 @@ namespace StudentsManagement.Core.Shared
         List<IInitializer> initList;
         private IAuthentication auth;
         private IStudentServices studentServices;
-        private IPersistence persistence;
 
-        public BusinessLogic(IPersistence persist, UserManager<ApplicationUser> userManager,
+        public BusinessLogic(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {            
             studentServices = new StudentServices();
-            auth = new AuthenticationServices(persist, userManager, signInManager);
+            auth = new AuthenticationServices(userManager, signInManager);
             initList = new List<IInitializer> { auth, studentServices };
 
 

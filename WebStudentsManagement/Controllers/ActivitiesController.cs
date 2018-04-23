@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using StudentsManagement.Core.Shared;
 using WebStudentsManagement.Models;
 using WebStudentsManagement.Models.ManageViewModels;
 using WebStudentsManagement.Services;
@@ -20,26 +21,25 @@ namespace WebStudentsManagement.Controllers
     [Route("[controller]/[action]")]
     public class ActivitiesController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+
+
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private readonly IBusinessLayer _businessLogic;
+        private readonly IAuthentication _auth;
 
         private bool student = false;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public ActivitiesController(
-          UserManager<ApplicationUser> userManager,
-          SignInManager<ApplicationUser> signInManager,
-          IEmailSender emailSender,
+          IBusinessLayer businessLayer,
           ILogger<ManageController> logger,
+          IAuthentication authentication,
           UrlEncoder urlEncoder)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _emailSender = emailSender;
+            _businessLogic = businessLayer;
+            _auth = _businessLogic.GetAuthenticationService();
             _logger = logger;
             _urlEncoder = urlEncoder;
         }
@@ -50,13 +50,13 @@ namespace WebStudentsManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            var result = await _auth.IsUserValid(User);
+            if (!result)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (student)
+            if (_auth.IsTeacher(!User))
             {
                 List<string> activitiesName = new List<string>
                 {
@@ -140,13 +140,13 @@ namespace WebStudentsManagement.Controllers
 
         // GET: Activities/Activity/{activityId}
         [HttpGet]
-        [Route("{activityId}", Name = "ActivityIndex")]
+        [Route("{activityId}", Name = "ActivityDetails")]
         public async Task<IActionResult> Activity(int? activityId)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            var result = await _auth.IsUserValid(User);
+            if (!result)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                throw new ApplicationException($"Unable to load user");
             }
 
             if (activityId == null)
@@ -239,13 +239,13 @@ namespace WebStudentsManagement.Controllers
 
         // GET: Activities/TeacherActivityDetails/{activityId}/Student/{studentId}
         [HttpGet]
-        [Route("{activityId}/Student/{studentId}", Name="StudentInfo")]
+        [Route("{activityId}/Student/{studentId}")]
         public async Task<IActionResult> TeacherActivityDetails(int? activityId, int? studentId)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            var result = await _auth.IsUserValid(User);
+            if (!result)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                throw new ApplicationException($"Unable to load user");
             }
 
             if (activityId == null || studentId == null)
@@ -316,10 +316,10 @@ namespace WebStudentsManagement.Controllers
         [Route("{activityId}/Student/{studentId}")]
         public async Task<IActionResult> TeacherActivityAdd(int? activityId, int? studentId)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            var result = await _auth.IsUserValid(User);
+            if (!result)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                throw new ApplicationException($"Unable to load user");
             }
 
             if (activityId == null || studentId == null)
@@ -352,7 +352,7 @@ namespace WebStudentsManagement.Controllers
         // POST: Activities/TeacherActivityAdd
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> TeacherActivityAdd([Bind("Id,IdActivity,ActivityName,StudentId,StudentName,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
+        public async Task<IActionResult> TeacherActivityAdd([Bind("IdActivity,StudentId,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
         {
             if (ModelState.IsValid)
             {
@@ -371,10 +371,10 @@ namespace WebStudentsManagement.Controllers
         [Route("{activityId}/Student/{studentId}/Id/{Id}")]
         public async Task<IActionResult> TeacherActivityEdit(int? activityId, int? studentId, int? id)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            var result = await _auth.IsUserValid(User);
+            if (!result)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                throw new ApplicationException($"Unable to load user");
             }
 
             if (activityId == null || studentId == null || id == null)
@@ -413,42 +413,6 @@ namespace WebStudentsManagement.Controllers
             };
 
             return View(model);
-        }
-
-        // POST: Activities/TeacherActivityEdit
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> TeacherActivityEdit([Bind("Id,IdActivity,ActivityName,StudentId,StudentName,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
-        {
-            if (studentInfo.Id != 0)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    //_context.Update(student);
-                    //await _context.SaveChangesAsync();
-
-                }
-                catch (Exception)
-                {
-                    //if (!IdExists(student.Id))
-                    //{
-                    //    return NotFound();
-                    //}
-                    //else
-                    //{
-                    //    throw;
-                    //}
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View("Index");
         }
     }
 }

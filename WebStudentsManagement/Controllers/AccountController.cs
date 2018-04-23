@@ -1,27 +1,12 @@
-<<<<<<< HEAD
 ﻿using System.Threading.Tasks;
-=======
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
->>>>>>> 5a480ab74ba282fb44e86dfe79e20e56d33c913c
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using WebStudentsManagement.Models;
-using WebStudentsManagement.Models.AccountViewModels;
-<<<<<<< HEAD
-using StudentsManagement.Domain.Services;
 using StudentsManagement.Core.Shared;
-=======
-using WebStudentsManagement.Services;
->>>>>>> 5a480ab74ba282fb44e86dfe79e20e56d33c913c
+using StudentsManagement.Domain;
+using WebStudentsManagement.Models.AccountViewModels;
 
 namespace WebStudentsManagement.Controllers
 {
@@ -29,21 +14,19 @@ namespace WebStudentsManagement.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+
         private readonly ILogger _logger;
+        private readonly IBusinessLayer _businessLogic;
+        private readonly IAuthentication _auth;
 
         public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            IBusinessLayer businessLayer)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _emailSender = emailSender;
+            _businessLogic = businessLayer;
+            _auth = _businessLogic.GetAuthenticationService();
             _logger = logger;
+
         }
 
         [TempData]
@@ -68,22 +51,12 @@ namespace WebStudentsManagement.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+                
+                var result = await _auth.LoginProcess(model.Email, model.Password, model.RememberMe);
+                if (result)
                 {
                     _logger.LogInformation("User logged in.");
                     return RedirectToLocal(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction(nameof(Lockout));
                 }
                 else
                 {
@@ -92,120 +65,11 @@ namespace WebStudentsManagement.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> LoginWith2fa(bool rememberMe, string returnUrl = null)
-        {
-            // Ensure the user has gone through the username & password screen first
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
-            }
-
-            var model = new LoginWith2faViewModel { RememberMe = rememberMe };
-            ViewData["ReturnUrl"] = returnUrl;
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LoginWith2fa(LoginWith2faViewModel model, bool rememberMe, string returnUrl = null)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            var authenticatorCode = model.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
-
-            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, model.RememberMachine);
-
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("User with ID {UserId} logged in with 2fa.", user.Id);
-                return RedirectToLocal(returnUrl);
-            }
-            else if (result.IsLockedOut)
-            {
-                _logger.LogWarning("User with ID {UserId} account locked out.", user.Id);
-                return RedirectToAction(nameof(Lockout));
-            }
-            else
-            {
-                _logger.LogWarning("Invalid authenticator code entered for user with ID {UserId}.", user.Id);
-                ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
-                return View();
-            }
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = null)
-        {
-            // Ensure the user has gone through the username & password screen first
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
-            }
-
-            ViewData["ReturnUrl"] = returnUrl;
-
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LoginWithRecoveryCode(LoginWithRecoveryCodeViewModel model, string returnUrl = null)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
-            }
-
-            var recoveryCode = model.RecoveryCode.Replace(" ", string.Empty);
-
-            var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
-
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("User with ID {UserId} logged in with a recovery code.", user.Id);
-                return RedirectToLocal(returnUrl);
-            }
-            if (result.IsLockedOut)
-            {
-                _logger.LogWarning("User with ID {UserId} account locked out.", user.Id);
-                return RedirectToAction(nameof(Lockout));
-            }
-            else
-            {
-                _logger.LogWarning("Invalid recovery code entered for user with ID {UserId}", user.Id);
-                ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
-                return View();
-            }
-        }
-
+ 
+ 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Lockout()
@@ -230,20 +94,22 @@ namespace WebStudentsManagement.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var result = await _auth.RegisterProcess(model.Email, model.Password);
+                if (result)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
+                else
+                {
+                    ErrorMessage = $"the password does not meet the password policy requirements.";
+                    var policyRequirements = $"* At least an uppercase and a special character";
+
+                    ViewBag.Error = ErrorMessage;
+                    ViewBag.policyRequirments = policyRequirements;
+                    return View();
+
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -254,7 +120,7 @@ namespace WebStudentsManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
+            await _auth.LogoutProcess();
             _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
@@ -264,8 +130,9 @@ namespace WebStudentsManagement.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
+            // Request a redirect to the external login provider.
             var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { returnUrl });
-            var properties = auth.ExternalLogin(provider, redirectUrl);
+            var properties = _auth.ExternalLogin(provider, returnUrl);
             return Challenge(properties, provider);
         }
 
@@ -278,24 +145,16 @@ namespace WebStudentsManagement.Controllers
                 ErrorMessage = $"Error from external provider: {remoteError}";
                 return RedirectToAction(nameof(Login));
             }
-            var result = await auth.ExternalLoginCallBackAsync();
-            if(result)
+            var result = await _auth.ExternalLoginCallBack();
+          
+            if (result)
             {
                 _logger.LogInformation("User logged in");
                 return RedirectToLocal(returnUrl);
             }
-            //if (result.IsLockedOut)
-            //{
-            //    return RedirectToAction(nameof(Lockout));
-            //}
             else
             {
-                //// If the user does not have an account, then ask the user to create an account.
-                //ViewData["ReturnUrl"] = returnUrl;
-                //ViewData["LoginProvider"] = info.LoginProvider;
-                //var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                //return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
-                return RedirectToAction(nameof(Login));
+                return View("ExternalLogin", new ExternalLoginViewModel { Email = "Enter Email"});
             }
         }
 
@@ -306,13 +165,12 @@ namespace WebStudentsManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Get the information about the user from the external login provider
-                var result = await auth.ExternalLogicConfirmationAsync(model.Email);
-
+                var result = await _auth.ExternalLogicConfirmation(model.Email);
                 if (result)
                 {
                     _logger.LogInformation("User created an account");
                     return RedirectToLocal(returnUrl);
+
                 }
             }
 
@@ -320,29 +178,13 @@ namespace WebStudentsManagement.Controllers
             return View(nameof(ExternalLogin), model);
         }
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        //{
-        //    if (userId == null || code == null)
-        //    {
-        //        return RedirectToAction(nameof(HomeController.Index), "Home");
-        //    }
-        //    var user = await _userManager.FindByIdAsync(userId);
-        //    if (user == null)
-        //    {
-        //        throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-        //    }
-        //    var result = await _userManager.ConfirmEmailAsync(user, code);
-        //    return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        //}
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public IActionResult ForgotPassword()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
 
         //[HttpPost]
         //[AllowAnonymous]
@@ -371,12 +213,12 @@ namespace WebStudentsManagement.Controllers
         //    return View(model);
         //}
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public IActionResult ForgotPasswordConfirmation()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
 
         //[HttpGet]
         //[AllowAnonymous]
@@ -414,12 +256,12 @@ namespace WebStudentsManagement.Controllers
         //    return View();
         //}
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public IActionResult ResetPasswordConfirmation()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
 
 
         [HttpGet]

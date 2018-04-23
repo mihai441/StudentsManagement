@@ -3781,9 +3781,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentManagement.Authentication\\StudentManagement.Authentication.csproj",
       "projectName": "StudentManagement.Authentication",
@@ -3808,11 +3805,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj": {
-              "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj"
-            },
             "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj": {
               "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj"
+            },
+            "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj": {
+              "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj"
             }
           }
         }
@@ -3826,15 +3823,15 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Identity": {
+            "target": "Package",
+            "version": "[2.0.2, )"
+          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
-          },
-          "Microsoft.AspNetCore.Identity": {
-            "target": "Package",
-            "version": "2.0.2"
           }
         },
         "imports": [

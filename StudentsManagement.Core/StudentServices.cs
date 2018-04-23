@@ -15,13 +15,13 @@ namespace StudentsManagement.Core
         public StudentServices()
         {
 
-
         }
 
         public void Configure(IApplicationBuilder builder)
         {
 
         }
+
 
         public void Initialize(IServiceCollection collection)
         {

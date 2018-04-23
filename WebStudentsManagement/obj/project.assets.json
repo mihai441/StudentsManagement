@@ -13206,9 +13206,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\WebStudentsManagement\\WebStudentsManagement.csproj",
       "projectName": "WebStudentsManagement",
@@ -13233,14 +13230,14 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
+            "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj": {
+              "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj"
+            },
             "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core\\StudentsManagement.Core.csproj": {
               "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core\\StudentsManagement.Core.csproj"
             },
             "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj": {
               "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj"
-            },
-            "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj": {
-              "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj"
             }
           }
         }
@@ -13254,24 +13251,24 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "[2.0.0, )"
+          },
           "Microsoft.EntityFrameworkCore.Tools": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.0"
+            "version": "[2.0.0, )"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "[2.0.0, )",
+            "autoReferenced": true
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.0"
-          },
-          "Microsoft.NETCore.App": {
-            "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
-          },
-          "Microsoft.AspNetCore.All": {
-            "target": "Package",
-            "version": "2.0.0"
+            "version": "[2.0.0, )"
           }
         },
         "imports": [

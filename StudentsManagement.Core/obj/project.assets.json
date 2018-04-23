@@ -3803,9 +3803,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core\\StudentsManagement.Core.csproj",
       "projectName": "StudentsManagement.Core",
@@ -3830,14 +3827,14 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj": {
-              "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj"
-            },
             "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentManagement.Authentication\\StudentManagement.Authentication.csproj": {
               "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentManagement.Authentication\\StudentManagement.Authentication.csproj"
             },
             "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj": {
               "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Core.Shared\\StudentsManagement.Core.Shared.csproj"
+            },
+            "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj": {
+              "projectPath": "C:\\Users\\alexandru.frunza\\source\\repos\\WebStudentsManagement\\StudentsManagement.Domain\\StudentsManagement.Domain.csproj"
             }
           }
         }
@@ -3851,19 +3848,19 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "suppressParent": "All",
+          "Microsoft.AspNetCore.Identity": {
             "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
+            "version": "[2.0.2, )"
           },
           "Microsoft.Extensions.Logging": {
             "target": "Package",
-            "version": "2.0.1"
+            "version": "[2.0.1, )"
           },
-          "Microsoft.AspNetCore.Identity": {
+          "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.2"
+            "version": "[2.0.0, )",
+            "autoReferenced": true
           }
         },
         "imports": [
