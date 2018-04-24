@@ -28,8 +28,6 @@ namespace WebStudentsManagement.Controllers
         private readonly IAuthentication _auth;
         private readonly IStudentServices _studentServices;
 
-        private bool student = false;
-
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public ActivitiesController(
@@ -314,7 +312,7 @@ namespace WebStudentsManagement.Controllers
         // POST: Activities/TeacherActivityEdit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> TeacherActivityEdit(int? id, [Bind("IdActivity, ,StudentId, Date, Grade, Attendance")] SingleStudentActivityInfo studentActivityInfoRow)
+        public IActionResult TeacherActivityEdit(int? id, [Bind("IdActivity, ,StudentId, Date, Grade, Attendance")] SingleStudentActivityInfo studentActivityInfoRow)
         {
             //if (CheckExistingActivityColumnId(id) == false)
             //{
@@ -341,7 +339,7 @@ namespace WebStudentsManagement.Controllers
                 //}
                 return RedirectToAction(nameof(Index));
             }
-            return View("Index"); 
+            return View("Index");
         }
     }
 }
