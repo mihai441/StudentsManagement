@@ -33,8 +33,9 @@ namespace WebStudentsManagement
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=ManagementDb;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<StudentsManagementDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnections")));
+                options.UseSqlServer(connection, b => b.MigrationsAssembly("WebStudentsManagement")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

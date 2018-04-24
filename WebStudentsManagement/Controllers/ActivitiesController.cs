@@ -37,7 +37,6 @@ namespace WebStudentsManagement.Controllers
         public ActivitiesController(
           IBusinessLayer businessLayer,
           ILogger<ManageController> logger,
-          IAuthentication authentication,
           UrlEncoder urlEncoder)
         {
             _businessLogic = businessLayer;
