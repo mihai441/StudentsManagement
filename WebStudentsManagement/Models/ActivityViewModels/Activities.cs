@@ -8,13 +8,13 @@ namespace WebStudentsManagement.Models.ManageViewModels
 {
     public class Activities
     {
-        public List<int> IdActivities { get; set; }
+        public int IdActivity { get; set; }
 
-        public List<string> ActivitiesName { get; set; }
+        public string ActivityName { get; set; }
 
-        public List<string> ActivitiesType { get; set; }
+        public string ActivityType { get; set; }
 
-        public List<string> ActivitiesDescription { get; set; }
+        public string ActivityDescription { get; set; }
 
         public string StatusMessage { get; set; }
     }

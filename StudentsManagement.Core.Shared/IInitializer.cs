@@ -9,7 +9,7 @@ namespace StudentsManagement.Core.Shared
 {
     public interface IInitializer
     {
-        void Initialize(IServiceCollection collection);
+        //void Initialize(IServiceCollection collection);
         void Configure(IApplicationBuilder builder);
 
     }

@@ -10,7 +10,6 @@ namespace StudentsManagement.Persistence
     {
         IEnumerable<Activity> GetActivities();
         Activity GetActivity(int id);
-        IEnumerable<Student> GetStudents(int id);
         int GetProfessorId(int id);
     }
 }

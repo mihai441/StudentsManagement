@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using StudentsManagement.Core.Shared;
+using StudentsManagement.Domain;
 using WebStudentsManagement.Models;
 using WebStudentsManagement.Models.ManageViewModels;
 using WebStudentsManagement.Services;
@@ -27,6 +28,7 @@ namespace WebStudentsManagement.Controllers
         private readonly UrlEncoder _urlEncoder;
         private readonly IBusinessLayer _businessLogic;
         private readonly IAuthentication _auth;
+        private readonly IStudentServices _studentServices;
 
         private bool student = false;
 
@@ -40,6 +42,7 @@ namespace WebStudentsManagement.Controllers
         {
             _businessLogic = businessLayer;
             _auth = _businessLogic.GetAuthenticationService();
+            _studentServices = _businessLogic.GetStudentOperationService();
             _logger = logger;
             _urlEncoder = urlEncoder;
         }
@@ -58,81 +61,33 @@ namespace WebStudentsManagement.Controllers
 
             if (_auth.IsTeacher(User))
             {
-                List<string> activitiesName = new List<string>
-                {
-                    "Activity 1",
-                    "Activity 2",
-                    "Activity 3"
-                };
+                List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.GetActivities();
 
-                List<int> activitiesId = new List<int>
-                {
-                    1,
-                    2,
-                    3
-                };
 
-                List<string> activitiesType = new List<string>
+                var model = new Activities();
+                
+                foreach(var activity in activities)
                 {
-                    "C",
-                    "S",
-                    "L"
-                };
-
-                List<string> activitiesDescription = new List<string>
-                {
-                    "Class 101",
-                    "Class 102",
-                    "Class 103"
-                };
-
-                var model = new Activities
-                {
-                    ActivitiesName = activitiesName,
-                    IdActivities = activitiesId,
-                    ActivitiesType = activitiesType,
-                    ActivitiesDescription = activitiesDescription
-                };
+                    model.ActivityName = activity.Name;
+                    model.IdActivity = activity.IdAct;
+                }
+                    
+               
 
                 return View("StudentActivities", model);
             }
             else
             {
-                List<string> activitiesName = new List<string>
-                {
-                    "Activity 4",
-                    "Activity 5",
-                    "Activity 6"
-                };
+                List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.GetActivities();
 
-                List<int> activitiesId = new List<int>
-                {
-                    4,
-                    5,
-                    6
-                };
 
-                List<string> activitiesType = new List<string>
-                {
-                    "S",
-                    "L",
-                    "C"
-                };
+                var model = new Activities();
 
-                List<string> activitiesDescription = new List<string>
+                foreach (var activity in activities)
                 {
-                    "Class 104",
-                    "Class 105",
-                    "Class 106"
-                };
-
-                var model = new Activities
-                {
-                    ActivitiesName = activitiesName,
-                    IdActivities = activitiesId,
-                    ActivitiesType = activitiesType,
-                    ActivitiesDescription = activitiesDescription
-                };
+                    model.ActivityName = activity.Name;
+                    model.IdActivity = activity.IdAct;
+                }
 
                 return View("TeacherActivities", model);
             }

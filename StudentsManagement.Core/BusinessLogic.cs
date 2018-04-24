@@ -11,7 +11,7 @@ namespace StudentsManagement.Core.Shared
 {
     public class BusinessLogic : IBusinessLayer
     {
-        List<IInitializer> initList;
+        //List<IInitializer> initList;
         private IAuthentication auth;
         private IStudentServices studentServices;
 
@@ -19,8 +19,8 @@ namespace StudentsManagement.Core.Shared
             SignInManager<ApplicationUser> signInManager, IPersistenceContext persistenceContext)
         {            
             studentServices = new StudentServices(persistenceContext);
-            auth = new AuthenticationServices(studentServices, userManager, signInManager);
-            initList = new List<IInitializer> { auth, studentServices };
+            auth = new AuthenticationServices( userManager, signInManager);
+            //initList = new List<IInitializer> { auth, studentServices };
 
 
 
@@ -42,13 +42,13 @@ namespace StudentsManagement.Core.Shared
         }
 
 
-        public void Initialize(IServiceCollection collection)
-        {
+        //public void Initialize(IServiceCollection collection)
+        //{
             
-            foreach (var item in initList)
-            {
-                item.Initialize(collection);
-            }
-        }
+        //    foreach (var item in initList)
+        //    {
+        //        item.Initialize(collection);
+        //    }
+        //}
     }
 }

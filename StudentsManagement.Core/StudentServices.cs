@@ -2,6 +2,7 @@
 using StudentsManagement.Core.Shared;
 using Microsoft.AspNetCore.Builder;
 using StudentsManagement.Persistence;
+using System.Security.Claims;
 
 namespace StudentsManagement.Core
 {
@@ -9,10 +10,13 @@ namespace StudentsManagement.Core
     {
         IPersistenceContext _persistenceContext;
 
+
         public StudentServices(IPersistenceContext persistenceContext)
         {
-            _persistenceContext = persistenceContext;
+            PersistenceContext = persistenceContext;
         }
+
+        public IPersistenceContext PersistenceContext { get => _persistenceContext; set => _persistenceContext = value; }
 
         public void Configure(IApplicationBuilder builder)
         {
@@ -24,5 +28,6 @@ namespace StudentsManagement.Core
         {
 
         }
+
     }
 }
