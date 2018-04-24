@@ -7,9 +7,8 @@ namespace StudentsManagement.Domain
 {
     public class Activity : IdentityUser
     {
-        
         public int IdAct { get; set; }
-        public String Name { get; set; }
-        public int TeacherId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
