@@ -58,46 +58,36 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user");
             }
 
+            List<int> idActivities = new List<int>();
+            List<string> activitiesName = new List<string>();
+            List<string> activitiesDescription = new List<string>();
+            List<string> activitiesType = new List<string>();
+
+            List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.GetActivities();
+
+            foreach (var activity in activities)
+            {
+                idActivities.Add(activity.IdAct);
+                activitiesName.Add(activity.Name);
+                activitiesDescription.Add(activity.Description);
+                //string type = GetActivityType(activity.IdAct);
+                //activitiesType.Add(type);
+            }
+
+            var model = new Activities
+            {
+                IdActivities = idActivities,
+                ActivitiesName = activitiesName,
+                ActivitiesType = activitiesType,
+                ActivitiesDescription = activitiesDescription
+            };
+
             if (_auth.IsTeacher(User))
             {
-                List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.GetActivities();
-
-                var model = new Activities();
-                
-                //foreach(var activity in activities)
-                //{
-                //    model.ActivityName = activity.Name;
-                //    model.IdActivity = activity.IdAct;
-                //}
-
                 return View("StudentActivities", model);
             }
             else
             {
-                List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.GetActivities();
-
-                List<int> idActivities = new List<int>();
-                List<string> activitiesName = new List<string>();
-                List<string> activitiesDescription = new List<string>();
-                List<string> activitiesType = new List<string>();
-
-                foreach (var activity in activities)
-                {
-                    idActivities.Add(activity.IdAct);
-                    activitiesName.Add(activity.Name);
-                    activitiesDescription.Add(activity.Description);
-                    string type = GetActivityType(activity.IdAct);
-                    activitiesType.Add(type);
-                }
-
-                var model = new Activities
-                {
-                    IdActivities = idActivities,
-                    ActivitiesName = activitiesName,
-                    ActivitiesType = activitiesType,
-                    ActivitiesDescription = activitiesDescription
-                };
-
                 return View("TeacherActivities", model);
             }
         }
