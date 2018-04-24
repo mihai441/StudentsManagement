@@ -22,8 +22,6 @@ namespace WebStudentsManagement.Controllers
     [Route("[controller]/[action]")]
     public class ActivitiesController : Controller
     {
-
-
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
         private readonly IBusinessLayer _businessLogic;
@@ -84,11 +82,11 @@ namespace WebStudentsManagement.Controllers
 
             if (_auth.IsTeacher(User))
             {
-                return View("StudentActivities", model);
+                return View("TeacherActivities", model);
             }
             else
             {
-                return View("TeacherActivities", model);
+                return View("StudentActivities", model);
             }
         }
 
@@ -103,91 +101,51 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user");
             }
 
-            if (activityId == null)
+            if (activityId == null || _auth.IsTeacher(User) != true)
             {
                 return NotFound();
             }
 
             int idActivity = activityId ?? default(int);
 
-            /*
-             * Check if student exists
-            if (ExistingActivity(idActivity) == null)
+            //if (CheckExistingActivity(idActivity) == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //string activityName = GetActivityName(idActivity);
+
+            if (_auth.IsTeacher(User))
             {
-                return NotFound();
+                List<int> studentsId = new List<int>();
+                List<string> studentsName = new List<string>();
+
+                var model = new AllStudentsOnActivity
+                {
+                    Id = studentsId,
+                    Name = studentsName,
+                    //ActivityName = activityName,
+                    ActivityId = idActivity
+                };
+
+                return View("TeacherActivity", model);
             }
-            */
-
-            /*
-             * Dummy data for activity test
-             * */
-
-            if (student)
+            else
             {
-                List<DateTime> dateTime = new List<DateTime>
-                {
-                    new DateTime(2018, 5, 4),
-                    new DateTime(2018, 5, 5),
-                    new DateTime(2018, 5, 6),
-                    new DateTime(2018, 5, 7)
-                };
-
-                List<double> grade = new List<double>
-                {
-                    9,
-                    8.5,
-                    0,
-                    7.25
-                };
-
-                List<bool> attendance = new List<bool>
-                {
-                    true,
-                    true,
-                    false,
-                    true
-                };
-
-                string activityName = "E-learning";
+                List<DateTime> dateTime = new List<DateTime>();
+                List<double> grade = new List<double>();
+                List<bool> attendance = new List<bool>();
 
                 var model = new StudentActivityInfo
                 {
                     IdActivity = idActivity,
-                    ActivityName = activityName,
+                    //ActivityName = activityName,
                     Date = dateTime,
                     Grade = grade,
                     Attendance = attendance
                 };
 
                 return View("StudentActivity", model);
-            }
-            else
-            {
-                List<int> studentId = new List<int>
-                {
-                    1,
-                    2,
-                    3
-                };
-
-                List<string> name = new List<string>
-                {
-                    "Ionel",
-                    "Georgel",
-                    "Mihai"
-                };
-
-                string activityName = "E-learning";
-
-                var model = new AllStudentsOnActivity
-                {
-                    Id = studentId,
-                    Name = name,
-                    ActivityName = activityName,
-                    ActivityId = idActivity
-                };
-
-                return View("TeacherActivity", model);
             }
         }
 
@@ -210,59 +168,38 @@ namespace WebStudentsManagement.Controllers
             int idActivity = activityId ?? default(int);
             int idStudent = studentId ?? default(int);
 
-            /*
-             * Dummy data for activity test
-             * */
+            //if (CheckExistingActivity(idActivity) == null || CheckExistingStudent(idStudent) == null)
+            //{
+            //    return NotFound();
+            //}
 
-            List<int> id = new List<int>
+            if (_auth.IsTeacher(User))
             {
-                5,
-                6,
-                7,
-                8
-            };
+                List<int> id = new List<int>();
+                List<DateTime> dateTime = new List<DateTime>();
+                List<double> grade = new List<double>();
+                List<bool> attendance = new List<bool>();
+                //string activityName = GetActivityName(idActivity);
+                //string studentName = GetStudentName(idStudent);
 
-            List<DateTime> dateTime = new List<DateTime>
+                var model = new StudentActivityInfo
+                {
+                    Id = id,
+                    IdActivity = idActivity,
+                    //ActivityName = activityName,
+                    StudentId = idStudent,
+                    //StudentName = studentName,
+                    Date = dateTime,
+                    Grade = grade,
+                    Attendance = attendance
+                };
+
+                return View(model);
+            }
+            else
             {
-                new DateTime(2018, 5, 4),
-                new DateTime(2018, 5, 5),
-                new DateTime(2018, 5, 6),
-                new DateTime(2018, 5, 7)
-            };
-
-            List<double> grade = new List<double>
-            {
-                9,
-                8.5,
-                0,
-                7.25
-            };
-
-            List<bool> attendance = new List<bool>
-            {
-                true,
-                true,
-                false,
-                true
-            };
-
-            string activityName = "E-learning";
-
-            string studentName = "Mihai";
-
-            var model = new StudentActivityInfo
-            {
-                Id = id,
-                IdActivity = idActivity,
-                ActivityName = activityName,
-                StudentName = studentName,
-                StudentId = idStudent,
-                Date = dateTime,
-                Grade = grade,
-                Attendance = attendance
-            };
-
-            return View(model);
+                return NotFound();
+            }
         }
 
         // GET: Activities/TeacherActivityAdd/{activityId}/Student/{studentId}
@@ -284,23 +221,30 @@ namespace WebStudentsManagement.Controllers
             int idActivity = activityId ?? default(int);
             int idStudent = studentId ?? default(int);
 
-            /*
-             * Dummy data for activity test
-             * */
+            //if (CheckExistingActivity(idActivity) == null || CheckExistingStudent(idStudent) == null)
+            //{
+            //    return NotFound();
+            //}
 
-            string studentName = "Mihai";
-
-            string activityName = "E-learning";
-
-            var model = new SingleStudentActivityInfo
+            if (_auth.IsTeacher(User))
             {
-                IdActivity = idActivity,
-                ActivityName = activityName,
-                StudentName = studentName,
-                StudentId = idStudent
-            };
+                //string activityName = GetActivityName(idActivity);
+                //string studentName = GetStudentName(idStudent);
 
-            return View(model);
+                var model = new SingleStudentActivityInfo
+                {
+                    IdActivity = idActivity,
+                    //ActivityName = activityName,
+                    //StudentName = studentName,
+                    StudentId = idStudent
+                };
+
+                return View(model);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: Activities/TeacherActivityAdd
@@ -340,33 +284,64 @@ namespace WebStudentsManagement.Controllers
             int idStudent = studentId ?? default(int);
             int idFinal = id ?? default(int);
 
-            /*
-             * Dummy data for activity test
-             * */
+            //if (CheckExistingActivity(idActivity) == null || CheckExistingStudent(idStudent) == null
+            //    || CheckExistingActivityColumnId(idFinal) == null)
+            //{
+            //    return NotFound();
+            //}
 
-            double grade = 7.25;
-
-            bool attendance = true;
-
-            DateTime dateTime = new DateTime(2018, 5, 4);
-
-            string activityName = "E-learning";
-
-            string studentName = "Mihai";
+            //double grade = GetActivityGradeById(idFinal);
+            //bool attendance = GetActivityAttendanceById(idFinal);
+            //DateTime dateTime = GetActivityDateById(idFinal);
+            //string activityName = GetActivityName(idActivity);
+            //string studentName = GetStudentName(idStudent);
 
             var model = new SingleStudentActivityInfo
             {
                 Id = idFinal,
                 IdActivity = idActivity,
-                ActivityName = activityName,
-                StudentName = studentName,
+                //ActivityName = activityName,
+                //StudentName = studentName,
                 StudentId = idStudent,
-                Date = dateTime,
-                Grade = grade,
-                Attendance = attendance
+                //Date = dateTime,
+                //Grade = grade,
+                //Attendance = attendance
             };
 
             return View(model);
+        }
+
+        // POST: Activities/TeacherActivityEdit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TeacherActivityEdit(int? id, [Bind("IdActivity, ,StudentId, Date, Grade, Attendance")] SingleStudentActivityInfo studentActivityInfoRow)
+        {
+            //if (CheckExistingActivityColumnId(id) == false)
+            //{
+            //    return NotFound();
+            //}
+
+            if (ModelState.IsValid)
+            {
+                //try
+                //{
+                //    _context.Update(student);
+                //    await _context.SaveChangesAsync();
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!StudentExists(student.Id))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
+                return RedirectToAction(nameof(Index));
+            }
+            return View("Index");
         }
     }
 }

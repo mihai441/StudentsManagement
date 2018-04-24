@@ -33,10 +33,11 @@ namespace StudentsManagement.Persistence.EF
 
         public int GetProfessorId(int id)
         {
-            return StudentsManagementDbContext.Activities
-                            .Where(b => b.IdAct == id)
-                            .Select(i => i.TeacherId)
-                            .FirstOrDefault();
+            //return StudentsManagementDbContext.Activities
+            //                .Where(b => b.IdAct == id)
+            //                .Select(i => i.TeacherId)
+            //                .FirstOrDefault();
+            return 0;
         }
 
         public StudentsManagementDbContext StudentsManagementDbContext

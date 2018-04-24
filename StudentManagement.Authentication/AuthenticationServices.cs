@@ -197,7 +197,7 @@ namespace StudentManagement.Authentication
                 throw new ApplicationException($"Unable to load user with ID ");
             }
            //StudentsManagement get user role
-            return false;
+            return true;
         }
 
         public async Task<bool> IsUserValid(ClaimsPrincipal User)
