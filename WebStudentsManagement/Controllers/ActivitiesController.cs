@@ -341,7 +341,7 @@ namespace WebStudentsManagement.Controllers
                 //}
                 return RedirectToAction(nameof(Index));
             }
-            return View("Index");
+            return View("Index"); 
         }
     }
 }
