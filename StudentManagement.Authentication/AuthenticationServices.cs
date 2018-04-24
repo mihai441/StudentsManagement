@@ -7,6 +7,8 @@ using StudentsManagement.Core.Shared;
 using Microsoft.AspNetCore.Authentication;
 using System;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace StudentManagement.Authentication
 {
@@ -69,10 +71,6 @@ namespace StudentManagement.Authentication
             return result.Succeeded;
         }
 
-
-        public void Initialize(IServiceCollection collection)
-        {
-        }
 
         public async Task<bool> LoginProcess(string email, string password, bool remember)
         {
@@ -214,6 +212,22 @@ namespace StudentManagement.Authentication
         {
             var result = _signInManager.IsSignedIn(User);
             return result;
+        }
+
+        public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+        }
+
+        public void InitializeData(IServiceProvider serviceProvider)
+        {
+            //Init admin users and dummy data
         }
     }
 }

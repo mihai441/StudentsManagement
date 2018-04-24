@@ -10,5 +10,6 @@ namespace StudentsManagement.Domain
         public int IdAct { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public int IdTeacher{ get; set; }
     }
 }

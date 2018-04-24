@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagement.Authentication", "StudentManagement.Authentication\StudentManagement.Authentication.csproj", "{A32DFF5E-6246-4028-891E-0D3D793AC390}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Abstractions", "Abstractions\Shared.Abstractions.csproj", "{5BF8AD33-AF1E-4C9D-AFB6-C26AEAD5F918}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{A32DFF5E-6246-4028-891E-0D3D793AC390}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A32DFF5E-6246-4028-891E-0D3D793AC390}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A32DFF5E-6246-4028-891E-0D3D793AC390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF8AD33-AF1E-4C9D-AFB6-C26AEAD5F918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF8AD33-AF1E-4C9D-AFB6-C26AEAD5F918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF8AD33-AF1E-4C9D-AFB6-C26AEAD5F918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF8AD33-AF1E-4C9D-AFB6-C26AEAD5F918}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{8A8E0A57-D1C6-4447-83A3-51979FA78859} = {29E71D62-DC24-459C-961E-E1C87DC5D775}
 		{C4E696BC-EE80-415B-B35D-CFFFD5980D36} = {29E71D62-DC24-459C-961E-E1C87DC5D775}
 		{A32DFF5E-6246-4028-891E-0D3D793AC390} = {29E71D62-DC24-459C-961E-E1C87DC5D775}
+		{5BF8AD33-AF1E-4C9D-AFB6-C26AEAD5F918} = {29E71D62-DC24-459C-961E-E1C87DC5D775}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05F0885C-168D-418E-926E-E79A447C3E76}

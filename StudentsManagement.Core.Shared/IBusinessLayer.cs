@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StudentsManagement.Core.Shared
 {
-    public interface IBusinessLayer : IInitializer
+    public interface IBusinessLayer 
     {
        
         IStudentServices GetStudentOperationService();

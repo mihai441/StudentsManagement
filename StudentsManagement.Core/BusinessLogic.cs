@@ -20,15 +20,7 @@ namespace StudentsManagement.Core.Shared
         {            
             studentServices = new StudentServices(persistenceContext);
             auth = new AuthenticationServices(userManager, signInManager);
-            //initList = new List<IInitializer> { auth, studentServices };
 
-
-
-        }
-
-        public void Configure(IApplicationBuilder builder)
-        {
-            throw new NotImplementedException();
         }
 
         public IAuthentication GetAuthenticationService()
@@ -40,15 +32,5 @@ namespace StudentsManagement.Core.Shared
         {
             return studentServices;
         }
-
-
-        //public void Initialize(IServiceCollection collection)
-        //{
-            
-        //    foreach (var item in initList)
-        //    {
-        //        item.Initialize(collection);
-        //    }
-        //}
     }
 }

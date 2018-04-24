@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using StudentsManagement.Domain;
+using StudentsManagement.Shared.Abstractions;
 //using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;

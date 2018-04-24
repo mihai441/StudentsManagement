@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +14,7 @@ using StudentsManagement.Domain;
 using StudentsManagement.Core.Shared;
 using StudentsManagement.Persistence;
 using StudentsManagement.Persistence.EF;
+using StudentManagement.Authentication;
 
 namespace WebStudentsManagement
 {
@@ -31,20 +30,26 @@ namespace WebStudentsManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=ManagementDb;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<StudentsManagementDbContext>(options =>
-                options.UseSqlServer(connection, b => b.MigrationsAssembly("WebStudentsManagement")));
+           
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            //Add persistence service
+            services.AddScoped<IPersistenceContext, PersistenceContext>();
+            var dataService = services.BuildServiceProvider().GetService<IPersistenceContext>();
+            dataService.InitializeContext(services, Configuration);
+
+            //Add auth service
+            services.AddScoped<IAuthentication, AuthenticationServices>();
+            var authService = services.BuildServiceProvider().GetService<IAuthentication>();
+            authService.InitializeContext(services, Configuration);
+
+
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IBusinessLayer, BusinessLogic>();
-            services.AddTransient<IPersistenceContext, PersistenceContext>();
+
+            //Add Business Layer 
+            services.AddScoped<IBusinessLayer, BusinessLogic>();
+            
             
             services.AddMvc();
         }

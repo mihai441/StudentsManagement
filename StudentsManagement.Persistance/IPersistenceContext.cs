@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using StudentsManagement.Shared.Abstractions;
 
 namespace StudentsManagement.Persistence
 {
-    public interface IPersistenceContext
+    public interface IPersistenceContext : IInitializer
     {
         int Complete();
         void Dispose();
