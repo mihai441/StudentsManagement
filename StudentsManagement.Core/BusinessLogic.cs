@@ -19,7 +19,7 @@ namespace StudentsManagement.Core.Shared
             SignInManager<ApplicationUser> signInManager, IPersistenceContext persistenceContext)
         {            
             studentServices = new StudentServices(persistenceContext);
-            auth = new AuthenticationServices( userManager, signInManager);
+            auth = new AuthenticationServices(userManager, signInManager);
             //initList = new List<IInitializer> { auth, studentServices };
 
 
