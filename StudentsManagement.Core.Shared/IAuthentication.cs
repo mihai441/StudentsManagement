@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using StudentsManagement.Domain;
 using StudentsManagement.Shared.Abstractions;
+using System.Collections.Generic;
 //using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace StudentsManagement.Core.Shared
         Task<bool> IsTeacher(ClaimsPrincipal User);
         Task<bool> IsUserValid(ClaimsPrincipal User);
         bool IsUserSignedIn(ClaimsPrincipal User);
-        string GetUserName(ClaimsPrincipal principal);
+        Task<string> GetUserNameAsync(ClaimsPrincipal User);
+        Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync();
     }
 }

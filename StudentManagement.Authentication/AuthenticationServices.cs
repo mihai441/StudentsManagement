@@ -235,9 +235,15 @@ namespace StudentManagement.Authentication
             //Init admin users and dummy data
         }
 
-        public string GetUserName(ClaimsPrincipal principal)
+        public async Task<string> GetUserNameAsync(ClaimsPrincipal User)
         {
-            // ceva aici
+            var user = await _userManager.GetUserAsync(User);
+            return user.UserName;
+        }
+
+        public Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync()
+        {
+            // aici pentru Account/Login.cshtml
             throw new NotImplementedException();
         }
     }
