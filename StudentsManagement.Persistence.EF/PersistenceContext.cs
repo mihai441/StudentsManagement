@@ -10,11 +10,11 @@ using System.Text;
 
 namespace StudentsManagement.Persistence.EF
 {
-    public class PersistenceContext : IPersistenceContext        
+    public class PersistenceContext : IPersistenceContext
     {
-       
-        private StudentsManagementDbContext _context;  
-       
+
+        private StudentsManagementDbContext _context;
+
 
         public IActivityRepository ActivityRepository { get; set; }
         public IStudentActivityDetailsRepository ActivityDetailsRepository { get; set; }
@@ -32,11 +32,9 @@ namespace StudentsManagement.Persistence.EF
             StudentsRepository = new StudentsRepository(_context);
         }
 
-        public PersistenceContext()
-        {
+        public PersistenceContext(){}
 
-           
-        }
+
         public int Complete()
         {
             int retVal = 0;
@@ -46,18 +44,18 @@ namespace StudentsManagement.Persistence.EF
             }
 
             return retVal;
-        }       
+        }
 
         public void Dispose()
         {
             if (_context != null)
-            { 
+            {
                 _context.Dispose();
             }
         }
 
         public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
-        { 
+        {
             services.AddDbContext<StudentsManagementDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnection")));
 
@@ -74,13 +72,12 @@ namespace StudentsManagement.Persistence.EF
             InitializeDbContext(serviceProvider);
 
 
-
-            //if (StudentsRepository.GetStudents().Count() == 0)
-            //{
+            if (StudentsRepository.ListAll().Count() == 0)
+            {
                 var stud1 = new Student
                 {
                     Id = 0,
-                    Name="Gheorghe"
+                    Name = "Gheorghe"
                 };
 
                 var stud2 = new Student
@@ -91,7 +88,52 @@ namespace StudentsManagement.Persistence.EF
 
                 StudentsRepository.Add(stud1);
                 StudentsRepository.Add(stud2);
-            //}
+                //}
+            }
+
+            if (TeachersRepository.ListAll().Count() == 0)
+            {
+                var teacher1 = new Teacher
+                {
+                    Id = 0,
+                    Name = "Costache"
+                };
+
+                var teacher2 = new Teacher
+                {
+                    Id = 1,
+                    Name = "Ofelia"
+                };
+
+                TeachersRepository.Add(teacher1);
+                TeachersRepository.Add(teacher2);
+                //}
+            }
+
+            if (ActivityRepository.ListAll().Count() == 0)
+            {
+                var activity1 = new Activity
+                {
+                    Id = 0,
+                    Name = "Sisteme de Operare",
+                    Description = "Studiu al sistemelor de operare",
+                    IdActivityType = 0,
+                    IdTeacher = 0
+                };
+
+                var activity2 = new Activity
+                {
+                    Id = 1,
+                    Name = "Arhitectura Calculatoarelor",
+                    Description = "Arhitectura calc",
+                    IdActivityType = 1,
+                    IdTeacher = 1
+                };
+
+                ActivityRepository.Add(activity1);
+                ActivityRepository.Add(activity2);
+
+            }
         }
     }
 }

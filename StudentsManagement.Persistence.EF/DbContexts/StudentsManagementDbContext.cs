@@ -18,11 +18,12 @@ namespace StudentsManagement.Persistence.EF
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-
+        
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<StudentActivityDetails> StudentActivityDetails { get; set; }
+        public virtual DbSet<ActivityType> ActivityTypes { get; set; }
 
     }
 }

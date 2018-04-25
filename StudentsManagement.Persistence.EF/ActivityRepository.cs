@@ -11,22 +11,11 @@ namespace StudentsManagement.Persistence.EF
         {
         }
 
-        public IEnumerable<Activity> GetActivities()
-        {
-            return StudentsManagementDbContext.Activities.ToList();
-                
-        }
-
-        public Activity GetActivity(int id)
-        {
-            return StudentsManagementDbContext.Activities.Find(id);
-        }
-
 
         public int GetProfessorId(int id)
         {
             return StudentsManagementDbContext.Activities
-                                           .Where(b => b.IdAct == id)
+                                           .Where(b => b.Id == id)
                                            .Select(i => i.IdTeacher)
                                            .FirstOrDefault();
         }

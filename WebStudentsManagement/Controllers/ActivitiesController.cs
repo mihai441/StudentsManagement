@@ -59,11 +59,11 @@ namespace WebStudentsManagement.Controllers
             List<string> activitiesDescription = new List<string>();
             List<string> activitiesType = new List<string>();
 
-            List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.GetActivities();
+            List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.ListAll();
 
             foreach (var activity in activities)
             {
-                idActivities.Add(activity.IdAct);
+                idActivities.Add(activity.Id);
                 activitiesName.Add(activity.Name);
                 activitiesDescription.Add(activity.Description);
                 //string type = GetActivityType(activity.IdAct);
