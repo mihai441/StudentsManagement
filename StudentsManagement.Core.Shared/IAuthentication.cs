@@ -21,7 +21,7 @@ namespace StudentsManagement.Core.Shared
         Task<bool> CheckPasswordData(ClaimsPrincipal claimsPrincipalUser);
         Task<bool> ChangePassword(ClaimsPrincipal claimsPrincipalUser, string oldPassword, string newPassword);
         Task<bool> SetPassword(ClaimsPrincipal claimsPrincipalUser, string newPassword);
-        bool IsTeacherAsync(ClaimsPrincipal User);
+        Task<bool> IsTeacher(ClaimsPrincipal User);
         Task<bool> IsUserValid(ClaimsPrincipal User);
         bool IsUserSignedIn(ClaimsPrincipal User);
     }

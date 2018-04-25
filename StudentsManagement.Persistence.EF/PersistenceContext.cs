@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StudentsManagement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,7 +74,20 @@ namespace StudentsManagement.Persistence.EF
             InitializeDbContext(serviceProvider);
             if (StudentsRepository.GetStudents().Count() == 0)
             {
+                var stud1 = new Student
+                {
+                    Id = 0,
+                    Name="Gheorghe"
+                };
 
+                var stud2 = new Student
+                {
+                    Id = 1,
+                    Name = "Stefanescu"
+                };
+
+                StudentsRepository.Add(stud1);
+                StudentsRepository.Add(stud2);
             }
         }
     }

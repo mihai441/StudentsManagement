@@ -78,7 +78,7 @@ namespace WebStudentsManagement.Controllers
                 ActivitiesDescription = activitiesDescription
             };
 
-            if (_auth.IsTeacherAsync(User))
+            if (await _auth.IsTeacher(User))
             {
                 return View("TeacherActivities", model);
             }
@@ -99,7 +99,7 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user");
             }
 
-            if (activityId == null || _auth.IsTeacherAsync(User) != true)
+            if (activityId == null || await _auth.IsTeacher(User) != true)
             {
                 return NotFound();
             }
@@ -113,7 +113,7 @@ namespace WebStudentsManagement.Controllers
 
             //string activityName = GetActivityName(idActivity);
 
-            if (_auth.IsTeacherAsync(User))
+            if (await _auth.IsTeacher(User))
             {
                 List<int> studentsId = new List<int>();
                 List<string> studentsName = new List<string>();
@@ -171,7 +171,7 @@ namespace WebStudentsManagement.Controllers
             //    return NotFound();
             //}
 
-            if (_auth.IsTeacherAsync(User))
+            if (await _auth.IsTeacher(User))
             {
                 List<int> id = new List<int>();
                 List<DateTime> dateTime = new List<DateTime>();
@@ -224,7 +224,7 @@ namespace WebStudentsManagement.Controllers
             //    return NotFound();
             //}
 
-            if (_auth.IsTeacherAsync(User))
+            if (await _auth.IsTeacher(User))
             {
                 //string activityName = GetActivityName(idActivity);
                 //string studentName = GetStudentName(idStudent);
