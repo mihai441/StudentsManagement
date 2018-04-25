@@ -266,3 +266,5 @@ __pycache__/
 /WebStudentsManagement/wwwroot/lib/jquery/LICENSE.txt
 /WebStudentsManagement/Migrations/20180424084537_Init.Designer.cs
 /WebStudentsManagement/Migrations/20180424084537_Init.cs
+/WebStudentsManagement/Data/Migrations/20180425080647_newMigrationTest.cs
+/WebStudentsManagement/Data/Migrations/20180425080647_newMigrationTest.Designer.cs

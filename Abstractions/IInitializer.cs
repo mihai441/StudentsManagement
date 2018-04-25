@@ -13,6 +13,5 @@ namespace StudentsManagement.Shared.Abstractions
         void InitializeContext(IServiceCollection collection, IConfiguration configuration);
         void InitializeData(IServiceProvider serviceProvider);
         void Configure(IApplicationBuilder builder);
-
     }
 }

@@ -232,7 +232,6 @@ namespace StudentManagement.Authentication
 
         public void InitializeData(IServiceProvider serviceProvider)
         {
-            //Init admin users and dummy data
         }
 
         public async Task<string> GetUserNameAsync(ClaimsPrincipal User)
@@ -243,8 +242,7 @@ namespace StudentManagement.Authentication
 
         public Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync()
         {
-            // aici trebuie modificat la fel si-n Account/Login.cshtml
-            throw new NotImplementedException();
+            return _signInManager.GetExternalAuthenticationSchemesAsync();
         }
     }
 }

@@ -22,22 +22,13 @@ namespace StudentsManagement.Persistence.EF
             return StudentsManagementDbContext.Activities.Find(id);
         }
 
-        //public IEnumerable<Student> GetStudents(int id)
-        //{
-            
-        //    return StudentsManagementDbContext.Activities
-        //                                .Where(b => b.IdAct == id)
-        //                                .Select(i => i.Students)
-        //                                .FirstOrDefault();
-        //}
 
         public int GetProfessorId(int id)
         {
-            //return StudentsManagementDbContext.Activities
-            //                .Where(b => b.IdAct == id)
-            //                .Select(i => i.TeacherId)
-            //                .FirstOrDefault();
-            return 0;
+            return StudentsManagementDbContext.Activities
+                                           .Where(b => b.IdAct == id)
+                                           .Select(i => i.IdTeacher)
+                                           .FirstOrDefault();
         }
 
         public StudentsManagementDbContext StudentsManagementDbContext

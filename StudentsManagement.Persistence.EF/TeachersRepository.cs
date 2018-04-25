@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentsManagement.Domain;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace StudentsManagement.Persistence.EF
 {
@@ -13,12 +11,12 @@ namespace StudentsManagement.Persistence.EF
         {
         }
 
-        public IEnumerable<Teacher> Teachers()
+        public new IEnumerable<Teacher> ListAll()
         {
             return StudentsManagementDbContext.Teachers.ToList();
         }
 
-        public Teacher GetTeacher(int id)
+        public new Teacher GetEntity(int id)
         {
             return StudentsManagementDbContext.Teachers
                             .Where(s => s.Id == id)

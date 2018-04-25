@@ -1,8 +1,8 @@
 ﻿@using System.Linq
 @using StudentsManagement.Domain
 @model LoginViewModel
-<!--inject IAuthentication auth-->
-@inject SignInManager<ApplicationUser> SignInManager
+@inject IAuthentication auth
+
 @{
     ViewData["Title"] = "Log in";
 }
@@ -44,8 +44,7 @@
         </section>
     </div>
     @{
-        var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        //var loginProviders = (await auth.GetExternalAuthenticationSchemesAsync()).ToList();
+        var loginProviders = (await auth.GetExternalAuthenticationSchemesAsync()).ToList();
         if (loginProviders.Count != 0)
         {
             <div class="col-md-6 col-md-offset-2">

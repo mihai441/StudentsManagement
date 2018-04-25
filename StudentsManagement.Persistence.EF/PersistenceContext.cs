@@ -72,8 +72,11 @@ namespace StudentsManagement.Persistence.EF
         public void InitializeData(IServiceProvider serviceProvider)
         {
             InitializeDbContext(serviceProvider);
-            if (StudentsRepository.GetStudents().Count() == 0)
-            {
+
+
+
+            //if (StudentsRepository.GetStudents().Count() == 0)
+            //{
                 var stud1 = new Student
                 {
                     Id = 0,
@@ -88,7 +91,7 @@ namespace StudentsManagement.Persistence.EF
 
                 StudentsRepository.Add(stud1);
                 StudentsRepository.Add(stud2);
-            }
+            //}
         }
     }
 }

@@ -40,6 +40,7 @@ namespace WebStudentsManagement
            .AddEntityFrameworkStores<ApplicationDbContext>()
            .AddDefaultTokenProviders();
 
+
             //Add persistence service
             services.AddScoped<IPersistenceContext, PersistenceContext>();
             var dataService = services.BuildServiceProvider().GetService<IPersistenceContext>();
@@ -80,7 +81,6 @@ namespace WebStudentsManagement
             app.UseStaticFiles();
 
             app.UseAuthentication();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
