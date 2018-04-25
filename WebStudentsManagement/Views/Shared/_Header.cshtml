@@ -1,15 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using WebStudentsManagement.Models
 @using StudentsManagement.Domain
+@using StudentManagement.Authentication
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject AuthenticationServices auth
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li><a asp-area="" asp-controller="Home" asp-action="Index" asp-route-returnurl="@ViewData["ReturnUrl"]">Home</a></li>
             <li><a asp-area="" asp-controller="Activities" asp-action="Index" asp-route-returnurl="@ViewData["ReturnUrl"]">Activities</a></li>
+            @if (await auth.IsTeacher(User))
+            {
             <li><a asp-area="" asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Manage Users</a></li>
+            }
         </ul>
         @await Html.PartialAsync("_LoginPartial")
     </div>
