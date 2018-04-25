@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 using StudentsManagement.Domain;
 
-namespace StudentManagement.Authentication
+namespace StudentsManagement.Persistence.EF
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

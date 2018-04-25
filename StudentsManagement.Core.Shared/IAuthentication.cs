@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using StudentsManagement.Domain;
 using StudentsManagement.Shared.Abstractions;
 //using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,5 @@ namespace StudentsManagement.Core.Shared
         bool IsTeacher(ClaimsPrincipal User);
         Task<bool> IsUserValid(ClaimsPrincipal User);
         bool IsUserSignedIn(ClaimsPrincipal User);
-
     }
 }

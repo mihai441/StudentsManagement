@@ -14,8 +14,6 @@ namespace StudentsManagement.Persistence.EF
             Context = context;
         }
 
-        public IQueryable<T> Query => throw new NotImplementedException();
-
         public void Add(T entity)
         {
             Context.Set<T>().Add(entity);

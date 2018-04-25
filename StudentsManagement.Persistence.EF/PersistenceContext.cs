@@ -58,7 +58,7 @@ namespace StudentsManagement.Persistence.EF
         public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
         { 
             services.AddDbContext<StudentsManagementDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ManagementDb")));
+                options.UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnection")));
 
             InitializeDbContext(services.BuildServiceProvider());
         }

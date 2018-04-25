@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using StudentManagement.Authentication;
+using StudentsManagement.Persistence.EF;
 
 namespace WebStudentsManagement.Data.Migrations
 {

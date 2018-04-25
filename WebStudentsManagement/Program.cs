@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StudentsManagement.Core.Shared;
 using StudentsManagement.Persistence;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebStudentsManagement
 {

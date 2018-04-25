@@ -9,19 +9,20 @@ using System;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using StudentsManagement.Persistence.EF;
 
 namespace StudentManagement.Authentication
 {
     public class AuthenticationServices : IAuthentication
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private UserManager<ApplicationUser> _userManager;
+        private SignInManager<ApplicationUser> _signInManager;
 
-        public AuthenticationServices( UserManager<ApplicationUser> userManager,
+        public AuthenticationServices(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public void Configure(IApplicationBuilder builder)
@@ -216,14 +217,9 @@ namespace StudentManagement.Authentication
 
         public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
+            
         }
+
 
         public void InitializeData(IServiceProvider serviceProvider)
         {

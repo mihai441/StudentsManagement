@@ -15,6 +15,8 @@ using StudentsManagement.Core.Shared;
 using StudentsManagement.Persistence;
 using StudentsManagement.Persistence.EF;
 using StudentManagement.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebStudentsManagement
 {
@@ -30,7 +32,13 @@ namespace WebStudentsManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+
+            services.AddTransient<IEmailSender, EmailSender>();
+
+            // Add application services.
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+           .AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddDefaultTokenProviders();
 
             //Add persistence service
             services.AddScoped<IPersistenceContext, PersistenceContext>();
@@ -38,14 +46,15 @@ namespace WebStudentsManagement
             dataService.InitializeContext(services, Configuration);
 
             //Add auth service
+            services.AddDbContext<ApplicationDbContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAuthentication, AuthenticationServices>();
             var authService = services.BuildServiceProvider().GetService<IAuthentication>();
-            authService.InitializeContext(services, Configuration);
+            
+            //authService.InitializeContext(services, Configuration);
 
 
 
-            // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
 
             //Add Business Layer 
             services.AddScoped<IBusinessLayer, BusinessLogic>();

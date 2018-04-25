@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StudentManagement.Authentication\StudentManagement.Authentication.csproj" />
+    <ProjectReference Include="..\StudentManagement.Authentication\StudentsManagement.Authentication.csproj" />
     <ProjectReference Include="..\StudentsManagement.Core.Shared\StudentsManagement.Core.Shared.csproj" />
     <ProjectReference Include="..\StudentsManagement.Domain\StudentsManagement.Domain.csproj" />
     <ProjectReference Include="..\StudentsManagement.Persistance\StudentsManagement.Persistence.csproj" />

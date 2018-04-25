@@ -9,9 +9,9 @@ using StudentsManagement.Domain;
 
 namespace WebStudentsManagement.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class TempNotUseddbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public TempNotUseddbContext(DbContextOptions<TempNotUseddbContext> options)
             : base(options)
         {
         }
