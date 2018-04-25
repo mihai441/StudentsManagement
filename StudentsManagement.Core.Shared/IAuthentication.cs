@@ -24,5 +24,6 @@ namespace StudentsManagement.Core.Shared
         Task<bool> IsTeacher(ClaimsPrincipal User);
         Task<bool> IsUserValid(ClaimsPrincipal User);
         bool IsUserSignedIn(ClaimsPrincipal User);
+        string GetUserName(ClaimsPrincipal principal);
     }
 }

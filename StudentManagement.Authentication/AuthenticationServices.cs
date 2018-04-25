@@ -234,5 +234,11 @@ namespace StudentManagement.Authentication
         {
             //Init admin users and dummy data
         }
+
+        public string GetUserName(ClaimsPrincipal principal)
+        {
+            // ceva aici
+            throw new NotImplementedException();
+        }
     }
 }
