@@ -10,6 +10,8 @@ using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using StudentsManagement.Persistence.EF;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StudentManagement.Authentication
 {
@@ -188,15 +190,22 @@ namespace StudentManagement.Authentication
             return true;
         }
 
-        public bool IsTeacher(ClaimsPrincipal User)
+        public async Task<bool> IsTeacher(ClaimsPrincipal User)
         {
-            var user =  _userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID ");
             }
-           //StudentsManagement get user role
-            return true;
+            var roles = await _userManager.GetRolesAsync(user);
+
+            foreach(var role in roles)
+            {
+                if (role == "Teacher")
+                    return true;
+            }
+            return false;
+            
         }
 
         public async Task<bool> IsUserValid(ClaimsPrincipal User)

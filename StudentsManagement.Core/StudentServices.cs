@@ -18,16 +18,5 @@ namespace StudentsManagement.Core
 
         public IPersistenceContext PersistenceContext { get => _persistenceContext; set => _persistenceContext = value; }
 
-        public void Configure(IApplicationBuilder builder)
-        {
-
-        }
-
-
-        public void Initialize(IServiceCollection collection)
-        {
-
-        }
-
     }
 }
