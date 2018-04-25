@@ -11,17 +11,6 @@ namespace StudentsManagement.Persistence.EF
         {
         }
 
-        public new IEnumerable<Teacher> ListAll()
-        {
-            return StudentsManagementDbContext.Teachers.ToList();
-        }
-
-        public new Teacher GetEntity(int id)
-        {
-            return StudentsManagementDbContext.Teachers
-                            .Where(s => s.Id == id)
-                            .SingleOrDefault();
-        }
 
         public StudentsManagementDbContext StudentsManagementDbContext
         {

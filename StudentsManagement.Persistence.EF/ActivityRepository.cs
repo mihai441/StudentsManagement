@@ -1,4 +1,5 @@
-﻿using StudentsManagement.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentsManagement.Domain;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace StudentsManagement.Persistence.EF
     class ActivityRepository : Repository<Activity>, IActivityRepository
     {
 
-        public ActivityRepository(StudentsManagementDbContext context) : base(context)
+        public ActivityRepository(DbContext context) : base(context)
         {
         }
 
