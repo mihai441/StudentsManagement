@@ -48,14 +48,9 @@ namespace WebStudentsManagement
 
             //Add auth service
             services.AddDbContext<ApplicationDbContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("WebStudentsManagement")));
             services.AddScoped<IAuthentication, AuthenticationServices>();
             var authService = services.BuildServiceProvider().GetService<IAuthentication>();
-            
-            //authService.InitializeContext(services, Configuration);
-
-
-
 
             //Add Business Layer 
             services.AddScoped<IBusinessLayer, BusinessLogic>();

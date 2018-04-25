@@ -226,12 +226,11 @@ namespace StudentManagement.Authentication
 
         public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
         {
-            
         }
 
 
         public void InitializeData(IServiceProvider serviceProvider)
-        {
+        {            
         }
 
         public async Task<string> GetUserNameAsync(ClaimsPrincipal User)

@@ -22,92 +22,66 @@ namespace WebStudentsManagement.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("StudentsManagement.Domain.Activity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+            {
+                b.Property<int>("Id")
+                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccessFailedCount");
+                b.Property<string>("Description");
 
-                    b.Property<string>("ConcurrencyStamp");
+                b.Property<int>("IdActivityType");
 
-                    b.Property<string>("Email");
+                b.Property<int>("IdTeacher");
 
-                    b.Property<bool>("EmailConfirmed");
+                b.Property<string>("Name");
 
-                    b.Property<int>("IdAct");
+                b.HasKey("Id");
 
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("NormalizedEmail");
-
-                    b.Property<string>("NormalizedUserName");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<int>("TeacherId");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Activities");
-                });
+                b.ToTable("Activities");
+            });
 
             modelBuilder.Entity("StudentsManagement.Domain.Student", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Students");
-                });
+                b.ToTable("Students");
+            });
 
             modelBuilder.Entity("StudentsManagement.Domain.StudentActivityDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Attendance");
+                b.Property<bool>("Attendance");
 
-                    b.Property<DateTime>("Date");
+                b.Property<DateTime>("Date");
 
-                    b.Property<double>("Grade");
+                b.Property<double>("Grade");
 
-                    b.Property<int>("IdActivity");
+                b.Property<int>("IdActivity");
 
-                    b.Property<int>("IdStudent");
+                b.Property<int>("IdStudent");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("StudentActivityDetails");
-                });
+                b.ToTable("StudentActivityDetails");
+            });
 
             modelBuilder.Entity("StudentsManagement.Domain.Teacher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Teachers");
-                });
+                b.ToTable("Teachers");
+            });
 #pragma warning restore 612, 618
         }
     }

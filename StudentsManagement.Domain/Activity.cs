@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace StudentsManagement.Domain
+﻿namespace StudentsManagement.Domain
 {
     public class Activity
     {
