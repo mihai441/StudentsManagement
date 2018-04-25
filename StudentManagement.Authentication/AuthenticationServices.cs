@@ -243,7 +243,7 @@ namespace StudentManagement.Authentication
 
         public Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync()
         {
-            // aici pentru Account/Login.cshtml
+            // aici trebuie modificat la fel si-n Account/Login.cshtml
             throw new NotImplementedException();
         }
     }
