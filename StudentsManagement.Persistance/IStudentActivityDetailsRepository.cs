@@ -7,6 +7,6 @@ namespace StudentsManagement.Persistence
 {
     public interface IStudentActivityDetailsRepository : IRepository<StudentActivityDetails>
     {
-        IEnumerable<ActivityDate> GetActivityDates(int id, int idActivity, int idStudent);
+        IEnumerable<ActivityDate> GetActivityDates(int activityId, int idStudent);
     }
 }

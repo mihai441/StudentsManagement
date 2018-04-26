@@ -10,9 +10,7 @@ namespace StudentsManagement.Persistence.EF
 
         public ActivityRepository(DbContext context) : base(context)
         {
-        }
-
-
+        }      
         public int GetProfessorId(int id)
         {
             return StudentsManagementDbContext.Activities

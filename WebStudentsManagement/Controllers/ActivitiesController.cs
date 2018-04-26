@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -18,7 +15,7 @@ using WebStudentsManagement.Services;
 
 namespace WebStudentsManagement.Controllers
 {
-    [Authorize]
+    
     [Route("[controller]/[action]")]
     public class ActivitiesController : Controller
     {
@@ -43,7 +40,7 @@ namespace WebStudentsManagement.Controllers
             _urlEncoder = urlEncoder;
         }
 
-        [TempData]
+      
         public string StatusMessage { get; set; }
 
         [HttpGet]
@@ -55,31 +52,12 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user");
             }
 
-            List<int> idActivities = new List<int>();
-            List<string> activitiesName = new List<string>();
-            List<string> activitiesDescription = new List<string>();
-            List<string> activitiesType = new List<string>();
-            List<string> Teacher = new List<string>();
-
             List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.ListAll();
 
-            foreach (var activity in activities)
-            {
-                idActivities.Add(activity.Id);
-                activitiesName.Add(activity.Name);
-                activitiesDescription.Add(activity.Description);
-                string teacher = _studentServices.PersistenceContext.ActivityRepository.GetProfessorName(activity.Id);
-                Teacher.Add(teacher);
-                string type = _studentServices.PersistenceContext.ActivityRepository.GetActivityTypeName(activity.Id);
-                activitiesType.Add(type);
-            }
 
             var model = new Activities
             {
-                IdActivities = idActivities,
-                ActivitiesName = activitiesName,
-                ActivitiesType = activitiesType,
-                ActivitiesDescription = activitiesDescription
+                ActivitiesList = activities
             };
 
             if (await _auth.IsTeacher(User))
@@ -110,42 +88,27 @@ namespace WebStudentsManagement.Controllers
 
             int idActivity = activityId ?? default(int);
 
-            //if (CheckExistingActivity(idActivity) == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //string activityName = GetActivityName(idActivity);
 
             if (await _auth.IsTeacher(User))
             {
-                List<int> studentsId = new List<int>();
-                List<string> studentsName = new List<string>();
 
-                
+                List<Student> students = _studentServices.PersistenceContext.StudentsRepository.ListAllFromActivity(idActivity).ToList();
+
+
                 var model = new AllStudentsOnActivity
                 {
-                    Id = studentsId,
-                    Name = studentsName,
-                    //ActivityName = activityName,
-                    ActivityId = idActivity
+                    Students = students
                 };
 
                 return View("TeacherActivity", model);
             }
             else
             {
-                List<DateTime> dateTime = new List<DateTime>();
-                List<double> grade = new List<double>();
-                List<bool> attendance = new List<bool>();
+                List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityDetailsRepository.GetActivityDates(idActivity, await _auth.GetUserIdAsync(User)).ToList();
 
                 var model = new StudentActivityInfo
                 {
-                    IdActivity = idActivity,
-                    //ActivityName = activityName,
-                    Date = dateTime,
-                    Grade = grade,
-                    Attendance = attendance
+                   ActivityDates = studentActivitiesDates
                 };
 
                 return View("StudentActivity", model);
@@ -178,23 +141,12 @@ namespace WebStudentsManagement.Controllers
 
             if (await _auth.IsTeacher(User))
             {
-                List<int> id = new List<int>();
-                List<DateTime> dateTime = new List<DateTime>();
-                List<double> grade = new List<double>();
-                List<bool> attendance = new List<bool>();
-                //string activityName = GetActivityName(idActivity);
-                //string studentName = GetStudentName(idStudent);
+                List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityDetailsRepository.GetActivityDates(idActivity, idStudent).ToList();
+
 
                 var model = new StudentActivityInfo
                 {
-                    Id = id,
-                    IdActivity = idActivity,
-                    //ActivityName = activityName,
-                    StudentId = idStudent,
-                    //StudentName = studentName,
-                    Date = dateTime,
-                    Grade = grade,
-                    Attendance = attendance
+                    ActivityDates = studentActivitiesDates
                 };
 
                 return View(model);

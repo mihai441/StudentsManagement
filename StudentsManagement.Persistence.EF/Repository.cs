@@ -29,7 +29,7 @@ namespace StudentsManagement.Persistence.EF
             return Context.Set<T>().Find(id); 
         }
 
-        public IEnumerable<T> ListAll()
+        public virtual IEnumerable<T> ListAll()
         {
             return Context.Set<T>().ToList();
         }

@@ -5,12 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StudentManagement.Authentication\StudentsManagement.Authentication.csproj" />
     <ProjectReference Include="..\StudentsManagement.Core.Shared\StudentsManagement.Core.Shared.csproj" />
     <ProjectReference Include="..\StudentsManagement.Domain\StudentsManagement.Domain.csproj" />
     <ProjectReference Include="..\StudentsManagement.Persistance\StudentsManagement.Persistence.csproj" />

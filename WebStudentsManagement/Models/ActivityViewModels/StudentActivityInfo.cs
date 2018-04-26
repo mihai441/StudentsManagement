@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentsManagement.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,22 +9,7 @@ namespace WebStudentsManagement.Models.ManageViewModels
 {
     public class StudentActivityInfo
     {
-        public List<int> Id { get; set; }
+        public IEnumerable<ActivityDate> ActivityDates { get; set; }
 
-        public int IdActivity { get; set; }
-
-        public string ActivityName { get; set; }
-
-        public int StudentId { get; set; }
-
-        public string StudentName { get; set; }
-
-        public List<DateTime> Date { get; set; }
-
-        public List<double> Grade { get; set; }
-
-        public List<bool> Attendance { get; set; }
-
-        public string StatusMessage { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using StudentsManagement.Domain;
-using StudentManagement.Authentication;
 using StudentsManagement.Persistence;
 
 namespace StudentsManagement.Core.Shared

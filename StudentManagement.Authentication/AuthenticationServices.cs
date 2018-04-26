@@ -261,5 +261,11 @@ namespace StudentManagement.Authentication
         {
             return _signInManager.GetExternalAuthenticationSchemesAsync();
         }
+
+        public async Task<int> GetUserIdAsync(ClaimsPrincipal User)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            return Int32.Parse(user.Id);
+        }
     }
 }

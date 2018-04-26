@@ -38,7 +38,7 @@ namespace WebStudentsManagement.Controllers
             _urlEncoder = urlEncoder;
         }
 
-        [TempData]
+       
         public string StatusMessage { get; set; }
 
         [HttpGet]

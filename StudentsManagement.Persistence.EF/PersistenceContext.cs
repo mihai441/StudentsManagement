@@ -56,8 +56,9 @@ namespace StudentsManagement.Persistence.EF
 
         public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<StudentsManagementDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnection"), 
+            services.AddDbContext<StudentsManagementDbContext>(options =>             
+            options.UseLazyLoadingProxies()
+            .UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnection"),              
                 b => b.MigrationsAssembly("StudentsManagement.Persistence.EF")));
 
             InitializeDbContext(services.BuildServiceProvider());

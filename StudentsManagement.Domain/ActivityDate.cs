@@ -13,7 +13,7 @@ namespace StudentsManagement.Domain
         public virtual Activity Activity { get; set; }
 
         public int StudentId { get; set; }
-        public Student Student { get; set; }
+        public virtual Student Student { get; set; }
 
     }
 }

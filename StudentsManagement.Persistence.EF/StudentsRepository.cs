@@ -11,6 +11,7 @@ namespace StudentsManagement.Persistence.EF
     {
         public StudentsRepository(DbContext context) : base(context)
         {
+            
         }
 
 
@@ -20,6 +21,21 @@ namespace StudentsManagement.Persistence.EF
             {
                 return Context as StudentsManagementDbContext;
             }
+        }
+
+        public IEnumerable<Student> ListAllFromActivity(int id)
+        {
+            List<StudentActivityDetails> studentActivityDetails;
+            studentActivityDetails = StudentsManagementDbContext.StudentActivityDetails.ToList();
+            List<Student> studentsToBeReturned = new List<Student>();
+
+            foreach(var activityDetail in studentActivityDetails)
+            {
+                if (activityDetail.ActivityId == id)
+                    studentsToBeReturned.Add(activityDetail.Student);
+            }
+
+            return studentsToBeReturned;
         }
     }
 }

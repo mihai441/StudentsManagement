@@ -10,7 +10,7 @@ using WebStudentsManagement.Models.AccountViewModels;
 
 namespace WebStudentsManagement.Controllers
 {
-    [Authorize]
+
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -30,7 +30,7 @@ namespace WebStudentsManagement.Controllers
 
         }
 
-        [TempData]
+        
         public string ErrorMessage { get; set; }
 
         [HttpGet]

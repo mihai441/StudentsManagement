@@ -24,6 +24,7 @@ namespace StudentsManagement.Persistence.EF
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<ActivityDate> ActivityDates { get; set; }
         public virtual DbSet<ActivityType> ActivityTypes { get; set; }
+        public virtual DbSet<StudentActivityDetails> StudentActivityDetails { get; set; }
         
 
     }
