@@ -19,15 +19,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (int iterator = 0; iterator < Model.IdActivities.Count; ++iterator)
-                    {
-                        <tr>
-                            <td scope="row">
-                                <a asp-action="Activity" asp-route-id="@Model.IdActivities[iterator]">@Model.ActivitiesName[iterator]</a>
-                            </td>
-                            <th scope="row">@Model.ActivitiesType[iterator]</th>
-                            <th scope="row">@Model.ActivitiesDescription[iterator]</th>
-                        </tr>
+                    @{
+                        var activitiesList = Model.ActivitiesList.ToList();
+                        if (activitiesList.Count != 0)
+                        {
+                            foreach (var activity in activitiesList)
+                            {
+                    <tr>
+                        <td scope="row">
+                            <a asp-action="Activity" asp-route-id="@activity.Id">@activity.Name</a>
+                        </td>
+                        <th scope="row">@activity.ActivityType.Name</th>
+                        <th scope="row">@activity.Description</th>
+                    </tr>
+                            }
+                        }
                     }
                 </tbody>
             </table>

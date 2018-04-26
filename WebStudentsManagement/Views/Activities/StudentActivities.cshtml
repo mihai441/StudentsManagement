@@ -21,20 +21,20 @@
                 <tbody>
                     @{
                         var activitiesList = Model.ActivitiesList.ToList();
-                        if (activitiesList.Count != 0) {
+                        if (activitiesList.Count != 0)
+                        {
                             foreach (var activity in activitiesList)
                             {
-                <tr>
-                    <td scope="row">
-                        <a asp-action="Activity" asp-route-id="@activity.Id">@activity.Name</a>
-                    </td>
-                    <th scope="row">@activity.ActivityType.Name</th>
-                    <th scope="row">@activity.Description</th>
-                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <a asp-action="Activity" asp-route-id="@activity.Id">@activity.Name</a>
+                                    </td>
+                                    <th scope="row">@activity.ActivityType.Name</th>
+                                    <th scope="row">@activity.Description</th>
+                                </tr>
                             }
                         }
                     }
-                        
                 </tbody>
             </table>
         </div>

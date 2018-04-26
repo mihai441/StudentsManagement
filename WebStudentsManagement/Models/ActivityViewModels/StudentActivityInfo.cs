@@ -10,6 +10,6 @@ namespace WebStudentsManagement.Models.ManageViewModels
     public class StudentActivityInfo
     {
         public IEnumerable<ActivityDate> ActivityDates { get; set; }
-
+        public string ActivityName;
     }
 }

@@ -1,8 +1,9 @@
 @model StudentActivityInfo
 @{
+    var activityList = Model.ActivityDates.ToList();
     ViewData["Title"] = @Model.ActivityName;
 }
-<h3>@Model.ActivityName</h3>
+<h3>@activityList[0].Activity.Name</h3>
 <div class="row">
     <div class="col-md-6">
         <table class="table">
@@ -14,20 +15,25 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int iterator = 0; iterator < Model.Date.Count; ++iterator)
-                {
-                    <tr>
-                        <td scope="row">@Model.Date[iterator]</td>
-                        @if (Model.Attendance[iterator])
+                @{
+                    if (activityList.Count != 0)
+                    {
+                        foreach (var activity in activityList)
                         {
-                            <th scope="row">1</th>
+                            <tr>
+                                <td scope="row">@activity.Date</td>
+                                @if (activity.Attendance)
+                                {
+                                     <th scope="row">1</th>
+                                }
+                                else
+                                {
+                                    <th scope="row">0</th>
+                                }
+                                <th scope="row">@activity.Grade</th>
+                            </tr>
                         }
-                        else
-                        {
-                            <th scope="row">0</th>
-                        }
-                        <th scope="row">@Model.Grade[iterator]</th>
-                    </tr>
+                    }
                 }
             </tbody>
         </table>

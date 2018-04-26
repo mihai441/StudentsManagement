@@ -1,6 +1,7 @@
 @model AllStudentsOnActivity
 @{
-    ViewData["Title"] = @Model.ActivityName;
+    var studentsList = Model.Students.ToList();
+    ViewData["Title"] = studentsList[0].
 }
 <h3>@Model.ActivityName</h3>
 <div class="row">
@@ -10,24 +11,27 @@
             <thead>
                 <tr>
                     <th scope="col">Student Name</th>
-                    <th scope="col">Student Surname</th>
                 </tr>
             </thead>
             <tbody>
-                @for (int iterator = 0; iterator < Model.Id.Count; ++iterator)
-                {
-                    <tr>
-                        <th scope="row">
-                            @Model.Name[iterator]
-                        </th>
-                        <th scope="row">
-                            @Model.Name[iterator]
-                        </th>
-                        <td>
-                            <a asp-action="TeacherActivityAdd" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@Model.Id[iterator]">Add</a> |
-                            <a asp-action="TeacherActivityDetails" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@Model.Id[iterator]">Details</a>
-                        </td>
-                    </tr>
+                @{
+                    if (studentsList.Count != 0)
+                    {
+                        foreach (var student in studentsList)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    @student.Name
+                                </th>
+                                <td>
+                                    <!--
+                                    <a asp-action="TeacherActivityAdd" asp-route-activityId="@student.ActivityId" asp-route-studentId="@Model.Id[iterator]">Add</a> |
+                                    <a asp-action="TeacherActivityDetails" asp-route-activityId="@student.ActivityId" asp-route-studentId="@Model.Id[iterator]">Details</a>
+                                    -->
+                                </td>
+                            </tr>
+                        }
+                    }
                 }
             </tbody>
         </table>
