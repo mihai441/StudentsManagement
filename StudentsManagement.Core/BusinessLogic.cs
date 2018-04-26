@@ -12,25 +12,21 @@ namespace StudentsManagement.Core.Shared
     public class BusinessLogic : IBusinessLayer
     {
         //List<IInitializer> initList;
-        private IAuthentication auth;
-        private IStudentServices studentServices;
+        
+        private IStudentServices _studentServices;
 
-        public BusinessLogic(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager, IPersistenceContext persistenceContext)
+        public BusinessLogic(IPersistenceContext persistenceContext)
         {            
-            studentServices = new StudentServices(persistenceContext);
-            auth = new AuthenticationServices(userManager, signInManager);
+            _studentServices = new StudentServices(persistenceContext);
+            
 
         }
 
-        public IAuthentication GetAuthenticationService()
-        {
-            return auth;
-        }
+        
 
         public IStudentServices GetStudentOperationService()
         {
-            return studentServices;
+            return _studentServices;
         }
     }
 }

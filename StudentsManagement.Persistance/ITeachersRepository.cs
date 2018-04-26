@@ -7,6 +7,7 @@ namespace StudentsManagement.Persistence
 {
     public interface ITeachersRepository : IRepository<Teacher>
     {
+        Teacher GetTeacherByName(string name);
 
     }
 }

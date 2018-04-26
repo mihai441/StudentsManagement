@@ -19,5 +19,17 @@ namespace StudentsManagement.Persistence.EF
                 return Context as StudentsManagementDbContext;
             }
         }
+
+        public Teacher GetTeacherByName(string name)
+        {
+            Teacher retVal = null;
+
+            if (StudentsManagementDbContext != null)
+            {
+                retVal = StudentsManagementDbContext.Teachers.SingleOrDefault(t => t.Name.Equals(name));
+            }
+
+            return retVal;
+        }
     }
 }

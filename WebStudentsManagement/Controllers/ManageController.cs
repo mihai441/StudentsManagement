@@ -27,10 +27,13 @@ namespace WebStudentsManagement.Controllers
 
         public ManageController(
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder, IBusinessLayer businessLayer)
+          UrlEncoder urlEncoder, 
+          IBusinessLayer businessLayer,
+          IAuthentication auth
+          )
         {
             _businessLogic = businessLayer;
-            _auth = _businessLogic.GetAuthenticationService();
+            _auth = auth;
             _logger = logger;
             _urlEncoder = urlEncoder;
         }

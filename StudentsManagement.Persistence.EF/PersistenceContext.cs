@@ -32,7 +32,7 @@ namespace StudentsManagement.Persistence.EF
             StudentsRepository = new StudentsRepository(_context);
         }
 
-        public PersistenceContext(){}
+        public PersistenceContext() {}
 
 
         public int Complete()
@@ -57,7 +57,8 @@ namespace StudentsManagement.Persistence.EF
         public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
         {
             services.AddDbContext<StudentsManagementDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnection"), b => b.MigrationsAssembly("WebStudentsManagement")));
+                options.UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnection"), 
+                b => b.MigrationsAssembly("StudentsManagement.Persistence.EF")));
 
             InitializeDbContext(services.BuildServiceProvider());
         }
@@ -71,68 +72,71 @@ namespace StudentsManagement.Persistence.EF
         {
             InitializeDbContext(serviceProvider);
 
+            ActivityType course = new ActivityType {Name = "Course" };
+            ActivityType lab = new ActivityType { Name = "Laboratory" };
 
             if (StudentsRepository.ListAll().Count() == 0)
             {
                 var stud1 = new Student
                 {
-                    Id = 0,
                     Name = "Gheorghe"
                 };
 
                 var stud2 = new Student
                 {
-                    Id = 1,
                     Name = "Stefanescu"
                 };
 
                 StudentsRepository.Add(stud1);
                 StudentsRepository.Add(stud2);
-                //}
+                
             }
 
-            if (TeachersRepository.ListAll().Count() == 0)
+            var teacher1 = TeachersRepository.GetTeacherByName("Costache");
+            if (teacher1 == null)
             {
-                var teacher1 = new Teacher
+                teacher1 = new Teacher
                 {
-                    Id = 0,
                     Name = "Costache"
                 };
-
-                var teacher2 = new Teacher
-                {
-                    Id = 1,
-                    Name = "Ofelia"
-                };
-
                 TeachersRepository.Add(teacher1);
-                TeachersRepository.Add(teacher2);
-                //}
             }
 
+            var teacher2 = TeachersRepository.GetTeacherByName("Ofelia");
+            if (teacher2 == null)
+            {
+                teacher2 = new Teacher
+                {
+                    Name = "Ofelia"
+                };
+                TeachersRepository.Add(teacher2);
+            }         
+
+            
             if (ActivityRepository.ListAll().Count() == 0)
             {
                 var activity1 = new Activity
                 {
-                    Id = 0,
                     Name = "Sisteme de Operare",
-                    Description = "Studiu al sistemelor de operare",
-                    IdActivityType = 0,
-                    IdTeacher = 0
+                    Description = "Studiu al SO",
+                    Owner = teacher1,
+                    ActivityType = course
+                    
                 };
 
                 var activity2 = new Activity
                 {
-                    Id = 1,
                     Name = "Arhitectura Calculatoarelor",
                     Description = "Arhitectura calc",
-                    IdActivityType = 1,
-                    IdTeacher = 1
+                    ActivityType = lab,
+                    Owner = teacher2
                 };
 
                 ActivityRepository.Add(activity1);
                 ActivityRepository.Add(activity2);
             }
+
+            Complete();
             
         }
     }

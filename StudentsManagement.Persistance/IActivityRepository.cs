@@ -9,5 +9,8 @@ namespace StudentsManagement.Persistence
     public interface IActivityRepository : IRepository<Activity>
     {
         int GetProfessorId(int id);
+        string GetProfessorName(int id);
+        int GetActivityTypeId(int id);
+        string GetActivityTypeName(int id);
     }
 }

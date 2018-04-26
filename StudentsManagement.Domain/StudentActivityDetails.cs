@@ -10,10 +10,11 @@ namespace StudentsManagement.Domain
     {
         [Key]
         public int Id { get; set; }
-        public int IdActivity { get; set; }
-        public int IdStudent { get; set; }
-        public DateTime Date { get; set; }
-        public double Grade { get; set; }
-        public bool Attendance { get; set; }
+
+        public int ActivityId { get; set; }
+        public virtual Activity Activity{ get; set; }
+
+        public int StudentId { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

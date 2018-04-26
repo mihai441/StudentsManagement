@@ -16,10 +16,11 @@ namespace WebStudentsManagement.Controllers
         IBusinessLayer _businessLogic;
         IAuthentication _auth;
         public HomeController(
-            IBusinessLayer businessLayer)
+            IBusinessLayer businessLayer,
+            IAuthentication auth)
         {
             _businessLogic = businessLayer;
-            _auth = _businessLogic.GetAuthenticationService();
+            _auth = auth;
         }
 
         public IActionResult Index()

@@ -32,11 +32,12 @@ namespace WebStudentsManagement.Controllers
 
         public ActivitiesController(
           IBusinessLayer businessLayer,
-          ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          ILogger<ActivitiesController> logger,
+          UrlEncoder urlEncoder, 
+          IAuthentication auth)
         {
             _businessLogic = businessLayer;
-            _auth = _businessLogic.GetAuthenticationService();
+            _auth = auth;
             _studentServices = _businessLogic.GetStudentOperationService();
             _logger = logger;
             _urlEncoder = urlEncoder;
@@ -58,6 +59,7 @@ namespace WebStudentsManagement.Controllers
             List<string> activitiesName = new List<string>();
             List<string> activitiesDescription = new List<string>();
             List<string> activitiesType = new List<string>();
+            List<string> Teacher = new List<string>();
 
             List<Activity> activities = (List<Activity>)_studentServices.PersistenceContext.ActivityRepository.ListAll();
 
@@ -66,8 +68,10 @@ namespace WebStudentsManagement.Controllers
                 idActivities.Add(activity.Id);
                 activitiesName.Add(activity.Name);
                 activitiesDescription.Add(activity.Description);
-                //string type = GetActivityType(activity.IdAct);
-                //activitiesType.Add(type);
+                string teacher = _studentServices.PersistenceContext.ActivityRepository.GetProfessorName(activity.Id);
+                Teacher.Add(teacher);
+                string type = _studentServices.PersistenceContext.ActivityRepository.GetActivityTypeName(activity.Id);
+                activitiesType.Add(type);
             }
 
             var model = new Activities
@@ -118,6 +122,7 @@ namespace WebStudentsManagement.Controllers
                 List<int> studentsId = new List<int>();
                 List<string> studentsName = new List<string>();
 
+                
                 var model = new AllStudentsOnActivity
                 {
                     Id = studentsId,

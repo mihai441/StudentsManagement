@@ -17,11 +17,7 @@ namespace WebStudentsManagement.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     IdActivityType = table.Column<int>(nullable: false),
-                    IdTeacher = table.Column<int>(nullable: false),
-
-
-
-
+                    IdTeacher = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,6 +39,18 @@ namespace WebStudentsManagement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StudentActivityDetails", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActivityTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActivityTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(

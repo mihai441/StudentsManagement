@@ -17,14 +17,23 @@ namespace StudentManagement.Authentication
 {
     public class AuthenticationServices : IAuthentication
     {
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private UserManager<ApplicationUser> _userManager = null;
+        private SignInManager<ApplicationUser> _signInManager = null;
 
-        public AuthenticationServices(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+        private void InitializeManagers(IServiceProvider serviceProvider)
         {
-            _signInManager = signInManager;
+            if (_userManager == null || _signInManager == null)
+            {                 
+                _userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+                _signInManager = serviceProvider.GetService<SignInManager<ApplicationUser>>();
+            }
+
+        }        
+
+        public AuthenticationServices(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public void Configure(IApplicationBuilder builder)
@@ -226,6 +235,15 @@ namespace StudentManagement.Authentication
 
         public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
         {
+            //Add auth service
+            services.AddDbContext<ApplicationDbContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("WebStudentsManagement")));
+            // Add application services.
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+           .AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddDefaultTokenProviders();
+
+            InitializeManagers(services.BuildServiceProvider());
         }
 
 

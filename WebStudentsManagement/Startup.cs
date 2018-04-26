@@ -35,26 +35,18 @@ namespace WebStudentsManagement
 
             services.AddTransient<IEmailSender, EmailSender>();
 
-            // Add application services.
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-           .AddEntityFrameworkStores<ApplicationDbContext>()
-           .AddDefaultTokenProviders();
-
+            var authService = new AuthenticationServices(null, null);
+            authService.InitializeContext(services, Configuration);
+            services.AddScoped<IAuthentication, AuthenticationServices>();           
+            
 
             //Add persistence service
             services.AddScoped<IPersistenceContext, PersistenceContext>();
             var dataService = services.BuildServiceProvider().GetService<IPersistenceContext>();
             dataService.InitializeContext(services, Configuration);
-
-            //Add auth service
-            services.AddDbContext<ApplicationDbContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("WebStudentsManagement")));
-            services.AddScoped<IAuthentication, AuthenticationServices>();
-            var authService = services.BuildServiceProvider().GetService<IAuthentication>();
-
-            //Add Business Layer 
-            services.AddScoped<IBusinessLayer, BusinessLogic>();
             
+            //Add Business Layer 
+            services.AddScoped<IBusinessLayer, BusinessLogic>(s => new BusinessLogic(dataService));
             
             services.AddMvc();
         }

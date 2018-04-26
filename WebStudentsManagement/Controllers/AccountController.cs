@@ -21,10 +21,11 @@ namespace WebStudentsManagement.Controllers
 
         public AccountController(
             ILogger<AccountController> logger,
-            IBusinessLayer businessLayer)
+            IBusinessLayer businessLayer,
+            IAuthentication auth)
         {
             _businessLogic = businessLayer;
-            _auth = _businessLogic.GetAuthenticationService();
+            _auth = auth;
             _logger = logger;
 
         }
@@ -38,9 +39,9 @@ namespace WebStudentsManagement.Controllers
         {
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
+            LoginViewModel vm = new LoginViewModel() { AuthenticationSchemes = await _auth.GetExternalAuthenticationSchemesAsync() };
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(vm);
         }
 
         [HttpPost]
