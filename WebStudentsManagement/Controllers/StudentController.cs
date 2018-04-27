@@ -39,9 +39,9 @@ namespace WebStudentsManagement.Controllers
         public string StatusMessage { get; set; }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View("Activities" , new Activities { ActivitiesList = _studentServices.PersistenceContext.ActivityRepository.ListAll() });
+            return View("Activities" , new Activities { ActivitiesList = _studentServices.GetUserActivities(await _auth.GetUserNameAsync(User)) });
         }
 
         // GET: Activities/Activity/{activityId}
@@ -63,11 +63,11 @@ namespace WebStudentsManagement.Controllers
             int idActivity = activityId ?? default(int);
 
             {
-                Activity currentActivity = _studentServices.PersistenceContext.ActivityRepository.GetEntity(idActivity);
+                Activity currentActivity = _studentServices.GetActivity(idActivity);
 
                 if (currentActivity != null)
-                { 
-                    List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, await _auth.GetUserIdAsync(User)).ToList();
+                {
+                    List<ActivityDate> studentActivitiesDates = _studentServices.GetActivityDates(idActivity, await _auth.GetUserIdAsync(User)).ToList();
 
                     var model = new StudentActivityInfo
                     {

@@ -71,6 +71,19 @@ namespace StudentsManagement.Persistence.EF
                                            .Where(b => b.StudentId == studentId);
         }
 
+        public IEnumerable<Activity> GetUserActivities(string username)
+        {
+            List<StudentActivityDetails> activityDetails = StudentsManagementDbContext.StudentActivityDetails
+                .Where(b => b.Student.Username == username).ToList();
+            List<Activity> activities = new List<Activity>();
+            foreach(var activityDetail in activityDetails)
+            {
+                activities.Add(activityDetail.Activity);
+            }
+            return activities;
+
+        }
+
         public StudentsManagementDbContext StudentsManagementDbContext
         {
             get
