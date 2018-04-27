@@ -122,7 +122,7 @@ namespace WebStudentsManagement.Controllers
         // GET: Teacher/ActivityAdd/{activityId}/Student/{studentId}
         [HttpGet]
         [Route("{activityId}/Student/{studentId}")]
-        public async Task<IActionResult> TeacherActivityAdd(int? activityDateId)
+        public async Task<IActionResult> TeacherActivityAdd(int? activityId, int? studentId)
         {
             var result = await _auth.IsUserValid(User);
             if (!result)
@@ -130,12 +130,15 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user");
             }
 
-            if (activityDateId == null || !await _auth.IsTeacher(User))
+            if (activityId == null 
+                || !await _auth.IsTeacher(User)
+                || studentId == null)
             {
                 return NotFound();
             }
 
-            int idActivityDate = activityDateId ?? default(int);
+            int idActivityDate = activityId ?? default(int);
+            int idStudent = studentId ?? default(int);
 
             var activityDate = _teacherServices.GetActivityDate(idActivityDate);
 
@@ -163,7 +166,7 @@ namespace WebStudentsManagement.Controllers
         // GET: Activities/TeacherActivityEdit/{activityId}/Student/{studentId}/Id/{Id}
         [HttpGet]
         [Route("{activityId}/Student/{studentId}/Id/{Id}")]
-        public async Task<IActionResult> TeacherActivityEdit(int? activityDateId)
+        public async Task<IActionResult> TeacherActivityEdit(int? activityId, int? studentId, int? Id)
         {
             var result = await _auth.IsUserValid(User);
             if (!result)
@@ -171,12 +174,14 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user");
             }
 
-            if (activityDateId == null || !await _auth.IsTeacher(User))
+            if (activityId == null || !await _auth.IsTeacher(User))
             {
                 return NotFound();
             }
 
-            int idActivityDate = activityDateId ?? default(int);
+            int idActivityDate = activityId ?? default(int);
+            int idStudent = studentId ?? default(int);
+            int IdRow = Id ?? default(int);
 
             var activityDate = _teacherServices.GetActivityDate(idActivityDate);
 

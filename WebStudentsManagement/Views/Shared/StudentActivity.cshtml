@@ -1,6 +1,6 @@
 @model StudentActivityInfo
 @{
-    var activityList = Model.ActivityDates.ToList();
+    var activityList = @Model.ActivityDates.ToList();
     ViewData["Title"] = @Model.ActivityName;
 }
 <h3>@Model.ActivityName</h3>
