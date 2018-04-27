@@ -57,9 +57,7 @@ namespace WebStudentsManagement.Controllers
 
             if (!await _auth.IsTeacher(User))
             {
-                //TODO ERROR
-                return RedirectToAction(nameof(AccountController.Login), "Login");
-
+                return NotFound();
             }
 
             int idActivity = activityId ?? default(int);
@@ -101,12 +99,16 @@ namespace WebStudentsManagement.Controllers
 
             if (await _auth.IsTeacher(User))
             {
-                List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, idStudent).ToList();
-
+                List<ActivityDate> studentActivitiesDates = _teacherServices.GetActivityDates(idActivity, idStudent).ToList();
+                Student student = _teacherServices.GetStudent(idStudent);
+                Activity activity = _teacherServices.GetActivity(idActivity);
 
                 var model = new TeacherActivityInfo
                 {
-                    ActivityDates = studentActivitiesDates
+                    ActivityDates = studentActivitiesDates,
+                    Student = student,
+                    Activity = activity
+
                 };
 
                 return View(model);
@@ -117,7 +119,7 @@ namespace WebStudentsManagement.Controllers
             }
         }
 
-        // GET: Activities/TeacherActivityAdd/{activityId}/Student/{studentId}
+        // GET: Teacher/ActivityAdd/{activityId}/Student/{studentId}
         [HttpGet]
         [Route("{activityId}/Student/{studentId}")]
         public async Task<IActionResult> TeacherActivityAdd(int? activityDateId)
@@ -135,17 +137,11 @@ namespace WebStudentsManagement.Controllers
 
             int idActivityDate = activityDateId ?? default(int);
 
-            var activityDate = _studentServices.PersistenceContext.ActivityRepository.GetActivityDate(idActivityDate);
+            var activityDate = _teacherServices.GetActivityDate(idActivityDate);
 
             var model = new SingleStudentActivityInfo
             {
-                IdActivity = idActivityDate,
-                StudentId = activityDate.StudentId,
-                ActivityName = activityDate.Activity.Name,
-                StudentName = activityDate.Student.Name,
-                Attendance = activityDate.Attendance,
-                Grade = activityDate.Grade,
-                Date = activityDate.Date
+                ActivityDate = activityDate
             };
 
             return View(model);
@@ -158,13 +154,7 @@ namespace WebStudentsManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                // AICI TREBUIE MODIFICAT
-                //_context.Add(studentInfo);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(TeacherActivityDetails(studentInfo.IdActivity, studentInfo.StudentId));
-                // AICI TREBUIE MODIFICAT - CATA
-
-                _studentServices.PersistenceContext.ActivityRepository.AddActivityDate(studentInfo.Date, studentInfo.Grade, studentInfo.Attendance, studentInfo.IdActivity, studentInfo.StudentId);
+                _teacherServices.AddActivityDate(studentInfo.Date, studentInfo.Grade, studentInfo.Attendance, studentInfo.IdActivity, studentInfo.StudentId);
                 var result = _studentServices.PersistenceContext.Complete();
                 return RedirectToAction(nameof(IndexAsync));
             }

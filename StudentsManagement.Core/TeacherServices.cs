@@ -20,9 +20,20 @@ namespace StudentsManagement.Core
 
         public IPersistenceContext PersistenceContext { get => _persistenceContext; set => _persistenceContext = value; }
 
+        public void AddActivityDate(DateTime date, double grade, bool attendance, int idActivity, int studentId)
+        {
+            PersistenceContext.ActivityRepository.AddActivityDate(date, grade, attendance, idActivity, studentId);
+            PersistenceContext.Complete();
+        }
+
         public Activity GetActivity(int idActivity)
         {
             return PersistenceContext.ActivityRepository.GetEntity(idActivity);
+        }
+
+        public ActivityDate GetActivityDate(int idActivityDate)
+        {
+            return PersistenceContext.ActivityRepository.GetActivityDate(idActivityDate);
         }
 
         public IEnumerable<ActivityDate> GetActivityDates(int idActivity, int studentId)
@@ -38,6 +49,11 @@ namespace StudentsManagement.Core
         public IEnumerable<Student> GetActivityStudents(int idActivity)
         {
             return PersistenceContext.ActivityRepository.GetStudentsFromActivity(idActivity);
+        }
+
+        public Student GetStudent(int idStudent)
+        {
+            return PersistenceContext.StudentsRepository.GetEntity(idStudent);
         }
 
         public IEnumerable<Activity> GetTeacherActivities(string username)

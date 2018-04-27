@@ -12,6 +12,8 @@ namespace StudentsManagement.Core.Shared
         IEnumerable<ActivityDate> GetActivityDates(int idActivity);
         IEnumerable<Student> GetActivityStudents(int idActivity);
         Activity GetActivity(int idActivity);
-
+        Student GetStudent(int idStudent);
+        ActivityDate GetActivityDate(int idActivityDate);
+        void AddActivityDate(DateTime date, double grade, bool attendance, int idActivity, int studentId);
     }
 }
