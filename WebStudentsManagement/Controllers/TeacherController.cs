@@ -41,7 +41,7 @@ namespace WebStudentsManagement.Controllers
 
         public IActionResult Index()
         {
-            return View("Activities", new Activities { ActivitiesList = _studentServices.PersistenceContext.ActivityRepository.ListAll() });
+            return View("TeacherActivities", new Activities { ActivitiesList = _studentServices.PersistenceContext.ActivityRepository.ListAll() });
         }
 
         // GET: Activities/Activity/{activityId}
@@ -72,7 +72,7 @@ namespace WebStudentsManagement.Controllers
                     ActivityName = name
                 };
 
-                return View("StudentActivity", model);
+                return View("TeacherActivity", model);
             }
         }
 
