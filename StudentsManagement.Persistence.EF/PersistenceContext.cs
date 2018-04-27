@@ -78,6 +78,15 @@ namespace StudentsManagement.Persistence.EF
 
             var stud1 = StudentsRepository.GetStudentByName("Gheorghe");
             var stud2 = StudentsRepository.GetStudentByName("Stefanescu");
+            var stud3 = StudentsRepository.GetStudentByName("Florescu");
+
+            var teacher1 = TeachersRepository.GetTeacherByName("Costache");
+            var teacher2 = TeachersRepository.GetTeacherByName("Ofelia");
+            var teacher3 = TeachersRepository.GetTeacherByName("Mihaescu");
+
+            var activity1 = ActivityRepository.GetActivityByName("Sisteme de Operare");
+            var activity2 = ActivityRepository.GetActivityByName("Arhitectura calc");
+            var activity3 = ActivityRepository.GetActivityByName("Arhitectura Calculatoarelor II");
 
             if (StudentsRepository.ListAll().Count() == 0)
             {
@@ -91,7 +100,7 @@ namespace StudentsManagement.Persistence.EF
                     Name = "Stefanescu"
                 };
 
-                var stud3 = new Student
+                stud3 = new Student
                 {
                     Name = "Florescu"
                 };
@@ -101,7 +110,6 @@ namespace StudentsManagement.Persistence.EF
                 StudentsRepository.Add(stud3);
             }
 
-            var teacher1 = TeachersRepository.GetTeacherByName("Costache");
             if (teacher1 == null)
             {
                 teacher1 = new Teacher
@@ -110,8 +118,7 @@ namespace StudentsManagement.Persistence.EF
                 };
                 TeachersRepository.Add(teacher1);
             }
-
-            var teacher2 = TeachersRepository.GetTeacherByName("Ofelia");
+            
             if (teacher2 == null)
             {
                 teacher2 = new Teacher
@@ -121,7 +128,6 @@ namespace StudentsManagement.Persistence.EF
                 TeachersRepository.Add(teacher2);
             }
 
-            var teacher3 = TeachersRepository.GetTeacherByName("Mihaescu");
             if (teacher3 == null)
             {
                 teacher3 = new Teacher
@@ -130,10 +136,6 @@ namespace StudentsManagement.Persistence.EF
                 };
                 TeachersRepository.Add(teacher3);
             }
-
-            var activity1 = ActivityRepository.GetActivityByName("Sisteme de Operare");
-            var activity2 = ActivityRepository.GetActivityByName("Arhitectura calc");
-
 
             if (ActivityRepository.ListAll().Count() == 0)
             {
@@ -154,7 +156,7 @@ namespace StudentsManagement.Persistence.EF
                     Owner = teacher2
                 };
 
-                var activity3 = new Activity
+                activity3 = new Activity
                 {
                     Name = "Arhitectura Calculatoarelor II",
                     Description = "Arhitectura II",
@@ -169,14 +171,37 @@ namespace StudentsManagement.Persistence.EF
 
             if (_context.StudentActivityDetails.ToList().Count == 0)
             {
-                var StudentActivityDetail = new StudentActivityDetails
+                var StudentActivityDetail1 = new StudentActivityDetails
                 {
                     Activity = activity2,
                     Student = stud1,
                 };
 
-                Complete();
+                var StudentActivityDetail2 = new StudentActivityDetails
+                {
+                    Activity = activity2,
+                    Student = stud2,
+                };
 
+                var StudentActivityDetail3 = new StudentActivityDetails
+                {
+                    Activity = activity1,
+                    Student = stud2,
+                };
+
+                var StudentActivityDetail4 = new StudentActivityDetails
+                {
+                    Activity = activity1,
+                    Student = stud3,
+                };
+
+                var StudentActivityDetail5 = new StudentActivityDetails
+                {
+                    Activity = activity3,
+                    Student = stud3,
+                };
+
+                Complete();
             }
         }
     }
