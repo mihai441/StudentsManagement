@@ -65,7 +65,7 @@ namespace WebStudentsManagement.Controllers
             {
                 List<Student> students = _teacherServices.GetActivityStudents(idActivity).ToList();
                 var name = _teacherServices.GetActivity(idActivity).Name;
-                int id = 1; // aici
+                int id = idActivity;
                 var model = new AllStudentsOnActivity
                 {
                     Students = students,   
@@ -73,7 +73,7 @@ namespace WebStudentsManagement.Controllers
                     ActivityId = id
                 };
 
-                return View("TeacherActivities", model);
+                return View("TeacherActivity", model);
             }
         }
 

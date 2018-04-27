@@ -57,7 +57,7 @@ namespace WebStudentsManagement.Controllers
             }
             if ( await _auth.IsTeacher(User))
             {
-                return RedirectToAction(nameof(TeacherController.IndexAsync), "Home");
+                return RedirectToAction(nameof(TeacherController.Index), "Home");
             }
 
             int idActivity = activityId ?? default(int);

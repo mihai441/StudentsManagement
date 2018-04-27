@@ -85,6 +85,14 @@ namespace StudentsManagement.Persistence.EF
 
         }
 
+        public IEnumerable<Activity> GetTeacherActivities(string username)
+        {
+            return StudentsManagementDbContext.Activities
+                .Where(b => b.Owner.Username == username)
+                .ToList();
+
+        }
+
         public Activity GetActivityByName(string name)
         {
             return StudentsManagementDbContext.Activities

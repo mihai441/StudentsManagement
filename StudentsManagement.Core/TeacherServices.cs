@@ -58,7 +58,7 @@ namespace StudentsManagement.Core
 
         public IEnumerable<Activity> GetTeacherActivities(string username)
         {
-            throw new NotImplementedException();
+            return PersistenceContext.ActivityRepository.GetTeacherActivities(username);
         }
 
         public void UpdateActivityDate(ActivityDate oldActivityDate, ActivityDate newActivityDate)

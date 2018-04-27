@@ -14,6 +14,7 @@ namespace StudentsManagement.Persistence
         int GetActivityTypeId(int id);
         string GetActivityTypeName(int id);
         IEnumerable<Activity> GetUserActivities(string username);
+        IEnumerable<Activity> GetTeacherActivities(string username);
         IEnumerable<ActivityDate> GetActivityDates(int activityId, string username);
         IEnumerable<ActivityDate> GetActivityDates(int activityId);
         IEnumerable<ActivityDate> GetActivityDates(int activityId, int studentId);
