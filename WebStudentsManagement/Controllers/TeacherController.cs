@@ -103,7 +103,7 @@ namespace WebStudentsManagement.Controllers
                 List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, idStudent).ToList();
 
 
-                var model = new StudentActivityInfo
+                var model = new TeacherActivityInfo
                 {
                     ActivityDates = studentActivitiesDates
                 };
@@ -134,9 +134,7 @@ namespace WebStudentsManagement.Controllers
 
             int idActivityDate = activityDateId ?? default(int);
 
-
             var activityDate = _studentServices.PersistenceContext.ActivityRepository.GetActivityDate(idActivityDate);
-
 
             var model = new SingleStudentActivityInfo
             {
