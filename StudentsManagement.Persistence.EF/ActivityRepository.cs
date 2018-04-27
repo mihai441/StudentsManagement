@@ -44,17 +44,17 @@ namespace StudentsManagement.Persistence.EF
                                            .FirstOrDefault();
         }
 
-        public IEnumerable<ActivityDate> GetActivityDates(int activityId, int idStudent)
+        public IEnumerable<ActivityDate> GetActivityDates(int activityId, string userNameStudent)
         {
             return StudentsManagementDbContext.ActivityDates
                                             .Where(b => b.ActivityId == activityId)
-                                            .Where(b => b.StudentId == idStudent);
+                                            .Where(b => b.Student.Username == userNameStudent);
                                             
         }
 
-        public void AddActivityDate(DateTime Date, double Grade, bool Attendance, int ActivityId, int StudentId)
+        public void AddActivityDate(DateTime Date, double Grade, bool Attendance, int ActivityId, int idStudent)
         {
-            StudentsManagementDbContext.ActivityDates.Add(new ActivityDate { Date = Date, Grade = Grade, Attendance = Attendance, ActivityId = ActivityId, StudentId = StudentId });
+            StudentsManagementDbContext.ActivityDates.Add(new ActivityDate { Date = Date, Grade = Grade, Attendance = Attendance, ActivityId = ActivityId, StudentId = idStudent});
         }
 
         public ActivityDate GetActivityDate(int Id)
@@ -62,6 +62,13 @@ namespace StudentsManagement.Persistence.EF
             return StudentsManagementDbContext.ActivityDates
                 .Where(b => b.Id == Id)
                 .SingleOrDefault();
+        }
+
+        public IEnumerable<ActivityDate> GetActivityDates(int activityId, int studentId)
+        {
+            return StudentsManagementDbContext.ActivityDates
+                                           .Where(b => b.ActivityId == activityId)
+                                           .Where(b => b.StudentId == studentId);
         }
 
         public StudentsManagementDbContext StudentsManagementDbContext

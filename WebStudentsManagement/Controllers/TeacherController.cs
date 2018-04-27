@@ -87,7 +87,7 @@ namespace WebStudentsManagement.Controllers
                 throw new ApplicationException($"Unable to load user");
             }
 
-            if (activityId == null || studentId == null || ! await _auth.IsTeacher(User) )
+            if (activityId == null || ! await _auth.IsTeacher(User) )
             {
                 return NotFound();
             }
@@ -139,7 +139,7 @@ namespace WebStudentsManagement.Controllers
             var model = new SingleStudentActivityInfo
             {
                 IdActivity = idActivityDate,
-                StudentId = activityDate.Id,
+                StudentId = activityDate.StudentId,
                 ActivityName = activityDate.Activity.Name,
                 StudentName = activityDate.Student.Name,
                 Attendance = activityDate.Attendance,
@@ -194,7 +194,7 @@ namespace WebStudentsManagement.Controllers
             var model = new SingleStudentActivityInfo
             {
                 IdActivity = idActivityDate,
-                StudentId = activityDate.Id,
+                StudentId = activityDate.StudentId,
                 ActivityName = activityDate.Activity.Name,
                 StudentName = activityDate.Student.Name,
                 Attendance = activityDate.Attendance,

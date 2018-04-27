@@ -27,6 +27,6 @@ namespace StudentsManagement.Core.Shared
         bool IsUserSignedIn(ClaimsPrincipal User);
         Task<string> GetUserNameAsync(ClaimsPrincipal User);
         Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync();
-        Task<int> GetUserIdAsync(ClaimsPrincipal User);
+        Task<string> GetUserIdAsync(ClaimsPrincipal User);
     }
 }

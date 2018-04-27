@@ -49,6 +49,7 @@ namespace WebStudentsManagement.Controllers
         [Route("{activityId}", Name = "ActivityDetails")]
         public async Task<IActionResult> Activity(int? activityId)
         {
+            IActionResult retView = View();
             var result = await _auth.IsUserValid(User);
             if (!result)
             {
@@ -62,15 +63,23 @@ namespace WebStudentsManagement.Controllers
             int idActivity = activityId ?? default(int);
 
             {
-                List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, await _auth.GetUserIdAsync(User)).ToList();
+                Activity currentActivity = _studentServices.PersistenceContext.ActivityRepository.GetEntity(idActivity);
 
-                var model = new StudentActivityInfo
-                {
-                    ActivityDates = studentActivitiesDates
-                };
+                if (currentActivity != null)
+                { 
+                    List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, await _auth.GetUserIdAsync(User)).ToList();
 
-                return View("StudentActivity", model);
+                    var model = new StudentActivityInfo
+                    {
+                        ActivityDates = studentActivitiesDates,
+                        ActivityName = currentActivity.Name
+                    };
+
+                    retView = View("StudentActivity", model);
+                }
             }
+
+            return retView;
         }
 
     

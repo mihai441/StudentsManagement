@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudentsManagement.Persistence.EF.Migrations
 {
-    public partial class RemodelingDatabase : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,8 @@ namespace StudentsManagement.Persistence.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,7 +42,8 @@ namespace StudentsManagement.Persistence.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,10 +56,9 @@ namespace StudentsManagement.Persistence.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ActivityTypeId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    StudentId = table.Column<int>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    ActivityTypeId = table.Column<int>(nullable: false),
                     TeacherId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -69,12 +70,6 @@ namespace StudentsManagement.Persistence.EF.Migrations
                         principalTable: "ActivityTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Activities_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Activities_Teachers_TeacherId",
                         column: x => x.TeacherId,
@@ -89,10 +84,10 @@ namespace StudentsManagement.Persistence.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ActivityId = table.Column<int>(nullable: false),
-                    Attendance = table.Column<bool>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Grade = table.Column<double>(nullable: false),
+                    Attendance = table.Column<bool>(nullable: false),
+                    ActivityId = table.Column<int>(nullable: false),
                     StudentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -112,15 +107,36 @@ namespace StudentsManagement.Persistence.EF.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "StudentActivityDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ActivityId = table.Column<int>(nullable: false),
+                    StudentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentActivityDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentActivityDetails_Activities_ActivityId",
+                        column: x => x.ActivityId,
+                        principalTable: "Activities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentActivityDetails_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Activities_ActivityTypeId",
                 table: "Activities",
                 column: "ActivityTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Activities_StudentId",
-                table: "Activities",
-                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Activities_TeacherId",
@@ -136,6 +152,16 @@ namespace StudentsManagement.Persistence.EF.Migrations
                 name: "IX_ActivityDates_StudentId",
                 table: "ActivityDates",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentActivityDetails_ActivityId",
+                table: "StudentActivityDetails",
+                column: "ActivityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentActivityDetails_StudentId",
+                table: "StudentActivityDetails",
+                column: "StudentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -144,13 +170,16 @@ namespace StudentsManagement.Persistence.EF.Migrations
                 name: "ActivityDates");
 
             migrationBuilder.DropTable(
+                name: "StudentActivityDetails");
+
+            migrationBuilder.DropTable(
                 name: "Activities");
 
             migrationBuilder.DropTable(
-                name: "ActivityTypes");
+                name: "Students");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                name: "ActivityTypes");
 
             migrationBuilder.DropTable(
                 name: "Teachers");

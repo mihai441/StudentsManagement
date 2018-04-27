@@ -15,4 +15,8 @@
     <ProjectReference Include="..\StudentsManagement.Persistance\StudentsManagement.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Migrations\" />
+  </ItemGroup>
+
 </Project>
