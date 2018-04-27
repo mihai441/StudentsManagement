@@ -65,12 +65,14 @@ namespace WebStudentsManagement.Controllers
             int idActivity = activityId ?? default(int);
 
             {
-                List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, await _auth.GetUserIdAsync(User)).ToList();
+                List<Student> students = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, await _auth.GetUserIdAsync(User)).ToList();
                 var name = _studentServices.PersistenceContext.ActivityRepository.GetEntity(idActivity).Name;
-                var model = new StudentActivityInfo
+                int id = 1; // aici
+                var model = new AllStudentsOnActivity
                 {
-                    ActivityDates = studentActivitiesDates,   
-                    ActivityName = name
+                    Students = students,   
+                    ActivityName = name,
+                    ActivityId = id
                 };
 
                 return View("TeacherActivities", model);
@@ -102,7 +104,7 @@ namespace WebStudentsManagement.Controllers
                 List<ActivityDate> studentActivitiesDates = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, idStudent).ToList();
 
 
-                var model = new StudentActivityInfo
+                var model = new TeacherActivityInfo
                 {
                     ActivityDates = studentActivitiesDates
                 };
@@ -133,9 +135,7 @@ namespace WebStudentsManagement.Controllers
 
             int idActivityDate = activityDateId ?? default(int);
 
-
             var activityDate = _studentServices.PersistenceContext.ActivityRepository.GetActivityDate(idActivityDate);
-
 
             var model = new SingleStudentActivityInfo
             {
