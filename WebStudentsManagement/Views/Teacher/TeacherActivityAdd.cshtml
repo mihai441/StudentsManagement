@@ -1,18 +1,18 @@
 @model SingleStudentActivityInfo
 @{
-    ViewData["Title"] = @Model.ActivityName + " - " + @Model.StudentName;
+    ViewData["Title"] = Model.ActivityDate.Activity.Name + " - " + Model.ActivityDate.Student.Name;
 }
-<h3>Add row on Student @Model.StudentName</h3>
-<h4>Activity @Model.ActivityName</h4>
+<h3>Add row on Student @Model.ActivityDate.Student.Name</h3>
+<h4>Activity @Model.ActivityDate.Activity.Name</h4>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="TeacherActivityAdd">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" value="@Model.Id" class="form-control" />
-            <input type="hidden" asp-for="IdActivity" value="@Model.IdActivity" class="form-control" />
-            <input type="hidden" asp-for="ActivityName" value="@Model.ActivityName" class="form-control" />
-            <input type="hidden" asp-for="StudentId" value="@Model.StudentId" class="form-control" />
-            <input type="hidden" asp-for="StudentName" value="@Model.StudentName" class="form-control" />
+            <input type="hidden" asp-for="ActivityDate.Id" value="@Model.ActivityDate.Id" class="form-control" />
+            <input type="hidden" asp-for="ActivityDate.ActivityId" value="@Model.ActivityDate.ActivityId" class="form-control" />
+            <input type="hidden" asp-for="ActivityDate.Activity.Name" value="@Model.ActivityDate.Activity.Name" class="form-control" />
+            <input type="hidden" asp-for="ActivityDate.StudentId" value="@Model.ActivityDate.StudentId" class="form-control" />
+            <input type="hidden" asp-for="ActivityDate.Student.Name" value="@Model.ActivityDate.Student.Name" class="form-control" />
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
                     <input type='text' class="form-control" />
@@ -27,14 +27,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Grade" class="control-label"></label>
-                <input asp-for="Grade" class="form-control" />
-                <span asp-validation-for="Grade" class="text-danger"></span>
+                <label asp-for="ActivityDate.Grade" class="control-label"></label>
+                <input asp-for="ActivityDate.Grade" class="form-control" />
+                <span asp-validation-for="ActivityDate.Grade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Attendance" class="control-label"></label>
-                <input asp-for="Attendance" class="form-control" />
-                <span asp-validation-for="Attendance" class="text-danger"></span>
+                <label asp-for="ActivityDate.Attendance" class="control-label"></label>
+                <input asp-for="ActivityDate.Attendance" class="form-control" />
+                <span asp-validation-for="ActivityDate.Attendance" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-default" />
@@ -43,7 +43,7 @@
     </div>
 </div>
 <div>
-    <a asp-route="StudentInfo" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId">Back to student list</a>
+    <a asp-route="StudentInfo" asp-route-activityId="@Model.ActivityDate.ActivityId" asp-route-studentId="@Model.ActivityDate.Student.Id">Back to student list</a>
 </div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
