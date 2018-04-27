@@ -9,5 +9,9 @@ namespace StudentsManagement.Core.Shared
     {
         IEnumerable<Activity> GetTeacherActivities(string username);
         IEnumerable<ActivityDate> GetActivityDates(int idActivity, int studentId);
+        IEnumerable<ActivityDate> GetActivityDates(int idActivity);
+        IEnumerable<Student> GetActivityStudents(int idActivity);
+        Activity GetActivity(int idActivity);
+
     }
 }

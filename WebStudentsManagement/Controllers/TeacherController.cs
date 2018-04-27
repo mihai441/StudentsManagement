@@ -41,7 +41,7 @@ namespace WebStudentsManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View("TeacherActivities", new Activities { ActivitiesList = _teacherServices.GetTeacherActivities(await _auth.GetUserNameAsync(User))});
+            return View("TeacherActivities", new Activities { ActivitiesList = _teacherServices.GetTeacherActivities(await _auth.GetUserNameAsync(User)) });
         }
 
         // GET: Activities/Activity/{activityId}
@@ -65,8 +65,8 @@ namespace WebStudentsManagement.Controllers
             int idActivity = activityId ?? default(int);
 
             {
-                List<Student> students = _studentServices.PersistenceContext.ActivityRepository.GetActivityDates(idActivity, await _auth.GetUserIdAsync(User)).ToList();
-                var name = _studentServices.PersistenceContext.ActivityRepository.GetEntity(idActivity).Name;
+                List<Student> students = _teacherServices.GetActivityStudents(idActivity).ToList();
+                var name = _teacherServices.GetActivity(idActivity).Name;
                 int id = 1; // aici
                 var model = new AllStudentsOnActivity
                 {

@@ -68,7 +68,8 @@ namespace StudentsManagement.Persistence.EF
         {
             return StudentsManagementDbContext.ActivityDates
                                            .Where(b => b.ActivityId == activityId)
-                                           .Where(b => b.StudentId == studentId);
+                                           .Where(b => b.StudentId == studentId)
+                                           .ToList();
         }
 
         public IEnumerable<Activity> GetUserActivities(string username)
@@ -89,6 +90,21 @@ namespace StudentsManagement.Persistence.EF
             return StudentsManagementDbContext.Activities
                 .Where(b => b.Name == name)
                 .SingleOrDefault();
+        }
+
+        public IEnumerable<ActivityDate> GetActivityDates(int activityId)
+        {
+            return StudentsManagementDbContext.ActivityDates
+                                         .Where(b => b.ActivityId == activityId)
+                                         .ToList();
+        }
+
+        public IEnumerable<Student> GetStudentsFromActivity(int idActivity)
+        {
+            return StudentsManagementDbContext.StudentActivityDetails
+                .Where(b => b.ActivityId == idActivity)
+                .Select(i => i.Student).ToList();
+
         }
 
         public StudentsManagementDbContext StudentsManagementDbContext
