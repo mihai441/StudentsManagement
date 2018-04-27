@@ -154,9 +154,8 @@ namespace WebStudentsManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                _teacherServices.AddActivityDate(studentInfo.Date, studentInfo.Grade, studentInfo.Attendance, studentInfo.IdActivity, studentInfo.StudentId);
-                var result = _studentServices.PersistenceContext.Complete();
-                return RedirectToAction(nameof(IndexAsync));
+                _teacherServices.AddActivityDate(studentInfo.ActivityDate.Date, studentInfo.ActivityDate.Grade, studentInfo.ActivityDate.Attendance, studentInfo.ActivityDate.ActivityId, studentInfo.ActivityDate.StudentId);
+                return RedirectToAction(nameof(Index));
             }
             return View("Index");
         }
@@ -179,18 +178,12 @@ namespace WebStudentsManagement.Controllers
 
             int idActivityDate = activityDateId ?? default(int);
 
-            var activityDate = _studentServices.PersistenceContext.ActivityRepository.GetActivityDate(idActivityDate);
+            var activityDate = _teacherServices.GetActivityDate(idActivityDate);
 
 
             var model = new SingleStudentActivityInfo
             {
-                IdActivity = idActivityDate,
-                StudentId = activityDate.StudentId,
-                ActivityName = activityDate.Activity.Name,
-                StudentName = activityDate.Student.Name,
-                Attendance = activityDate.Attendance,
-                Grade = activityDate.Grade,
-                Date = activityDate.Date
+                ActivityDate= activityDate
             };
 
             return View(model);
@@ -204,20 +197,22 @@ namespace WebStudentsManagement.Controllers
            
             if (ModelState.IsValid)
             {
-                var activityDate = _studentServices.PersistenceContext.ActivityRepository.GetActivityDate(studentActivityInfoRow.Id);
+                var activityDate = _teacherServices.GetActivityDate(studentActivityInfoRow.ActivityDate.Id);
 
                 //Edit part, maybe integrated in repository?
+                ActivityDate NewActivityDate = new ActivityDate {
+                    Id = studentActivityInfoRow.ActivityDate.Id,
+                    Date = studentActivityInfoRow.ActivityDate.Date,
+                    Grade = studentActivityInfoRow.ActivityDate.Grade,
+                    Attendance = studentActivityInfoRow.ActivityDate.Attendance,
+                    Activity = studentActivityInfoRow.ActivityDate.Activity,
+                    Student = studentActivityInfoRow.ActivityDate.Student
+            };
 
-                activityDate.Id = studentActivityInfoRow.Id;
-                activityDate.StudentId = studentActivityInfoRow.StudentId;
-                activityDate.ActivityId = studentActivityInfoRow.IdActivity;
-                activityDate.Date = studentActivityInfoRow.Date;
-                activityDate.Grade = studentActivityInfoRow.Grade;
-                activityDate.Attendance = studentActivityInfoRow.Attendance;
+                _teacherServices.UpdateActivityDate(activityDate, NewActivityDate);
+                
 
-                _studentServices.PersistenceContext.Complete();
-
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             return View("Index");
         }

@@ -15,5 +15,6 @@ namespace StudentsManagement.Core.Shared
         Student GetStudent(int idStudent);
         ActivityDate GetActivityDate(int idActivityDate);
         void AddActivityDate(DateTime date, double grade, bool attendance, int idActivity, int studentId);
+        void UpdateActivityDate(ActivityDate oldActivityDate, ActivityDate newActivityDate );
     }
 }
