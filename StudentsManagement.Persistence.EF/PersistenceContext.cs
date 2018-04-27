@@ -72,8 +72,9 @@ namespace StudentsManagement.Persistence.EF
         {
             InitializeDbContext(serviceProvider);
 
-            ActivityType course = new ActivityType {Name = "Course" };
-            ActivityType lab = new ActivityType { Name = "Laboratory" };
+            ActivityType course = new ActivityType { Name = "Course" };
+            ActivityType laboratory = new ActivityType { Name = "Laboratory" };
+            ActivityType seminary = new ActivityType { Name = "Seminary" };
 
             if (StudentsRepository.ListAll().Count() == 0)
             {
@@ -87,9 +88,14 @@ namespace StudentsManagement.Persistence.EF
                     Name = "Stefanescu"
                 };
 
+                var stud3 = new Student
+                {
+                    Name = "Florescu"
+                };
+
                 StudentsRepository.Add(stud1);
                 StudentsRepository.Add(stud2);
-                
+                StudentsRepository.Add(stud3);
             }
 
             var teacher1 = TeachersRepository.GetTeacherByName("Costache");
@@ -110,9 +116,18 @@ namespace StudentsManagement.Persistence.EF
                     Name = "Ofelia"
                 };
                 TeachersRepository.Add(teacher2);
-            }         
+            }
 
-            
+            var teacher3 = TeachersRepository.GetTeacherByName("Mihaescu");
+            if (teacher3 == null)
+            {
+                teacher3 = new Teacher
+                {
+                    Name = "Mihaescu"
+                };
+                TeachersRepository.Add(teacher3);
+            }
+
             if (ActivityRepository.ListAll().Count() == 0)
             {
                 var activity1 = new Activity
@@ -128,12 +143,21 @@ namespace StudentsManagement.Persistence.EF
                 {
                     Name = "Arhitectura Calculatoarelor",
                     Description = "Arhitectura calc",
-                    ActivityType = lab,
+                    ActivityType = laboratory,
                     Owner = teacher2
+                };
+
+                var activity3 = new Activity
+                {
+                    Name = "Arhitectura Calculatoarelor II",
+                    Description = "Arhitectura II",
+                    ActivityType = seminary,
+                    Owner = teacher3
                 };
 
                 ActivityRepository.Add(activity1);
                 ActivityRepository.Add(activity2);
+                ActivityRepository.Add(activity3);
             }
 
             Complete();
