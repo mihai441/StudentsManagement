@@ -31,7 +31,7 @@ namespace StudentsManagement.Persistence.EF
             StudentsRepository = new StudentsRepository(_context);
         }
 
-        public PersistenceContext() {}
+        public PersistenceContext() { }
 
 
         public int Complete()
@@ -55,9 +55,9 @@ namespace StudentsManagement.Persistence.EF
 
         public void InitializeContext(IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<StudentsManagementDbContext>(options =>             
+            services.AddDbContext<StudentsManagementDbContext>(options =>
             options.UseLazyLoadingProxies()
-            .UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnection"),              
+            .UseSqlServer(Configuration.GetConnectionString("StudentsManagementConnection"),
                 b => b.MigrationsAssembly("StudentsManagement.Persistence.EF")));
 
             InitializeDbContext(services.BuildServiceProvider());
@@ -76,14 +76,17 @@ namespace StudentsManagement.Persistence.EF
             ActivityType laboratory = new ActivityType { Name = "Laboratory" };
             ActivityType seminary = new ActivityType { Name = "Seminary" };
 
+            var stud1 = StudentsRepository.GetStudentByName("Gheorghe");
+            var stud2 = StudentsRepository.GetStudentByName("Stefanescu");
+
             if (StudentsRepository.ListAll().Count() == 0)
             {
-                var stud1 = new Student
+                stud1 = new Student
                 {
                     Name = "Gheorghe"
                 };
 
-                var stud2 = new Student
+                stud2 = new Student
                 {
                     Name = "Stefanescu"
                 };
@@ -128,18 +131,22 @@ namespace StudentsManagement.Persistence.EF
                 TeachersRepository.Add(teacher3);
             }
 
+            var activity1 = ActivityRepository.GetActivityByName("Sisteme de Operare");
+            var activity2 = ActivityRepository.GetActivityByName("Arhitectura calc");
+
+
             if (ActivityRepository.ListAll().Count() == 0)
             {
-                var activity1 = new Activity
+                activity1 = new Activity
                 {
                     Name = "Sisteme de Operare",
                     Description = "Studiu al SO",
                     Owner = teacher1,
                     ActivityType = course
-                    
+
                 };
 
-                var activity2 = new Activity
+                activity2 = new Activity
                 {
                     Name = "Arhitectura Calculatoarelor",
                     Description = "Arhitectura calc",
@@ -160,8 +167,17 @@ namespace StudentsManagement.Persistence.EF
                 ActivityRepository.Add(activity3);
             }
 
-            Complete();
-            
+            if (_context.StudentActivityDetails.ToList().Count == 0)
+            {
+                var StudentActivityDetail = new StudentActivityDetails
+                {
+                    Activity = activity2,
+                    Student = stud1,
+                };
+
+                Complete();
+
+            }
         }
     }
 }

@@ -8,6 +8,8 @@ namespace StudentsManagement.Core.Shared
     {
        
         IStudentServices GetStudentOperationService();
-        
+        ITeacherServices GetTeacherOperationService();
+
+
     }
 }

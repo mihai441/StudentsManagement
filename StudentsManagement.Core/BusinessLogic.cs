@@ -13,11 +13,13 @@ namespace StudentsManagement.Core.Shared
         //List<IInitializer> initList;
         
         private IStudentServices _studentServices;
+        private ITeacherServices _teacherServices;
+
 
         public BusinessLogic(IPersistenceContext persistenceContext)
         {            
             _studentServices = new StudentServices(persistenceContext);
-            
+            _teacherServices = new TeacherServices(persistenceContext);
 
         }
 
@@ -26,6 +28,11 @@ namespace StudentsManagement.Core.Shared
         public IStudentServices GetStudentOperationService()
         {
             return _studentServices;
+        }
+
+        public ITeacherServices GetTeacherOperationService()
+        {
+            return _teacherServices;
         }
     }
 }

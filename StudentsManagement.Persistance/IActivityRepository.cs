@@ -8,6 +8,7 @@ namespace StudentsManagement.Persistence
 {
     public interface IActivityRepository : IRepository<Activity>
     {
+        Activity GetActivityByName(string name);
         int GetProfessorId(int id);
         string GetProfessorName(int id);
         int GetActivityTypeId(int id);

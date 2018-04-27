@@ -18,7 +18,7 @@ namespace WebStudentsManagement.Controllers
         private readonly UrlEncoder _urlEncoder;
         private readonly IBusinessLayer _businessLogic;
         private readonly IAuthentication _auth;
-        private readonly IStudentServices _studentServices;
+        private readonly ITeacherServices _teacherServices;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
@@ -30,7 +30,7 @@ namespace WebStudentsManagement.Controllers
         {
             _businessLogic = businessLayer;
             _auth = auth;
-            _studentServices = _businessLogic.GetStudentOperationService();
+            _teacherServices = _businessLogic.GetTeacherOperationService();
             _logger = logger;
             _urlEncoder = urlEncoder;
         }
@@ -39,9 +39,9 @@ namespace WebStudentsManagement.Controllers
         public string StatusMessage { get; set; }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View("TeacherActivities", new Activities { ActivitiesList = _studentServices.PersistenceContext.ActivityRepository.ListAll() });
+            return View("TeacherActivities", new Activities { ActivitiesList = _teacherServices.GetTeacherActivities(await _auth.GetUserNameAsync(User))});
         }
 
         // GET: Activities/Activity/{activityId}
@@ -57,7 +57,8 @@ namespace WebStudentsManagement.Controllers
 
             if (!await _auth.IsTeacher(User))
             {
-                return RedirectToAction(nameof(StudentController.Index), "Home");
+                //TODO ERROR
+                return RedirectToAction(nameof(AccountController.Login), "Login");
 
             }
 
@@ -72,7 +73,7 @@ namespace WebStudentsManagement.Controllers
                     ActivityName = name
                 };
 
-                return View("TeacherActivity", model);
+                return View("TeacherActivities", model);
             }
         }
 
@@ -165,7 +166,7 @@ namespace WebStudentsManagement.Controllers
 
                 _studentServices.PersistenceContext.ActivityRepository.AddActivityDate(studentInfo.Date, studentInfo.Grade, studentInfo.Attendance, studentInfo.IdActivity, studentInfo.StudentId);
                 var result = _studentServices.PersistenceContext.Complete();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             return View("Index");
         }
@@ -226,7 +227,7 @@ namespace WebStudentsManagement.Controllers
 
                 _studentServices.PersistenceContext.Complete();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             return View("Index");
         }

@@ -7,6 +7,7 @@ namespace StudentsManagement.Core.Shared
 {
     public interface ITeacherServices
     {
+        IEnumerable<Activity> GetTeacherActivities(string username);
         IEnumerable<ActivityDate> GetActivityDates(int idActivity, int studentId);
     }
 }

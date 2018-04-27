@@ -84,6 +84,13 @@ namespace StudentsManagement.Persistence.EF
 
         }
 
+        public Activity GetActivityByName(string name)
+        {
+            return StudentsManagementDbContext.Activities
+                .Where(b => b.Name == name)
+                .SingleOrDefault();
+        }
+
         public StudentsManagementDbContext StudentsManagementDbContext
         {
             get

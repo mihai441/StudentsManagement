@@ -23,6 +23,13 @@ namespace StudentsManagement.Persistence.EF
             }
         }
 
+        public Student GetStudentByName(string name)
+        {
+            return StudentsManagementDbContext.Students
+                .Where(b => b.Name == name)
+                .SingleOrDefault();
+        }
+
         public IEnumerable<Student> ListAllFromActivity(int id)
         {
             List<StudentActivityDetails> studentActivityDetails;
