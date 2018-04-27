@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StudentsManagement.Persistence.EF;
 using System;
 
-namespace WebStudentsManagement.Migrations
+namespace StudentsManagement.Persistence.EF.Migrations
+
 {
     [DbContext(typeof(StudentsManagementDbContext))]
     [Migration("20180425100223_NewActivityModel")]

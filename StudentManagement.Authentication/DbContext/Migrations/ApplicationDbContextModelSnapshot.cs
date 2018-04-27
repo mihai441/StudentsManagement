@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StudentsManagement.Persistence.EF;
 using System;
 
-namespace WebStudentsManagement.Data.Migrations
+namespace StudentsManagement.Authentication
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180425151704_UsersDbMigration")]
-    partial class UsersDbMigration
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

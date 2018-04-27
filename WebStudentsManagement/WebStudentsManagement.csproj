@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.0-preview2-final" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0-preview2-final" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,11 @@
     <ProjectReference Include="..\StudentsManagement.Domain\StudentsManagement.Domain.csproj" />
     <ProjectReference Include="..\StudentsManagement.Persistance\StudentsManagement.Persistence.csproj" />
     <ProjectReference Include="..\StudentsManagement.Persistence.EF\StudentsManagement.Persistence.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Views\Activities\" />
   </ItemGroup>
 
 </Project>

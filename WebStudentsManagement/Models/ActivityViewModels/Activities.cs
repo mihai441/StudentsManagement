@@ -10,6 +10,5 @@ namespace WebStudentsManagement.Models.ManageViewModels
     public class Activities
     {
         public IEnumerable<Activity> ActivitiesList { get; set; }
-        public string StatusMessage { get; set; }
     }
 }

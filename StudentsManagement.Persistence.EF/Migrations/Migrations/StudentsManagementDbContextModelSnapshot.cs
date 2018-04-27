@@ -2,13 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
-using StudentsManagement.Persistence.EF;
 using System;
 
-namespace WebStudentsManagement.Migrations
+namespace StudentsManagement.Persistence.EF
+
+
 {
     [DbContext(typeof(StudentsManagementDbContext))]
     partial class StudentsManagementDbContextModelSnapshot : ModelSnapshot

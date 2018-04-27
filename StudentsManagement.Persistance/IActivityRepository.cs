@@ -12,5 +12,8 @@ namespace StudentsManagement.Persistence
         string GetProfessorName(int id);
         int GetActivityTypeId(int id);
         string GetActivityTypeName(int id);
+        IEnumerable<ActivityDate> GetActivityDates(int activityId, int idStudent);
+        void AddActivityDate(DateTime Date, double Grade, bool Attendance, int ActivityId, int StudentId);
+        ActivityDate GetActivityDate(int Id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentsManagement.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,6 +42,26 @@ namespace StudentsManagement.Persistence.EF
                                            .Where(b => b.Id == GetActivityTypeId(id))
                                            .Select(i => i.Name)
                                            .FirstOrDefault();
+        }
+
+        public IEnumerable<ActivityDate> GetActivityDates(int activityId, int idStudent)
+        {
+            return StudentsManagementDbContext.ActivityDates
+                                            .Where(b => b.ActivityId == activityId)
+                                            .Where(b => b.StudentId == idStudent);
+                                            
+        }
+
+        public void AddActivityDate(DateTime Date, double Grade, bool Attendance, int ActivityId, int StudentId)
+        {
+            StudentsManagementDbContext.ActivityDates.Add(new ActivityDate { Date = Date, Grade = Grade, Attendance = Attendance, ActivityId = ActivityId, StudentId = StudentId });
+        }
+
+        public ActivityDate GetActivityDate(int Id)
+        {
+            return StudentsManagementDbContext.ActivityDates
+                .Where(b => b.Id == Id)
+                .SingleOrDefault();
         }
 
         public StudentsManagementDbContext StudentsManagementDbContext

@@ -208,7 +208,7 @@ namespace StudentManagement.Authentication
             }
             var roles = await _userManager.GetRolesAsync(user);
 
-            foreach(var role in roles)
+            foreach (var role in roles)
             {
                 if (role == "Teacher")
                     return true;
@@ -248,7 +248,8 @@ namespace StudentManagement.Authentication
 
 
         public void InitializeData(IServiceProvider serviceProvider)
-        {            
+        {
+           
         }
 
         public async Task<string> GetUserNameAsync(ClaimsPrincipal User)

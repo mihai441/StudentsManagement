@@ -17,7 +17,6 @@ namespace StudentsManagement.Persistence.EF
 
 
         public IActivityRepository ActivityRepository { get; set; }
-        public IStudentActivityDetailsRepository ActivityDetailsRepository { get; set; }
         public ITeachersRepository TeachersRepository { get; set; }
         public IStudentsRepository StudentsRepository { get; set; }
 

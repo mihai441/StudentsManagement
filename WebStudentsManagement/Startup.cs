@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebStudentsManagement.Data;
-using WebStudentsManagement.Models;
-using WebStudentsManagement.Services;
 using StudentsManagement.Domain.Services;
-using StudentsManagement.Domain;
 using StudentsManagement.Core.Shared;
 using StudentsManagement.Persistence;
 using StudentsManagement.Persistence.EF;
 using StudentManagement.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace WebStudentsManagement
 {

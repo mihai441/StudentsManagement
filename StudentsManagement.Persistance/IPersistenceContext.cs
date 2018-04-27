@@ -7,7 +7,6 @@ namespace StudentsManagement.Persistence
         int Complete();
         void Dispose();
         IActivityRepository ActivityRepository { get; set; }
-        IStudentActivityDetailsRepository ActivityDetailsRepository { get; set; }
         ITeachersRepository TeachersRepository { get; set; }
         IStudentsRepository StudentsRepository { get; set; }
     }

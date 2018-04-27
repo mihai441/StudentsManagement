@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace WebStudentsManagement.Migrations
+namespace StudentsManagement.Persistence.EF.Migrations
+
 {
     public partial class NewActivityModel : Migration
     {

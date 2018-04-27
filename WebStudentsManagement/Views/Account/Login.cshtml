@@ -43,9 +43,10 @@
         </section>
     </div>
     @{
-        var loginProviders = Model.AuthenticationSchemes.ToList();
-        if (loginProviders.Count != 0)
-        {
+        if (Model.AuthenticationSchemes != null) {
+            var loginProviders = Model.AuthenticationSchemes.ToList();
+            if (loginProviders.Count != 0)
+            {
             <div class="col-md-6 col-md-offset-2">
                 <section>
                     <h4>Use another service to log in.</h4>
@@ -62,8 +63,9 @@
                     </form>
                 </section>
             </div>
+                }
+            }
         }
-    }
 </div>
 
 @section Scripts {

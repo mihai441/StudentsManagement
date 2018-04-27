@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace WebStudentsManagement.Data.Migrations
+namespace StudentsManagement.Authentication
 {
     public partial class UsersDbMigration : Migration
     {
