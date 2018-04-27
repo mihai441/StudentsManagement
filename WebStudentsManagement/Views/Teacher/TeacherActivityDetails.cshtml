@@ -1,5 +1,6 @@
-@model StudentActivityInfo
+@model TeacherActivityInfo
 @{
+    var activityList = Model.ActivityDates.ToList();
     ViewData["Title"] = @Model.ActivityName + " - " + @Model.StudentName;
 }
 <h3>@Model.ActivityName</h3>
@@ -15,21 +16,26 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int iterator = 0; iterator < Model.Date.Count; ++iterator)
-                {
-                    <tr>
-                        <td scope="row">@Model.Date[iterator]</td>
-                        @if (Model.Attendance[iterator])
+                @{
+                    if (activityList.Count != 0)
+                    {
+                        foreach (var activity in activityList)
                         {
-                            <th scope="row">1</th>
+                            <tr>
+                                <td scope="row">@activity.Date</td>
+                                @if (activity.Attendance)
+                                {
+                                     <th scope="row">1</th>
+                                }
+                                else
+                                {
+                                    <th scope="row">0</th>
+                                }
+                                <th scope="row">@activity.Grade</th>
+                                <td><a asp-action="TeacherActivityEdit" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId" asp-route-id="@activity.Id">Edit</a></td>
+                            </tr>
                         }
-                        else
-                        {
-                            <th scope="row">0</th>
-                        }
-                        <th scope="row">@Model.Grade[iterator]</th>
-                        <td><a asp-action="TeacherActivityEdit" asp-route-activityId="@Model.IdActivity" asp-route-studentId="@Model.StudentId" asp-route-id="@Model.Id[iterator]">Edit</a></td>
-                    </tr>
+                    }
                 }
             </tbody>
         </table>
