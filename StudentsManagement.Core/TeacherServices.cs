@@ -60,5 +60,19 @@ namespace StudentsManagement.Core
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateActivityDate(ActivityDate oldActivityDate, ActivityDate newActivityDate)
+        {
+            var toBeUpdatedRecord = PersistenceContext.ActivityRepository.GetActivityDate(oldActivityDate.Id);
+
+            toBeUpdatedRecord.Id = newActivityDate.Id;
+            toBeUpdatedRecord.Grade = newActivityDate.Grade;
+            toBeUpdatedRecord.Date = newActivityDate.Date;
+            toBeUpdatedRecord.Attendance = newActivityDate.Attendance;
+            toBeUpdatedRecord.Student = newActivityDate.Student;
+            toBeUpdatedRecord.Activity = newActivityDate.Activity;
+            PersistenceContext.Complete();
+            
+        }
     }
 }
