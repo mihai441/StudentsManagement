@@ -11,5 +11,6 @@ namespace WebStudentsManagement.Models.ManageViewModels
     {
         public IEnumerable<Student> Students { get; set; }
         public string ActivityName;
+        public int ActivityId;
     }
 }
