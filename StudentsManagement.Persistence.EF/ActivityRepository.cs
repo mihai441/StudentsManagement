@@ -64,6 +64,14 @@ namespace StudentsManagement.Persistence.EF
                 .SingleOrDefault();
         }
 
+        public ActivityDate GetActivityDate(int Id, int studentId)
+        {
+            return StudentsManagementDbContext.ActivityDates
+                .Where(b => b.Id == Id)
+                .Where(b => b.StudentId == studentId)
+                .SingleOrDefault();
+        }
+
         public IEnumerable<ActivityDate> GetActivityDates(int activityId, int studentId)
         {
             return StudentsManagementDbContext.ActivityDates

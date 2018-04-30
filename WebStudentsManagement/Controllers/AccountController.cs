@@ -94,6 +94,8 @@ namespace WebStudentsManagement.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                // trebuie creat in tabela cu roluri in functie de model.Teacher - bool Teacher;
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _auth.RegisterProcess(model.Email, model.Password);
                 if (result)

@@ -36,6 +36,11 @@ namespace StudentsManagement.Core
             return PersistenceContext.ActivityRepository.GetActivityDate(idActivityDate);
         }
 
+        public ActivityDate GetActivityDate(int idActivityDate, int idStudent)
+        {
+            return PersistenceContext.ActivityRepository.GetActivityDate(idActivityDate, idStudent);
+        }
+
         public IEnumerable<ActivityDate> GetActivityDates(int idActivity, int studentId)
         {
             return PersistenceContext.ActivityRepository.GetActivityDates(idActivity, studentId).ToList();

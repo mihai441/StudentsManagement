@@ -1,21 +1,18 @@
 @model SingleStudentActivityInfo
 @{
-    ViewData["Title"] = Model.ActivityDate.Activity.Name + " - " + Model.ActivityDate.Student.Name;
+    ViewData["Title"] = Model.Activity.Name + " - " + Model.Student.Name;
 }
-<h3>Add row on Student @Model.ActivityDate.Student.Name</h3>
-<h4>Activity @Model.ActivityDate.Activity.Name</h4>
+<h3>Add row on Student @Model.Student.Name</h3>
+<h4>Activity @Model.Activity.Name</h4>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="TeacherActivityAdd">
+        <form asp-action="TeacherActivityCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ActivityDate.Id" value="@Model.ActivityDate.Id" class="form-control" />
             <input type="hidden" asp-for="ActivityDate.ActivityId" value="@Model.ActivityDate.ActivityId" class="form-control" />
-            <input type="hidden" asp-for="ActivityDate.Activity.Name" value="@Model.ActivityDate.Activity.Name" class="form-control" />
             <input type="hidden" asp-for="ActivityDate.StudentId" value="@Model.ActivityDate.StudentId" class="form-control" />
-            <input type="hidden" asp-for="ActivityDate.Student.Name" value="@Model.ActivityDate.Student.Name" class="form-control" />
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
+                    <input asp-for="ActivityDate.Date" type='text' class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -43,7 +40,9 @@
     </div>
 </div>
 <div>
-    <a asp-route="TeacherActivityDetals" asp-route-activityId="@Model.ActivityDate.ActivityId" asp-route-studentId="@Model.ActivityDate.Student.Id">Back to student list</a>
+    <a asp-action="TeacherActivityDetails" asp-route-activityId="@Model.Activity.Id" asp-route-studentId="@Model.Student.Id">Student details</a>
+    <br />
+    <a asp-route="Activities" asp-route-activityId="@Model.Activity.Id">Back to student list</a>
 </div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

@@ -79,7 +79,7 @@ namespace WebStudentsManagement.Controllers
 
         // GET: Activities/TeacherActivityDetails/{activityId}/Student/{studentId}
         [HttpGet]
-        [Route("{activityId}/Student/{studentId}")]
+        [Route("{activityId}/Student/{studentId}", Name = "StudentDetails")]
         public async Task<IActionResult> TeacherActivityDetails(int? activityId, int? studentId)
         {
             var result = await _auth.IsUserValid(User);
@@ -140,11 +140,23 @@ namespace WebStudentsManagement.Controllers
             int idActivityDate = activityId ?? default(int);
             int idStudent = studentId ?? default(int);
 
-            var activityDate = _teacherServices.GetActivityDate(idActivityDate);
+            Student student = _teacherServices.GetStudent(idStudent);
+            Activity activity = _teacherServices.GetActivity(idActivityDate);
+
+            var activityDate = new ActivityDate()
+            {
+                ActivityId = activity.Id,
+                StudentId = student.Id,
+                Date = DateTime.Now,
+                Grade = 0,
+                Attendance = false
+            };
 
             var model = new SingleStudentActivityInfo
             {
-                ActivityDate = activityDate
+                ActivityDate = activityDate,
+                Student = student,
+                Activity = activity
             };
 
             return View(model);
@@ -153,11 +165,12 @@ namespace WebStudentsManagement.Controllers
         // POST: Activities/TeacherActivityAdd
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult TeacherActivityAdd([Bind("IdActivity,StudentId,Date,Grade,Attendance")] SingleStudentActivityInfo studentInfo)
+        public IActionResult TeacherActivityCreate([Bind("IdActivity,StudentId,Date,Grade,Attendance")] SingleRowActivityInfo studentRowInfo)
         {
             if (ModelState.IsValid)
             {
-                _teacherServices.AddActivityDate(studentInfo.ActivityDate.Date, studentInfo.ActivityDate.Grade, studentInfo.ActivityDate.Attendance, studentInfo.ActivityDate.ActivityId, studentInfo.ActivityDate.StudentId);
+                // trebuie modificat si-n model dupa exemplul cu SingleRowActivityInfo
+                _teacherServices.AddActivityDate(studentRowInfo.Date, studentRowInfo.Grade, studentRowInfo.Attendance, studentRowInfo.ActivityId, studentRowInfo.StudentId);
                 return RedirectToAction(nameof(Index));
             }
             return View("Index");
@@ -183,12 +196,15 @@ namespace WebStudentsManagement.Controllers
             int idStudent = studentId ?? default(int);
             int IdRow = Id ?? default(int);
 
-            var activityDate = _teacherServices.GetActivityDate(idActivityDate);
+            //testing output with list
+            var activityDate = _teacherServices.GetActivityDate(IdRow);
 
+            Student student = _teacherServices.GetStudent(idStudent);
+            Activity activity = _teacherServices.GetActivity(idActivityDate);
 
             var model = new SingleStudentActivityInfo
             {
-                ActivityDate= activityDate
+                ActivityDate = activityDate
             };
 
             return View(model);
@@ -212,7 +228,7 @@ namespace WebStudentsManagement.Controllers
                     Attendance = studentActivityInfoRow.ActivityDate.Attendance,
                     Activity = studentActivityInfoRow.ActivityDate.Activity,
                     Student = studentActivityInfoRow.ActivityDate.Student
-            };
+                };
 
                 _teacherServices.UpdateActivityDate(activityDate, NewActivityDate);
                 

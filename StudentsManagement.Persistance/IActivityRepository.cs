@@ -20,6 +20,7 @@ namespace StudentsManagement.Persistence
         IEnumerable<ActivityDate> GetActivityDates(int activityId, int studentId);
         void AddActivityDate(DateTime Date, double Grade, bool Attendance, int ActivityId, int StudentId);
         ActivityDate GetActivityDate(int Id);
+        ActivityDate GetActivityDate(int Id, int studentId);
         IEnumerable<Student> GetStudentsFromActivity(int idActivity);
     }
 }

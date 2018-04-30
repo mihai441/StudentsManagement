@@ -9,6 +9,8 @@ namespace WebStudentsManagement.Models.ManageViewModels
 {
     public class SingleStudentActivityInfo
     {
-      public ActivityDate ActivityDate { get; set; }
+        public ActivityDate ActivityDate { get; set; }
+        public Student Student { get; set; }
+        public Activity Activity { get; set; }
     }
 }
