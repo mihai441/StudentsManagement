@@ -10,5 +10,6 @@ namespace StudentsManagement.Core.Shared
         IEnumerable<ActivityDate> GetActivityDates(int idActivity, string studentUsername);
         IEnumerable<Activity> GetUserActivities(string username);
         Activity GetActivity(int id);
+        void AddStudent(ApplicationUser user);
     }
 }

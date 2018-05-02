@@ -98,13 +98,9 @@ namespace StudentManagement.Authentication
             return true;
         }
 
-        public async Task<bool> RegisterProcess(string email, string password)
+        public async Task<bool> RegisterProcess(ApplicationUser user, string password)
         {
-            var user = new ApplicationUser { UserName = email, Email = email };
             var result = await _userManager.CreateAsync(user, password);
-
-            if(result.Succeeded)
-                await _signInManager.SignInAsync(user, isPersistent: false);
 
             return result.Succeeded;
         }
@@ -267,6 +263,12 @@ namespace StudentManagement.Authentication
         {
             var user = await _userManager.GetUserAsync(User);
             return user.Id;
+        }
+
+        public async Task SetUserRole(ApplicationUser user, string roleName)
+        {
+           var result = await _userManager.AddToRoleAsync(user, roleName);
+            Console.WriteLine(result.Errors);
         }
     }
 }

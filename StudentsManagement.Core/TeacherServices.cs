@@ -26,6 +26,21 @@ namespace StudentsManagement.Core
             PersistenceContext.Complete();
         }
 
+        public void AddTeacher(ApplicationUser user)
+        {
+            if (user!=null)
+            {
+                var teacher = new Teacher
+                {
+                    Name = user.Email,
+                    Username = user.Email
+                };
+
+                PersistenceContext.TeachersRepository.Add(teacher);
+                PersistenceContext.Complete();
+            }
+        }
+
         public Activity GetActivity(int idActivity)
         {
             return PersistenceContext.ActivityRepository.GetEntity(idActivity);
@@ -66,17 +81,17 @@ namespace StudentsManagement.Core
             return PersistenceContext.ActivityRepository.GetTeacherActivities(username);
         }
 
-        public void UpdateActivityDate(ActivityDate oldActivityDate, ActivityDate newActivityDate)
+        public void UpdateActivityDate(ActivityDate newActivityDate)
         {
-            var toBeUpdatedRecord = PersistenceContext.ActivityRepository.GetActivityDate(oldActivityDate.Id);
+            ActivityDate toBeUpdatedRecord = PersistenceContext.ActivityRepository.GetActivityDate(newActivityDate.Id);
 
-            toBeUpdatedRecord.Id = newActivityDate.Id;
-            toBeUpdatedRecord.Grade = newActivityDate.Grade;
-            toBeUpdatedRecord.Date = newActivityDate.Date;
-            toBeUpdatedRecord.Attendance = newActivityDate.Attendance;
-            toBeUpdatedRecord.Student = newActivityDate.Student;
-            toBeUpdatedRecord.Activity = newActivityDate.Activity;
-            PersistenceContext.Complete();
+            if (toBeUpdatedRecord != null)
+            {
+                toBeUpdatedRecord.Grade = newActivityDate.Grade;
+                toBeUpdatedRecord.Date = newActivityDate.Date;
+                toBeUpdatedRecord.Attendance = newActivityDate.Attendance;
+                PersistenceContext.Complete();
+            }
             
         }
     }

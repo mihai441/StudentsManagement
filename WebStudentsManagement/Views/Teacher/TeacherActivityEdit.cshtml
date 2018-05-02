@@ -2,11 +2,11 @@
 @{
     ViewData["Title"] = Model.ActivityDate.Activity.Name + " - " + Model.ActivityDate.Student.Name;
 }
-<h3>Edit row on Student @Model.ActivityDate.Student.Name</h3>
-<h4>Activity @Model.ActivityDate.Activity.Name</h4>
+<h3>Edit row on Student: @Model.ActivityDate.Student.Name</h3>
+<h4>Activity: @Model.ActivityDate.Activity.Name</h4>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="TeacherActivityEdit">
+        <form asp-action="TeacherActivityModify">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ActivityDate.Id" value="@Model.ActivityDate.Id" class="form-control" />
             <input type="hidden" asp-for="ActivityDate.ActivityId" value="@Model.ActivityDate.ActivityId" class="form-control" />

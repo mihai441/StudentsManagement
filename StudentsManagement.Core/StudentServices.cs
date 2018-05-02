@@ -39,5 +39,21 @@ namespace StudentsManagement.Core
             return _persistenceContext.ActivityRepository.GetUserActivities(username);
                 
         }
+
+        public void AddStudent(ApplicationUser user)
+        {
+            if (user != null)
+            {
+                var stud = new Student
+                {
+                    Name = user.Email,
+                    Username = user.Email
+                };
+
+                PersistenceContext.StudentsRepository.Add(stud);
+                PersistenceContext.Complete();
+            }
+
+        }
     }
 }

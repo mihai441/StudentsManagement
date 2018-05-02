@@ -213,24 +213,13 @@ namespace WebStudentsManagement.Controllers
         // POST: Activities/TeacherActivityEdit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult TeacherActivityEdit(int? id, [Bind("IdActivity, ,StudentId, Date, Grade, Attendance")] SingleStudentActivityInfo studentActivityInfoRow)
+        public IActionResult TeacherActivityModify(int? id, [Bind("Id, ActivityId, StudentId, Date, Grade, Attendance")] ActivityDate activityDate)
         {
            
             if (ModelState.IsValid)
             {
-                var activityDate = _teacherServices.GetActivityDate(studentActivityInfoRow.ActivityDate.Id);
 
-                //Edit part, maybe integrated in repository?
-                ActivityDate NewActivityDate = new ActivityDate {
-                    Id = studentActivityInfoRow.ActivityDate.Id,
-                    Date = studentActivityInfoRow.ActivityDate.Date,
-                    Grade = studentActivityInfoRow.ActivityDate.Grade,
-                    Attendance = studentActivityInfoRow.ActivityDate.Attendance,
-                    Activity = studentActivityInfoRow.ActivityDate.Activity,
-                    Student = studentActivityInfoRow.ActivityDate.Student
-                };
-
-                _teacherServices.UpdateActivityDate(activityDate, NewActivityDate);
+                _teacherServices.UpdateActivityDate(activityDate);
                 
 
                 return RedirectToAction(nameof(Index));

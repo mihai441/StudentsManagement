@@ -13,7 +13,7 @@ namespace StudentsManagement.Core.Shared
     {
         Task<bool> LogoutProcess();
         Task<bool> LoginProcess(string email, string password, bool remember);
-        Task<bool> RegisterProcess(string email, string password);
+        Task<bool> RegisterProcess(ApplicationUser user, string password);
         Task<bool> ExternalLoginCallBack();
         Task<bool> ExternalLogicConfirmation(string email);
         AuthenticationProperties ExternalLogin(string provider, string redirectUrl);
@@ -28,5 +28,6 @@ namespace StudentsManagement.Core.Shared
         Task<string> GetUserNameAsync(ClaimsPrincipal User);
         Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync();
         Task<string> GetUserIdAsync(ClaimsPrincipal User);
+        Task SetUserRole(ApplicationUser user, string roleName);
     }
 }

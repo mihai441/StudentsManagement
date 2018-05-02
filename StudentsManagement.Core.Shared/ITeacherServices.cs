@@ -16,6 +16,7 @@ namespace StudentsManagement.Core.Shared
         ActivityDate GetActivityDate(int idActivityDate);
         ActivityDate GetActivityDate(int idActivityDate, int idStudent);
         void AddActivityDate(ActivityDate newActivityDate);
-        void UpdateActivityDate(ActivityDate oldActivityDate, ActivityDate newActivityDate );
+        void UpdateActivityDate(ActivityDate newActivityDate );
+        void AddTeacher(ApplicationUser user);
     }
 }

@@ -18,15 +18,20 @@ namespace WebStudentsManagement.Controllers
         private readonly ILogger _logger;
         private readonly IBusinessLayer _businessLogic;
         private readonly IAuthentication _auth;
+        private readonly IStudentServices _studentServices;
+        private readonly ITeacherServices _teacherServices;
 
         public AccountController(
             ILogger<AccountController> logger,
             IBusinessLayer businessLayer,
-            IAuthentication auth)
+            IAuthentication auth
+            )
         {
             _businessLogic = businessLayer;
             _auth = auth;
             _logger = logger;
+            _studentServices = _businessLogic.GetStudentOperationService();
+            _teacherServices = _businessLogic.GetTeacherOperationService();
 
         }
 
@@ -94,12 +99,22 @@ namespace WebStudentsManagement.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // trebuie creat in tabela cu roluri in functie de model.Teacher - bool Teacher;
 
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _auth.RegisterProcess(model.Email, model.Password);
+                var result = await _auth.RegisterProcess(user, model.Password);
                 if (result)
                 {
+                    if (model.Teacher)
+                    {
+                        _teacherServices.AddTeacher(user);
+                        await _auth.SetUserRole(user, "Teacher");
+                    }
+                    else
+                    {
+                        _studentServices.AddStudent(user);
+                        await _auth.SetUserRole(user, "Student");
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToAction("Index", "Home");
                 }
