@@ -165,12 +165,12 @@ namespace WebStudentsManagement.Controllers
         // POST: Activities/TeacherActivityAdd
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult TeacherActivityCreate([Bind("IdActivity,StudentId,Date,Grade,Attendance")] SingleRowActivityInfo studentRowInfo)
+        public IActionResult TeacherActivityCreate([Bind("ActivityId,StudentId,Date,Grade,Attendance")] ActivityDate activityDate)
         {
             if (ModelState.IsValid)
             {
                 // trebuie modificat si-n model dupa exemplul cu SingleRowActivityInfo
-                _teacherServices.AddActivityDate(studentRowInfo.Date, studentRowInfo.Grade, studentRowInfo.Attendance, studentRowInfo.ActivityId, studentRowInfo.StudentId);
+                _teacherServices.AddActivityDate(activityDate);
                 return RedirectToAction(nameof(Index));
             }
             return View("Index");

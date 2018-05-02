@@ -52,9 +52,9 @@ namespace StudentsManagement.Persistence.EF
                                             
         }
 
-        public void AddActivityDate(DateTime Date, double Grade, bool Attendance, int ActivityId, int idStudent)
+        public void AddActivityDate(ActivityDate activityDate)
         {
-            StudentsManagementDbContext.ActivityDates.Add(new ActivityDate { Date = Date, Grade = Grade, Attendance = Attendance, ActivityId = ActivityId, StudentId = idStudent});
+            StudentsManagementDbContext.ActivityDates.Add(activityDate);
         }
 
         public ActivityDate GetActivityDate(int Id)

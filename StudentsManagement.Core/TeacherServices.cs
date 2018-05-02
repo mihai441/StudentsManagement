@@ -20,9 +20,9 @@ namespace StudentsManagement.Core
 
         public IPersistenceContext PersistenceContext { get => _persistenceContext; set => _persistenceContext = value; }
 
-        public void AddActivityDate(DateTime date, double grade, bool attendance, int idActivity, int studentId)
+        public void AddActivityDate(ActivityDate newActivityDate)
         {
-            PersistenceContext.ActivityRepository.AddActivityDate(date, grade, attendance, idActivity, studentId);
+            PersistenceContext.ActivityRepository.AddActivityDate(newActivityDate);
             PersistenceContext.Complete();
         }
 
