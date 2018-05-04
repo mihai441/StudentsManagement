@@ -123,6 +123,11 @@ namespace StudentsManagement.Persistence.EF
 
         }
 
+        public void AddActivityDetails(Student student, int id)
+        {
+            StudentsManagementDbContext.StudentActivityDetails.Add(new StudentActivityDetails { Id = id, Student = student });
+        }
+
         public StudentsManagementDbContext StudentsManagementDbContext
         {
             get

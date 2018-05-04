@@ -15,24 +15,25 @@
             </thead>
             <tbody>
                 @{
-                    if (studentsList.Count != 0)
+                if (studentsList.Count != 0)
+                {
+                    foreach (var student in studentsList)
                     {
-                        foreach (var student in studentsList)
-                        {
-                            <tr>
-                                <th scope="row">
-                                    @student.Name
-                                </th>
-                                <td>
-                                    <a asp-action="TeacherActivityAdd" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@student.Id">Add</a> |
-                                    <a asp-action="TeacherActivityDetails" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@student.Id">Details</a>
-                                </td>
-                            </tr>
-                        }
-                    }
+                        <tr>
+                            <th scope="row">
+                                @student.Name
+                            </th>
+                            <td>
+                                <a asp-action="TeacherActivityAdd" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@student.Id">Add</a> |
+                                <a asp-action="TeacherActivityDetails" asp-route-activityId="@Model.ActivityId" asp-route-studentId="@student.Id">Details</a>
+                            </td>
+                        </tr>
+                }
+            }
                 }
             </tbody>
         </table>
+        <a asp-action="AddStudentToActivity" asp-route-activityId="@Model.ActivityId">Add Student to Activity</a> |
         <a asp-action="Index">Back to activity list</a>
     </div>
 </div>

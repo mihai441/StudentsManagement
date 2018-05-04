@@ -22,5 +22,6 @@ namespace StudentsManagement.Persistence
         ActivityDate GetActivityDate(int Id);
         ActivityDate GetActivityDate(int Id, int studentId);
         IEnumerable<Student> GetStudentsFromActivity(int idActivity);
+        void AddActivityDetails(Student student, int id);
     }
 }

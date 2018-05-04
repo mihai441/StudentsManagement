@@ -18,5 +18,9 @@ namespace StudentsManagement.Core.Shared
         void AddActivityDate(ActivityDate newActivityDate);
         void UpdateActivityDate(ActivityDate newActivityDate );
         void AddTeacher(ApplicationUser user);
+        IEnumerable<Student> GetAllStudents();
+        void AddStudentToActivity(string student, int id);
+        void AddStudentsToActivity(List<string> studentNames, int actId);
+
     }
 }

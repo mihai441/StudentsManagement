@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using StudentsManagement.Core.Shared;
 using StudentsManagement.Domain;
@@ -162,10 +163,43 @@ namespace WebStudentsManagement.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Route("{activityId}")]
+        public async Task<IActionResult> AddStudentToActivity(int? activityId)
+        {
+            var result = await _auth.IsUserValid(User);
+            if (!result)
+            {
+                throw new ApplicationException($"Unable to load user");
+            }
+
+            if (activityId == null
+                || !await _auth.IsTeacher(User))
+            {
+                return NotFound();
+            }
+
+            int idActivityDate = activityId ?? default(int);
+
+            Activity activity = _teacherServices.GetActivity(idActivityDate);
+
+
+            //TODO: filter the students which already participate to activity
+            var studentList = _teacherServices.GetAllStudents();
+
+            var model = new AddStudentToActivity
+            {
+                Activity = activity,
+                StudentList = studentList
+            };
+
+            return View(model);
+        }
+
         // POST: Activities/TeacherActivityAdd
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult TeacherActivityCreate([Bind("ActivityId,StudentId,Date,Grade,Attendance")] ActivityDate activityDate)
+        public IActionResult CreateActivity([Bind("ActivityId,StudentId,Date,Grade,Attendance")] ActivityDate activityDate)
         {
             if (ModelState.IsValid)
             {
@@ -213,14 +247,45 @@ namespace WebStudentsManagement.Controllers
         // POST: Activities/TeacherActivityEdit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult TeacherActivityModify(int? id, [Bind("Id, ActivityId, StudentId, Date, Grade, Attendance")] ActivityDate activityDate)
+        public async Task<IActionResult> TeacherActivityModify(int? id, [Bind("Id, ActivityId, StudentId, Date, Grade, Attendance")] ActivityDate activityDate)
         {
-           
+
+            if (id == null || !await _auth.IsTeacher(User))
+            {
+                return NotFound();
+            }
+
+            int activityId = id ?? default(int);
+
             if (ModelState.IsValid)
             {
 
                 _teacherServices.UpdateActivityDate(activityDate);
                 
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View("Index");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("{activityId}")]
+        public async Task<IActionResult> AddStudentToActivity(int? activityId, [Bind("inputList")] List<string> studentNames)
+        {
+            if (activityId == null || !await _auth.IsTeacher(User))
+            {
+                return NotFound();
+            }
+
+            int actId = activityId ?? default(int);
+
+            if (ModelState.IsValid)
+            {
+
+                _teacherServices.AddStudentsToActivity(studentNames,actId);
+
 
                 return RedirectToAction(nameof(Index));
             }

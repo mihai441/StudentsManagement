@@ -26,6 +26,24 @@ namespace StudentsManagement.Core
             PersistenceContext.Complete();
         }
 
+        public void AddStudentToActivity(string student, int id)
+        {
+            var studentLoaded = PersistenceContext.StudentsRepository.GetStudentByName(student);
+            PersistenceContext.ActivityRepository.AddActivityDetails(studentLoaded, id);
+            PersistenceContext.Complete();
+        }
+
+        public void AddStudentsToActivity(List <string> students, int id)
+        {
+            foreach (var student in students)
+            {
+                var studentLoaded = PersistenceContext.StudentsRepository.GetStudentByName(student);
+                PersistenceContext.ActivityRepository.AddActivityDetails(studentLoaded, id);
+            }
+            PersistenceContext.Complete();
+
+        }
+
         public void AddTeacher(ApplicationUser user)
         {
             if (user!=null)
@@ -69,6 +87,11 @@ namespace StudentsManagement.Core
         public IEnumerable<Student> GetActivityStudents(int idActivity)
         {
             return PersistenceContext.ActivityRepository.GetStudentsFromActivity(idActivity);
+        }
+
+        public IEnumerable<Student> GetAllStudents()
+        {
+            return PersistenceContext.StudentsRepository.ListAll();
         }
 
         public Student GetStudent(int idStudent)
